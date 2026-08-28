@@ -316,9 +316,35 @@ def cmd_new(slug, title):
     write(p, SKELETON.format(title=title, today=datetime.date.today().isoformat()))
     print("만들었습니다:", p)
 
+
+# ---------- 단일 파일로 뽑기 ----------
+def cmd_standalone(slug, outdir=None):
+    """공유·미리보기용. 외부 css/js 를 안에 넣어 파일 하나로 만듭니다."""
+    src_path = os.path.join(ROOT, "studies", slug + ".html")
+    if not os.path.exists(src_path):
+        print("그런 자료가 없습니다:", src_path); return
+    s = read(src_path)
+    css = read(os.path.join(ROOT, "assets", "site.css"))
+    js  = read(os.path.join(ROOT, "assets", "site.js"))
+    s = s.replace('<link rel="stylesheet" href="../assets/site.css">',
+                  "<style>\n" + css + "\n</style>")
+    s = s.replace('<script src="../assets/site.js"></script>',
+                  "<script>\n" + js + "\n</script>")
+    # 사이트 내부 링크는 단독 파일에서 의미가 없으므로 헤더/푸터 메뉴를 걷어냅니다
+    for k in ("HEADER", "FOOTER"):
+        a, b = MARK[k]
+        s = re.sub(re.escape(a) + r".*?" + re.escape(b), "", s, flags=re.S)
+    out = os.path.join(outdir or ROOT, slug + ".standalone.html")
+    write(out, s)
+    print("만들었습니다:", out, "(%.1f KB)" % (len(s.encode()) / 1024))
+
 # ---------- 메인 ----------
 def main():
     cfg = load_cfg()
+    if len(sys.argv) > 1 and sys.argv[1] == "standalone":
+        if len(sys.argv) < 3:
+            print("사용법: python3 build.py standalone 슬러그 [출력폴더]"); return
+        cmd_standalone(sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else None); return
     if len(sys.argv) > 1 and sys.argv[1] == "new":
         if len(sys.argv) < 4:
             print('사용법: python3 build.py new 슬러그 "제목"'); return
