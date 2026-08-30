@@ -5,4 +5,4 @@ Allow: /
 User-agent: Yeti
 Allow: /
 
-Sitemap: __SITE_URL__/sitemap.xml
+Sitemap: https://steveoh555.github.io/bible-notes/sitemap.xml
