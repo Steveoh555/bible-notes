@@ -73,15 +73,12 @@ def meta_of(path):
     }
 
 # ---------- 주입 블록 ----------
-def nav(cfg, depth, current=None):
+def nav(cfg, depth):
     up = "../" if depth else ""
-    items = [(up + "index.html", "자료 목록", "index"), (up + "about.html", "소개", "about")]
+    items = [(up + "index.html", "자료 목록"), (up + "about.html", "소개")]
     links = "".join(
-        '\n          <a href="%s"%s>%s</a>'
-        % (esc(h), ' aria-current="page"' if k == current else "", esc(t))
-        for h, t, k in items)
-    return """<a class="skip" href="#main">본문으로 건너뛰기</a>
-    <header class="site-head">
+        '\n          <a href="%s">%s</a>' % (esc(h), esc(t)) for h, t in items)
+    return """<header class="site-head">
       <div class="bar">
         <a class="brand" href="{up}index.html">
           <b>{name}</b><span>{tag}</span>
@@ -119,13 +116,8 @@ def headtags(cfg, info, depth):
         '<meta property="og:locale" content="%s">' % esc(cfg.get("locale", "ko_KR")),
         '<meta property="og:title" content="%s">' % esc(info["title"]),
         '<meta property="og:description" content="%s">' % esc(info["description"]),
-        '<meta name="twitter:card" content="summary_large_image">',
+        '<meta name="twitter:card" content="summary">',
     ]
-    if base:
-        parts += [
-            '<meta property="og:image" content="%s">' % esc(base + "/assets/og.png"),
-            '<meta name="twitter:image" content="%s">' % esc(base + "/assets/og.png"),
-        ]
     if url:
         parts.insert(-1, '<meta property="og:url" content="%s">' % esc(url))
     ld = {
@@ -158,47 +150,18 @@ def inject(src, key, content):
     pat = re.compile(re.escape(a) + r".*?" + re.escape(b), re.S)
     return pat.sub(lambda _: a + "\n    " + content + "\n    " + b, src, count=1), True
 
-
-FAVICON_BLOCK = (
-    '<link rel="icon" type="image/svg+xml" href="{up}assets/favicon.svg">\n'
-    '<link rel="apple-touch-icon" href="{up}assets/icon-180.png">\n'
-    '<meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">\n'
-    '<meta name="theme-color" content="#141714" media="(prefers-color-scheme: dark)">'
-)
-
-def ensure_head_links(src, depth):
-    """파비콘·테마색이 없으면 viewport 메타 뒤에 넣는다."""
-    if 'rel="icon"' in src:
-        return src
-    up = "../" if depth else ""
-    block = FAVICON_BLOCK.format(up=up)
-    m = re.search(r'<meta name="viewport"[^>]*>', src)
-    if not m:
-        return src
-    return src[:m.end()] + "\n" + block + src[m.end():]
-
-def ensure_main_id(src):
-    """건너뛰기 링크가 닿을 곳을 만든다."""
-    if 'id="main"' in src:
-        return src
-    return re.sub(r'<(article|main) class="wrap">', r'<\1 id="main" class="wrap">', src, count=1)
-
 # ---------- 홈 ----------
 def card(cfg, s):
     search = " ".join([s["title"], s["description"], s["scripture"]] + s["tags"]).lower()
     tags = "".join('<span class="tag">%s</span>' % esc(t) for t in s["tags"][:3])
-    return """        <li><a class="entry" href="{url}" data-search="{search}">
-          <span class="entry-ref">{scripture}</span>
-          <span class="entry-main">
-            <span class="entry-title">{title}</span>
-            <span class="entry-desc">{desc}</span>
-            <span class="entry-meta"><time datetime="{date}">{date}</time>{tags}</span>
-          </span>
-        </a></li>""".format(
-        url=esc(s["url"]), search=esc(search),
-        scripture=esc(s["scripture"] or "성경 배경"),
-        title=esc(s["title"]), desc=esc(s["description"]),
-        date=esc(s["date"]), tags=tags)
+    return """      <a class="card" href="{url}" data-search="{search}">
+        <span class="scripture">{scripture}</span>
+        <h3>{title}</h3>
+        <p>{desc}</p>
+        <div class="meta"><time datetime="{date}">{date}</time>{tags}</div>
+      </a>""".format(url=esc(s["url"]), search=esc(search), scripture=esc(s["scripture"] or "성경 배경"),
+                     title=esc(s["title"]), desc=esc(s["description"]),
+                     date=esc(s["date"]), tags=tags)
 
 def build_index(cfg, studies):
     cards = "\n".join(card(cfg, s) for s in studies) or ""
@@ -213,13 +176,13 @@ def build_index(cfg, studies):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="assets/site.css">\n{favicon}
+<link rel="stylesheet" href="assets/site.css">
 {rsslink}<script>try{{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 </head>
 <body>
     <!--#HEADER--><!--/#HEADER-->
 
-    <main id="main" class="wrap">
+    <main class="wrap">
       <header>
         <div class="eyebrow">성경 배경 연구</div>
         <h1>{tag}</h1>
@@ -229,12 +192,12 @@ def build_index(cfg, studies):
       <section>
         <div class="search-row">
           <label for="q" class="sr-only" style="position:absolute;left:-9999px">자료 검색</label>
-          <input id="q" type="search" placeholder="본문·주제·인물로 찾기 — 누가복음, 호적, 헤롯…" autocomplete="off">
+          <input id="q" type="search" placeholder="본문·주제·인물로 찾기 (예: 누가복음, 호적, 헤롯)" autocomplete="off">
           <span class="count" id="count">{n} 편</span>
         </div>
-        <ol class="index-list">
+        <div class="grid">
 {cards}
-        </ol>
+        </div>
         <p class="empty" id="empty" hidden>찾는 자료가 없습니다. 다른 낱말로 검색해 보세요.</p>
       </section>
     </main>
@@ -245,60 +208,10 @@ def build_index(cfg, studies):
 </html>
 """.format(name=esc(cfg["site_name"]), tag=esc(cfg["tagline"]),
            desc=esc(cfg["description"]), n=n, cards=cards,
-           favicon=FAVICON_BLOCK.format(up=""),
            rsslink=('<link rel="alternate" type="application/rss+xml" title="%s" href="feed.xml">\n' % esc(cfg["site_name"])) if cfg.get("site_url") else "")
-    body, _ = inject(body, "HEADER", nav(cfg, 0, "index"))
-    body, _ = inject(body, "FOOTER", foot(cfg, 0))
-    write(os.path.join(ROOT, "index.html"), body)
-
-
-# ---------- 404 ----------
-def build_404(cfg):
-    base = cfg.get("site_url", "").rstrip("/")
-    home = (base + "/") if base else "index.html"
-    body = """<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>찾는 자료가 없습니다 — {name}</title>
-<meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="{base}/assets/site.css">
-<link rel="icon" type="image/svg+xml" href="{base}/assets/favicon.svg">
-<meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141714" media="(prefers-color-scheme: dark)">
-<script>try{{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
-</head>
-<body>
-    <!--#HEADER--><!--/#HEADER-->
-    <main id="main" class="wrap">
-      <header>
-        <p class="eyebrow">404</p>
-        <h1>이 주소에는 자료가 없습니다</h1>
-        <p class="lede">주소가 바뀌었거나, 아직 없는 자료일 수 있습니다.
-          자료 목록에서 찾아보시면 대부분 해결됩니다.</p>
-      </header>
-      <section>
-        <div class="prose">
-          <p><a href="{home}">자료 목록으로 돌아가기</a></p>
-        </div>
-      </section>
-    </main>
-    <!--#FOOTER--><!--/#FOOTER-->
-</body>
-</html>
-""".format(name=esc(cfg["site_name"]), base=esc(base), home=esc(home))
     body, _ = inject(body, "HEADER", nav(cfg, 0))
     body, _ = inject(body, "FOOTER", foot(cfg, 0))
-    # 404 는 어느 깊이에서든 뜨므로 링크를 절대 주소로
-    if base:
-        body = body.replace('href="index.html"', 'href="%s/index.html"' % esc(base))
-        body = body.replace('href="about.html"', 'href="%s/about.html"' % esc(base))
-        body = body.replace('href="feed.xml"', 'href="%s/feed.xml"' % esc(base))
-    write(os.path.join(ROOT, "404.html"), body)
+    write(os.path.join(ROOT, "index.html"), body)
 
 # ---------- 사이트맵 / RSS ----------
 def build_sitemap(cfg, studies):
@@ -510,8 +423,6 @@ def main():
         src, ok1 = inject(src, "HEAD", headtags(cfg, i, 1))
         src, ok2 = inject(src, "HEADER", nav(cfg, 1))
         src, ok3 = inject(src, "FOOTER", foot(cfg, 1))
-        src = ensure_head_links(src, 1)
-        src = ensure_main_id(src)
         if src != i["src"]: write(i["path"], src)
         missing = [k for k, ok in (("HEAD", ok1), ("HEADER", ok2), ("FOOTER", ok3)) if not ok]
         flag = ""
@@ -523,9 +434,7 @@ def main():
     ap = os.path.join(ROOT, "about.html")
     if os.path.exists(ap):
         s = read(ap)
-        s, _ = inject(s, "HEADER", nav(cfg, 0, "about"))
-        s = ensure_head_links(s, 0)
-        s = ensure_main_id(s)
+        s, _ = inject(s, "HEADER", nav(cfg, 0))
         s, _ = inject(s, "FOOTER", foot(cfg, 0))
         write(ap, s)
 
@@ -535,7 +444,6 @@ def main():
               % (len(qrows), sum(r["verses"] for r in qrows)))
 
     build_index(cfg, live)
-    build_404(cfg)
     if build_sitemap(cfg, live):
         build_feed(cfg, live)
         print("  sitemap.xml · feed.xml 갱신")

@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141714" media="(prefers-color-scheme: dark)">
 <title>소개 — 성경연구노트</title>
 <meta name="description" content="성경연구노트는 성경 본문의 역사·지리·문헌 배경을 1차 자료로 직접 확인해 정리하는 곳입니다. 확인된 사실과 추론을 구분해 적습니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +17,7 @@
 </head>
 <body>
     <!--#HEADER-->
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
     <header class="site-head">
       <div class="bar">
         <a class="brand" href="index.html">
@@ -20,14 +25,14 @@
         </a>
         <nav class="site-nav" aria-label="주요 메뉴">
           <a href="index.html">자료 목록</a>
-          <a href="about.html">소개</a>
+          <a href="about.html" aria-current="page">소개</a>
         </nav>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="화면 테마 바꾸기">자동</button>
       </div>
     </header>
     <!--/#HEADER-->
 
-    <article class="wrap">
+    <article id="main" class="wrap">
       <header>
         <div class="eyebrow">소개</div>
         <h1>확인한 것과 추론한 것을 구분해서 씁니다</h1>

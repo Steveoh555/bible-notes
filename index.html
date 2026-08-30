@@ -9,18 +9,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141714" media="(prefers-color-scheme: dark)">
 <link rel="alternate" type="application/rss+xml" title="성경연구노트" href="feed.xml">
 <script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
     <!--#HEADER-->
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
     <header class="site-head">
       <div class="bar">
         <a class="brand" href="index.html">
           <b>성경연구노트</b><span>1차 자료로 확인하는 성경 배경</span>
         </a>
         <nav class="site-nav" aria-label="주요 메뉴">
-          <a href="index.html">자료 목록</a>
+          <a href="index.html" aria-current="page">자료 목록</a>
           <a href="about.html">소개</a>
         </nav>
         <button id="themeBtn" class="theme-btn" type="button" aria-label="화면 테마 바꾸기">자동</button>
@@ -28,7 +33,7 @@
     </header>
     <!--/#HEADER-->
 
-    <main class="wrap">
+    <main id="main" class="wrap">
       <header>
         <div class="eyebrow">성경 배경 연구</div>
         <h1>1차 자료로 확인하는 성경 배경</h1>
@@ -38,23 +43,27 @@
       <section>
         <div class="search-row">
           <label for="q" class="sr-only" style="position:absolute;left:-9999px">자료 검색</label>
-          <input id="q" type="search" placeholder="본문·주제·인물로 찾기 (예: 누가복음, 호적, 헤롯)" autocomplete="off">
+          <input id="q" type="search" placeholder="본문·주제·인물로 찾기 — 누가복음, 호적, 헤롯…" autocomplete="off">
           <span class="count" id="count">2 편</span>
         </div>
-        <div class="grid">
-      <a class="card" href="studies/bethlehem-rulers.html" data-search="베들레헴 시대의 통치자들 예수님이 태어나셨을 때 로마 황제부터 수리아 총독·헤롯 대왕·대제사장까지 누가 어디를 다스렸는지, 그리고 헤롯이 죽은 뒤 나라가 어떻게 셋으로 나뉘었는지 초등학생도 읽을 수 있게 정리한 표. 누가복음 2장 · 마태복음 2장 연대기 로마사 헤롯 성탄">
-        <span class="scripture">누가복음 2장 · 마태복음 2장</span>
-        <h3>베들레헴 시대의 통치자들</h3>
-        <p>예수님이 태어나셨을 때 로마 황제부터 수리아 총독·헤롯 대왕·대제사장까지 누가 어디를 다스렸는지, 그리고 헤롯이 죽은 뒤 나라가 어떻게 셋으로 나뉘었는지 초등학생도 읽을 수 있게 정리한 표.</p>
-        <div class="meta"><time datetime="2026-08-27">2026-08-27</time><span class="tag">연대기</span><span class="tag">로마사</span><span class="tag">헤롯</span></div>
-      </a>
-      <a class="card" href="studies/nazareth-bethlehem-journey.html" data-search="나사렛에서 베들레헴까지, 며칠 길이었나 요셉과 마리아가 호적하러 간 길의 실제 거리를 경유지 좌표로 계산하고, 걸어서 갔다는 견해와 나귀를 탔다는 견해를 문헌으로 나누어 이동 일수를 각각 산출했습니다. 나귀는 성경 본문에 없습니다. 누가복음 2:4–7 지리 고대여행 성탄 외경">
-        <span class="scripture">누가복음 2:4–7</span>
-        <h3>나사렛에서 베들레헴까지, 며칠 길이었나</h3>
-        <p>요셉과 마리아가 호적하러 간 길의 실제 거리를 경유지 좌표로 계산하고, 걸어서 갔다는 견해와 나귀를 탔다는 견해를 문헌으로 나누어 이동 일수를 각각 산출했습니다. 나귀는 성경 본문에 없습니다.</p>
-        <div class="meta"><time datetime="2026-08-27">2026-08-27</time><span class="tag">지리</span><span class="tag">고대여행</span><span class="tag">성탄</span></div>
-      </a>
-        </div>
+        <ol class="index-list">
+        <li><a class="entry" href="studies/bethlehem-rulers.html" data-search="베들레헴 시대의 통치자들 예수님이 태어나셨을 때 로마 황제부터 수리아 총독·헤롯 대왕·대제사장까지 누가 어디를 다스렸는지, 그리고 헤롯이 죽은 뒤 나라가 어떻게 셋으로 나뉘었는지 초등학생도 읽을 수 있게 정리한 표. 누가복음 2장 · 마태복음 2장 연대기 로마사 헤롯 성탄">
+          <span class="entry-ref">누가복음 2장 · 마태복음 2장</span>
+          <span class="entry-main">
+            <span class="entry-title">베들레헴 시대의 통치자들</span>
+            <span class="entry-desc">예수님이 태어나셨을 때 로마 황제부터 수리아 총독·헤롯 대왕·대제사장까지 누가 어디를 다스렸는지, 그리고 헤롯이 죽은 뒤 나라가 어떻게 셋으로 나뉘었는지 초등학생도 읽을 수 있게 정리한 표.</span>
+            <span class="entry-meta"><time datetime="2026-08-27">2026-08-27</time><span class="tag">연대기</span><span class="tag">로마사</span><span class="tag">헤롯</span></span>
+          </span>
+        </a></li>
+        <li><a class="entry" href="studies/nazareth-bethlehem-journey.html" data-search="나사렛에서 베들레헴까지, 며칠 길이었나 요셉과 마리아가 호적하러 간 길의 실제 거리를 경유지 좌표로 계산하고, 걸어서 갔다는 견해와 나귀를 탔다는 견해를 문헌으로 나누어 이동 일수를 각각 산출했습니다. 나귀는 성경 본문에 없습니다. 누가복음 2:4–7 지리 고대여행 성탄 외경">
+          <span class="entry-ref">누가복음 2:4–7</span>
+          <span class="entry-main">
+            <span class="entry-title">나사렛에서 베들레헴까지, 며칠 길이었나</span>
+            <span class="entry-desc">요셉과 마리아가 호적하러 간 길의 실제 거리를 경유지 좌표로 계산하고, 걸어서 갔다는 견해와 나귀를 탔다는 견해를 문헌으로 나누어 이동 일수를 각각 산출했습니다. 나귀는 성경 본문에 없습니다.</span>
+            <span class="entry-meta"><time datetime="2026-08-27">2026-08-27</time><span class="tag">지리</span><span class="tag">고대여행</span><span class="tag">성탄</span></span>
+          </span>
+        </a></li>
+        </ol>
         <p class="empty" id="empty" hidden>찾는 자료가 없습니다. 다른 낱말로 검색해 보세요.</p>
       </section>
     </main>
