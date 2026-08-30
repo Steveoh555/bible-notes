@@ -1,0 +1,129 @@
+# 성경연구노트 — 사이트 작업 규약
+
+성경 배경 연구 자료를 **손으로 설계한 HTML 페이지 그대로** 모아 공개하는 정적 사이트입니다.
+서버도 데이터베이스도 없습니다. 파일이 곧 사이트입니다.
+
+> **마크다운을 자동 변환하는 사이트가 아닙니다.** 각 자료는 표·도표·그림을 손으로 설계한
+> 독립된 HTML 페이지입니다. Quartz 같은 SSG는 검토했다가 이 요구에 맞지 않아 폐기했습니다.
+
+## 구조
+
+```
+site/
+├── index.html          홈 — 자동 생성. 절대 직접 고치지 말 것
+├── about.html          소개
+├── studies/*.html      ← 자료 페이지
+├── assets/site.css     공통 디자인 시스템 (색·글꼴은 :root 토큰만 고치면 전체 반영)
+├── assets/site.js      테마 전환(자동/밝게/어둡게) + 홈 검색
+├── build.py            자동화
+├── verify.py           점검
+├── site.config.json    사이트 이름·주소·글쓴이
+├── sitemap.xml         자동 생성   ┐ site_url 이 비어 있으면
+└── feed.xml            자동 생성   ┘ 생성되지 않음
+```
+
+## 명령
+
+```bash
+python3 build.py new <슬러그> "<제목>"     새 자료 뼈대 생성
+python3 build.py                          홈·sitemap·feed 재생성 + 공통 요소 주입
+python3 build.py standalone <슬러그> [폴더] css/js를 안에 넣은 단일 파일 추출
+python3 verify.py                         링크·태그·메타·토큰 점검
+python3 -m http.server 8000               로컬 미리보기
+```
+
+## 자료 페이지 규약 — 반드시 지킬 것
+
+### 1. `<head>` 안에 자기 정보를 적는다
+
+홈 카드와 검색 결과가 여기서 나옵니다.
+
+```html
+<title>제목 — 성경연구노트</title>
+<meta name="description" content="한 문장 요약. 검색 결과에 그대로 보입니다.">
+<meta name="study:scripture" content="누가복음 2:1–7">
+<meta name="study:tags" content="연대기, 로마사">
+<meta name="study:date" content="2026-08-30">
+<meta name="study:updated" content="2026-08-30">
+<meta name="study:draft" content="true">   <!-- 있으면 목록에서 숨김 -->
+```
+
+### 2. 세 개의 표시자를 남긴다
+
+`build.py`가 이 자리를 채웁니다. 지우면 헤더·푸터·SEO 태그가 안 들어갑니다.
+
+```html
+<!--#HEAD--><!--/#HEAD-->        (</head> 바로 위)
+<!--#HEADER--><!--/#HEADER-->    (<body> 바로 아래)
+<!--#FOOTER--><!--/#FOOTER-->    (</body> 바로 위)
+```
+
+### 3. 공통 CSS를 불러 쓴다
+
+```html
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+```
+페이지 고유 스타일만 `<style>`로 추가합니다.
+
+## 디자인 시스템
+
+### 색 토큰 (라이트·다크 3상태 모두 정의되어 있음)
+
+| 토큰 | 뜻 | 쓰임 |
+|---|---|---|
+| `--rome` / `--rome-soft` | 자주 — 로마 | 황제·총독 등 로마 쪽 |
+| `--judea` / `--judea-soft` | 청동녹 — 유대 | 유대 통치자·성경 참조 |
+| `--temple` / `--temple-soft` | 금 — 성전 | 제사장·성전 관련 |
+| `--ink` `--ink-2` `--muted` | 글자 3단계 | |
+| `--ground` `--surface` `--surface-2` | 바탕 3단계 | |
+| `--line` `--line-soft` | 선 2단계 | |
+
+> **다크 모드 규칙:** 색은 반드시 토큰으로만 쓰고, 토큰은 세 곳 모두에 정의합니다 —
+> 맨 `:root`(라이트), `@media (prefers-color-scheme:dark)` 안의
+> `:root:not([data-theme="light"])`, 그리고 `:root[data-theme="dark"]`.
+> 미디어 쿼리 안에서만 정의된 색은 시스템 기본 상태에서 적용되지 않습니다.
+
+### 공통 컴포넌트
+
+`.ladder`>`.rung`+`.arrow` (위계 사다리) · `.scroller`>`table` (가로 스크롤 표) ·
+`.chip.rome/.judea/.temple` (분류 칩) · `.tip` (점선 강조 상자) · `.hinge` (전환점 카드) ·
+`.mapcard` (그림 카드) · `.cards`>`.hcard` (인물·개념 카드) · `.glossary`>`.term` (낱말 사전) ·
+`.prose` (산문 블록) · `.stamp` `.eyebrow` `.name` `.alt` `.note` `.ref`
+
+새 컴포넌트가 두 번째 페이지에서도 쓰이면 `assets/site.css`로 올리세요.
+
+### 차트를 넣을 때
+
+**사이트의 `--judea`/`--rome`은 채도가 낮아 데이터 시각화 검증(chroma floor)을 통과하지 못합니다.**
+차트 전용으로 검증을 통과한 팔레트를 쓰세요.
+
+| | 계열 1 | 계열 2 |
+|---|---|---|
+| 라이트 | `#008F80` | `#B2591F` |
+| 다크 | `#22A88F` | `#C97E33` |
+
+2계열 기준 전 항목 PASS(명도대역·채도·색각이상 분리·정상시야 분리·대비).
+페이지 `<style>`에서 `--s1`/`--s2`로 **3상태 모두** 정의하세요.
+계열이 3개 이상이면 `dataviz` 스킬의 검증기를 다시 돌리세요.
+
+차트에는 범례를 반드시 넣고(2계열 이상), 직접 라벨을 붙이고,
+`<details>`로 수치 표 대체보기를 제공하고, 점에 툴팁을 답니다.
+`nazareth-bethlehem-journey.html`의 고도 단면도가 참고 구현입니다.
+
+## 글의 톤
+
+초등학생도 읽을 수 있게. 다만 엄밀성은 낮추지 않습니다.
+표와 그림을 먼저 보여 주고 설명은 뒤에 붙입니다.
+확정되지 않은 것은 "가설"·"이견"·"미결"로 표시합니다.
+각 페이지 끝에 **근거 자료** 절을 두고 1차 자료 출처를 밝힙니다.
+
+## 성경 본문 인용
+
+**개역개정을 길게 싣지 마세요.** 저작권이 살아 있습니다.
+`../docs/공개-계획.md` 참조. 장절 표기와 짧은 인용, 또는 원문+사역으로 갑니다.
+
+## 배포
+
+git 저장소이며 GitHub Pages로 배포합니다(Cloudflare는 이 환경에서 막혀 있음).
+`site.config.json`의 `site_url`이 비어 있으면 sitemap·feed·canonical이 생성되지 않습니다.
