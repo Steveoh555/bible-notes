@@ -5,3 +5,6 @@ __pycache__/
 _preview/
 .git-credentials
 *.token
+github-token.txt
+*token*.txt
+_to_delete/
