@@ -50,10 +50,24 @@ if [ -z "$(git remote 2>/dev/null)" ]; then
   echo "  git remote add origin https://github.com/<아이디>/<저장소>.git"
   exit 0
 fi
+if [ ! -s .git/.git-credentials ]; then
+  echo "  인증 파일이 없습니다 (.git/.git-credentials)."
+  echo "  GitHub 토큰을 site/github-token.txt 에 저장해 주시면 설정합니다."
+  exit 0
+fi
 unlock
-if git push 2>&1 | quiet; then
-  echo "  올렸습니다. GitHub Pages 반영까지 1~3분 걸립니다."
+BR="$(git branch --show-current)"
+if git rev-parse --abbrev-ref "@{upstream}" >/dev/null 2>&1; then
+  OUT="$(git push 2>&1)"
 else
-  echo "  푸시 실패 — 인증이나 원격 설정을 확인하세요."
+  OUT="$(git push -u origin "$BR" 2>&1)"
+fi
+unlock
+if echo "$OUT" | grep -qiE 'error|fatal|rejected|denied'; then
+  echo "$OUT" | quiet | head -6
+  echo "  푸시 실패."
   exit 1
 fi
+echo "$OUT" | quiet | grep -viE '^remote:|^To |^ \*|^Enumerating|^Counting|^Compressing|^Writing|^Total|^delta' | head -3
+echo "  올렸습니다 → https://steveoh555.github.io/bible-notes"
+echo "  GitHub Pages 반영까지 1~3분 걸립니다."
