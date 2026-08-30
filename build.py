@@ -338,6 +338,67 @@ def cmd_standalone(slug, outdir=None):
     write(out, s)
     print("만들었습니다:", out, "(%.1f KB)" % (len(s.encode()) / 1024))
 
+
+# ---------- 성경 인용 현황 ----------
+BQ = re.compile(
+    r'<blockquote[^>]*class="[^"]*bible[^"]*"[^>]*data-ref="([^"]+)"[^>]*'
+    r'(?:data-version="([^"]*)")?[^>]*>(.*?)</blockquote>', re.S)
+
+def verse_count(ref):
+    """'누가복음 2:4-5' → 2 ,  '출애굽기 4:20' → 1"""
+    m = re.search(r"(\d+)\s*:\s*(\d+)(?:\s*[-–~]\s*(\d+))?", ref)
+    if not m:
+        return 0
+    a = int(m.group(2)); b = int(m.group(3) or a)
+    return max(1, b - a + 1)
+
+def collect_quotes():
+    rows = []
+    for f in sorted(glob.glob(os.path.join(ROOT, "studies", "*.html"))):
+        src = read(f)
+        t = re.search(r"<title>(.*?)</title>", src, re.S)
+        title = re.sub(r"\s*[—|]\s*성경연구노트\s*$", "",
+                       html.unescape(t.group(1)).strip()) if t else os.path.basename(f)
+        for m in BQ.finditer(src):
+            ref = html.unescape(m.group(1)).strip()
+            ver = html.unescape(m.group(2) or "개역개정").strip()
+            body = re.sub(r"<[^>]+>", "", m.group(3))
+            body = html.unescape(body)
+            # 한글만 세어 대략의 인용 분량을 낸다(원문 히브리어·헬라어 제외)
+            ko = len(re.findall(r"[가-힣]", body))
+            rows.append({"page": os.path.basename(f), "title": title,
+                         "ref": ref, "version": ver,
+                         "verses": verse_count(ref), "chars": ko})
+    return rows
+
+def build_quotes(cfg):
+    rows = collect_quotes()
+    lines = [
+        "# 성경 인용 현황",
+        "",
+        "이 파일은 `build.py`가 자동으로 만듭니다. 직접 고치지 마세요.",
+        "사이트에 실린 성경 본문 인용을 전부 모은 표입니다.",
+        "대한성서공회에 저작권을 문의할 때 이 표를 그대로 쓰시면 됩니다.",
+        "",
+    ]
+    if not rows:
+        lines.append("아직 표시된 성경 인용이 없습니다.")
+    else:
+        by_ver = {}
+        for r in rows:
+            by_ver.setdefault(r["version"], []).append(r)
+        tv = sum(r["verses"] for r in rows)
+        tc = sum(r["chars"] for r in rows)
+        lines += [f"**전체 {len(rows)}건 · 약 {tv}절 · 한글 {tc:,}자**", ""]
+        for ver, rs in sorted(by_ver.items()):
+            lines += [f"## {ver} — {len(rs)}건 · 약 {sum(r['verses'] for r in rs)}절", "",
+                      "| 자료 | 구절 | 절 수 | 한글 글자 수 |", "|---|---|---:|---:|"]
+            for r in sorted(rs, key=lambda x: x["page"]):
+                lines.append(f"| {r['title']} | {r['ref']} | {r['verses']} | {r['chars']} |")
+            lines.append("")
+    write(os.path.join(ROOT, "인용현황.md"), "\n".join(lines) + "\n")
+    return rows
+
 # ---------- 메인 ----------
 def main():
     cfg = load_cfg()
@@ -376,6 +437,11 @@ def main():
         s, _ = inject(s, "HEADER", nav(cfg, 0))
         s, _ = inject(s, "FOOTER", foot(cfg, 0))
         write(ap, s)
+
+    qrows = build_quotes(cfg)
+    if qrows:
+        print("  성경 인용 %d건 · 약 %d절 → 인용현황.md"
+              % (len(qrows), sum(r["verses"] for r in qrows)))
 
     build_index(cfg, live)
     if build_sitemap(cfg, live):

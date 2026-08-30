@@ -190,6 +190,14 @@ blockquote{margin:0;padding:14px 20px;border-inline-start:3px solid var(--judea)
   background:var(--surface);border-radius:0 12px 12px 0;color:var(--ink-2)}
 blockquote p{margin:0}
 
+/* ---- 성경 인용 ---- */
+blockquote.bible{border-inline-start-color:var(--temple);background:var(--temple-soft)}
+blockquote.bible cite{display:block;margin-top:8px;font-style:normal;
+  font-family:var(--mono);font-size:.8rem;color:var(--temple);letter-spacing:.02em}
+blockquote.src{border-inline-start-color:var(--muted)}
+blockquote.src cite{display:block;margin-top:8px;font-style:normal;
+  font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+
 /* ---- 푸터 ---- */
 .site-foot{border-top:1px solid var(--line);background:var(--surface)}
 .site-foot .inner{max-width:var(--measure);margin:0 auto;

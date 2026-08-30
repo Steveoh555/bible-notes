@@ -120,6 +120,45 @@ if os.path.exists(cfg_path):
         for f in ("sitemap.xml", "feed.xml"):
             print(("    OK " if os.path.exists(os.path.join(ROOT, f)) else "    X ") + f)
 
+# 6) 성경 인용 분량
+print("\n[6] 성경 인용 분량")
+BQ = re.compile(r'<blockquote[^>]*class="[^"]*bible[^"]*"[^>]*data-ref="([^"]+)"', re.S)
+UNTAGGED = re.compile(r'<blockquote(?![^>]*class=)', re.S)
+MAXV = 4          # 한 인용에서 이 절 수를 넘으면 경고
+MAXCH = 8         # 한 페이지에서 같은 장을 이만큼 넘게 인용하면 경고
+
+def vcount(ref):
+    m = re.search(r"(\d+)\s*:\s*(\d+)(?:\s*[-\u2013~]\s*(\d+))?", ref)
+    if not m:
+        return 0, ""
+    a = int(m.group(2)); b = int(m.group(3) or a)
+    chap = re.sub(r"\s*\d+\s*:.*$", "", ref).strip() + " " + m.group(1) + "장"
+    return max(1, b - a + 1), chap
+
+any_q = False
+for p_ in sorted(glob.glob(os.path.join(ROOT, "studies", "*.html"))):
+    src = read(p_)
+    refs = BQ.findall(src)
+    plain = len(UNTAGGED.findall(src))
+    per_chap = {}
+    for r in refs:
+        n, chap = vcount(r)
+        per_chap[chap] = per_chap.get(chap, 0) + n
+        if n > MAXV:
+            problems.append(f"{rel(p_)}: {r} — {n}절 인용 (권장 {MAXV}절 이하)")
+            print(f"    X {rel(p_)}: {r} — {n}절, 너무 깁니다")
+    for chap, n in per_chap.items():
+        if n > MAXCH:
+            print(f"    ! {rel(p_)}: {chap}에서 합계 {n}절 — 분량을 줄이는 편이 안전합니다")
+    if refs:
+        any_q = True
+        print(f"    OK {rel(p_)}: {len(refs)}건 · {sum(vcount(r)[0] for r in refs)}절")
+    if plain:
+        print(f"    ! {rel(p_)}: 표시 없는 인용블록 {plain}개 — 성경 본문이면"
+              f' class="bible" data-ref="..." 를 달아 주세요')
+if not any_q:
+    print("    표시된 성경 인용 없음")
+
 print("\n" + "=" * 52)
 if problems:
     print("문제 %d건" % len(problems))
