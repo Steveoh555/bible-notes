@@ -51,6 +51,8 @@
 }
 
 *{box-sizing:border-box}
+.theme-switching *,.theme-switching *::before,.theme-switching *::after{
+  transition:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

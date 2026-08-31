@@ -4,8 +4,13 @@
   var order=['auto','light','dark'];
   var label={auto:'자동',light:'밝게',dark:'어둡게'};
 
-  function apply(v){
+  function apply(v, animate){
     var r=document.documentElement;
+    if(animate!==false){                      // 전환 순간만 트랜지션 정지
+      r.classList.add('theme-switching');     // var() 치환이 옛 색에 고착되는 것을 막는다
+      void r.offsetWidth;
+      setTimeout(function(){ r.classList.remove('theme-switching'); }, 60);
+    }
     if(v==='auto'){ r.removeAttribute('data-theme'); }
     else { r.setAttribute('data-theme', v); }
     var b=document.getElementById('themeBtn');
@@ -15,7 +20,7 @@
     try{ return localStorage.getItem(KEY) || 'auto'; }catch(e){ return 'auto'; }
   }
   document.addEventListener('DOMContentLoaded', function(){
-    apply(current());
+    apply(current(), false);
     var b=document.getElementById('themeBtn');
     if(b){
       b.addEventListener('click', function(){
