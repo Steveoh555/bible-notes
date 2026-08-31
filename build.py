@@ -183,6 +183,24 @@ def ensure_main_id(src):
         return src
     return re.sub(r'<(article|main) class="wrap">', r'<\1 id="main" class="wrap">', src, count=1)
 
+
+# ---------- 자산 캐시 무효화 ----------
+def asset_versions():
+    """site.css / site.js 의 내용 해시. 배포마다 주소가 바뀌어 옛 캐시를 안 쓴다."""
+    import hashlib
+    out = {}
+    for f in ("site.css", "site.js"):
+        fp = os.path.join(ROOT, "assets", f)
+        out[f] = hashlib.md5(read(fp).encode()).hexdigest()[:8] if os.path.exists(fp) else "0"
+    return out
+
+def stamp_assets(src, ver):
+    """assets/site.css|js 링크에 ?v=해시 를 붙이거나 갱신한다."""
+    for f, key in (("site.css", "site.css"), ("site.js", "site.js")):
+        src = re.sub(r'(assets/' + re.escape(f) + r')(\?v=[0-9a-f]+)?',
+                     lambda m: m.group(1) + "?v=" + ver[key], src)
+    return src
+
 # ---------- 홈 ----------
 def card(cfg, s):
     search = " ".join([s["title"], s["description"], s["scripture"]] + s["tags"]).lower()
@@ -249,6 +267,7 @@ def build_index(cfg, studies):
            rsslink=('<link rel="alternate" type="application/rss+xml" title="%s" href="feed.xml">\n' % esc(cfg["site_name"])) if cfg.get("site_url") else "")
     body, _ = inject(body, "HEADER", nav(cfg, 0, "index"))
     body, _ = inject(body, "FOOTER", foot(cfg, 0))
+    body = stamp_assets(body, asset_versions())
     write(os.path.join(ROOT, "index.html"), body)
 
 
@@ -298,6 +317,7 @@ def build_404(cfg):
         body = body.replace('href="index.html"', 'href="%s/index.html"' % esc(base))
         body = body.replace('href="about.html"', 'href="%s/about.html"' % esc(base))
         body = body.replace('href="feed.xml"', 'href="%s/feed.xml"' % esc(base))
+    body = stamp_assets(body, asset_versions())
     write(os.path.join(ROOT, "404.html"), body)
 
 # ---------- 사이트맵 / RSS ----------
@@ -498,6 +518,7 @@ def main():
             print('사용법: python3 build.py new 슬러그 "제목"'); return
         cmd_new(sys.argv[2], sys.argv[3]); return
 
+    ver = asset_versions()
     files = sorted(glob.glob(os.path.join(ROOT, "studies", "*.html")))
     infos = [meta_of(f) for f in files]
     live = [i for i in infos if not i["draft"]]
@@ -512,6 +533,7 @@ def main():
         src, ok3 = inject(src, "FOOTER", foot(cfg, 1))
         src = ensure_head_links(src, 1)
         src = ensure_main_id(src)
+        src = stamp_assets(src, ver)
         if src != i["src"]: write(i["path"], src)
         missing = [k for k, ok in (("HEAD", ok1), ("HEADER", ok2), ("FOOTER", ok3)) if not ok]
         flag = ""
@@ -526,6 +548,7 @@ def main():
         s, _ = inject(s, "HEADER", nav(cfg, 0, "about"))
         s = ensure_head_links(s, 0)
         s = ensure_main_id(s)
+        s = stamp_assets(s, ver)
         s, _ = inject(s, "FOOTER", foot(cfg, 0))
         write(ap, s)
 

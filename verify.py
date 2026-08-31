@@ -33,6 +33,9 @@ for p in pages():
     for href in re.findall(r'(?:href|src)="([^"#]+)"', read(p)):
         if href.startswith(("http", "//", "mailto:", "data:")):
             continue
+        href = href.split("?", 1)[0]          # ?v= 캐시 버전은 떼고 검사
+        if not href:
+            continue
         if not os.path.exists(os.path.normpath(os.path.join(base, href))):
             problems.append(f"{rel(p)} → {href} (파일 없음)")
             print(f"    X {rel(p)} → {href}")
