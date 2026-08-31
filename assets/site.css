@@ -6,7 +6,7 @@
   /* 종이와 잉크 — 회색은 전부 올리브 쪽으로 통일 */
   --ground:#EFF0EA;  --surface:#F8F9F4;  --surface-2:#E4E6DD;
   --line:#D2D5C9;    --line-soft:#E1E3D9;
-  --ink:#1F2420;     --ink-2:#4B534E;    --muted:#79807A;
+  --ink:#1F2420;     --ink-2:#4B534E;    --muted:#5F665F;
 
   /* 강조는 하나 — 청동 녹 */
   --accent:#2F6B58;  --accent-soft:#DCE8E1;  --accent-ink:#245243;
@@ -20,8 +20,8 @@
   --shadow:0 1px 1px rgba(31,36,32,.04), 0 8px 24px -12px rgba(31,36,32,.18);
   --shadow-lift:0 2px 4px rgba(31,36,32,.06), 0 14px 32px -14px rgba(31,36,32,.26);
 
-  --display:"Hahmlet","Gowun Batang","Nanum Myeongjo",Georgia,serif;
-  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --display:"Gowun Batang","Nanum Myeongjo","Noto Serif KR",Georgia,serif;
+  --body:"Pretendard Variable",Pretendard,"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
   --measure:1060px;
   --r-lg:14px; --r-md:9px; --r-sm:5px;   /* 반경은 층위별로 다르게 */
@@ -57,7 +57,7 @@ html{scroll-behavior:smooth}
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 body{margin:0;background:var(--ground);color:var(--ink);
-  font-family:var(--body);font-size:17px;line-height:1.72;
+  font-family:var(--body);font-size:18px;line-height:1.78;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 
 /* 종이 결 — 완전 평면을 깬다 */
@@ -86,15 +86,15 @@ img{max-width:100%;height:auto}
   display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .brand{display:flex;align-items:baseline;gap:11px;text-decoration:none;color:var(--ink);margin-inline-end:auto}
 .brand b{font-family:var(--display);font-weight:700;font-size:1.2rem;letter-spacing:-.02em}
-.brand span{font-size:.76rem;color:var(--muted);letter-spacing:.01em}
+.brand span{font-size:0.875rem;color:var(--muted);letter-spacing:.01em}
 .site-nav{display:flex;gap:2px;align-items:center}
-.site-nav a{font-size:.93rem;color:var(--ink-2);text-decoration:none;padding:7px 12px;
+.site-nav a{font-size:0.95rem;color:var(--ink-2);text-decoration:none;padding:7px 12px;
   border-radius:var(--r-sm);transition:color .18s var(--ease),background .18s var(--ease)}
-.site-nav a:hover{background:var(--surface-2);color:var(--ink)}
+.site-nav a:hover{background:var(--accent-soft);color:var(--accent-ink)}
 .site-nav a[aria-current="page"]{color:var(--ink);font-weight:600;
   box-shadow:inset 0 -2px 0 var(--accent)}
 .theme-btn{background:transparent;border:1px solid var(--line);color:var(--ink-2);
-  border-radius:var(--r-sm);padding:6px 11px;cursor:pointer;font-size:.8rem;line-height:1;
+  border-radius:var(--r-sm);padding:6px 11px;cursor:pointer;font-size:0.875rem;line-height:1;
   transition:background .18s var(--ease),color .18s var(--ease),transform .1s var(--ease)}
 .theme-btn:hover{background:var(--surface-2);color:var(--ink)}
 .theme-btn:active{transform:scale(.96)}
@@ -113,18 +113,16 @@ h2{font-family:var(--display);font-weight:700;
   letter-spacing:-.022em;text-wrap:balance}
 h3{font-family:var(--display);font-weight:700;font-size:1.24rem;margin:0;
   line-height:1.32;letter-spacing:-.016em}
-h2 .num{font-family:var(--mono);font-size:.62em;color:var(--muted);
-  margin-inline-end:.62em;font-weight:400;letter-spacing:0}
 
 /* 눈썹 문구 — 대문자 남발 대신 규칙선 + 소문자 */
-.eyebrow{font-size:.85rem;color:var(--accent);font-weight:600;letter-spacing:.005em;
+.eyebrow{font-size:0.875rem;color:var(--accent);font-weight:600;letter-spacing:.005em;
   display:flex;align-items:center;gap:11px}
 .eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:120px}
 .lede{margin:0;max-width:58ch;color:var(--ink-2);
   font-size:clamp(1.04rem,2.3vw,1.2rem);line-height:1.66;text-wrap:pretty}
 .sub{margin:0;color:var(--ink-2);max-width:62ch;text-wrap:pretty}
 .stamp{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;
-  font-family:var(--mono);font-size:.83rem;padding:6px 13px;
+  font-family:var(--mono);font-size:0.875rem;padding:6px 13px;
   border:1px solid var(--line);border-radius:var(--r-sm);
   background:var(--surface);color:var(--ink-2);font-variant-numeric:tabular-nums}
 .stamp b{color:var(--ink);font-weight:500}
@@ -133,11 +131,11 @@ article > header{display:flex;flex-direction:column;gap:17px}
 /* ---- 표 ---- */
 .scroller{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-lg);
   background:var(--surface);box-shadow:var(--shadow)}
-.scroller table{border-collapse:collapse;width:100%;min-width:620px;font-size:.96rem;
+.scroller table{border-collapse:collapse;width:100%;min-width:620px;font-size:1.02rem;
   font-variant-numeric:tabular-nums}
 .scroller caption{text-align:start;padding:17px 19px 0;color:var(--muted);
-  font-size:.84rem;font-family:var(--mono)}
-.scroller thead th{text-align:start;font-size:.82rem;font-weight:600;color:var(--muted);
+  font-size:0.875rem;font-family:var(--mono)}
+.scroller thead th{text-align:start;font-size:0.875rem;font-weight:600;color:var(--muted);
   padding:16px 19px 11px;border-bottom:1px solid var(--line);white-space:nowrap;
   letter-spacing:.005em}
 .scroller tbody td{padding:15px 19px;border-bottom:1px solid var(--line-soft);vertical-align:top}
@@ -147,11 +145,11 @@ article > header{display:flex;flex-direction:column;gap:17px}
 td.role{white-space:nowrap}
 td.where{color:var(--ink-2)}
 .name{font-weight:600;font-size:1.01rem;display:block}
-.alt{color:var(--muted);font-size:.85rem;display:block;margin-top:2px}
-.note{display:block;color:var(--muted);font-size:.83rem;margin-top:5px;white-space:normal}
-.ref{font-family:var(--mono);font-size:.83rem;color:var(--accent);white-space:nowrap}
+.alt{color:var(--muted);font-size:0.875rem;display:block;margin-top:2px}
+.note{display:block;color:var(--muted);font-size:0.875rem;margin-top:5px;white-space:normal}
+.ref{font-family:var(--mono);font-size:0.875rem;color:var(--accent);white-space:nowrap}
 .ref.none{color:var(--muted)}
-.chip{display:inline-block;font-size:.79rem;font-family:var(--mono);padding:3px 8px;
+.chip{display:inline-block;font-size:0.875rem;font-family:var(--mono);padding:3px 8px;
   border-radius:var(--r-sm);white-space:nowrap}
 .chip.rome{background:var(--rome-soft);color:var(--rome)}
 .chip.judea{background:var(--accent-soft);color:var(--accent-ink)}
@@ -161,12 +159,12 @@ td.where{color:var(--ink-2)}
 .tip{border:1px solid var(--line);border-inline-start:3px solid var(--accent);
   border-radius:0 var(--r-md) var(--r-md) 0;padding:19px 22px;
   background:var(--surface);display:flex;flex-direction:column;gap:9px}
-.tip strong{font-size:.96rem}
+.tip strong{font-size:1.02rem}
 .tip p{margin:0;color:var(--ink-2);font-size:.95rem;max-width:64ch;text-wrap:pretty}
 .hinge{display:flex;flex-direction:column;gap:13px;padding:clamp(22px,4vw,34px);
   border-radius:var(--r-lg);background:var(--surface-2);
   border-top:2px solid var(--rome)}
-.hinge .year{font-family:var(--mono);font-size:.82rem;color:var(--rome);
+.hinge .year{font-family:var(--mono);font-size:0.875rem;color:var(--rome);
   font-variant-numeric:tabular-nums}
 .hinge h3{color:var(--ink);font-size:clamp(1.28rem,3.2vw,1.62rem)}
 .hinge p{margin:0;color:var(--ink-2);max-width:60ch;text-wrap:pretty}
@@ -184,7 +182,7 @@ td.where{color:var(--ink-2)}
 .rung.r3{background:var(--accent-soft)}    .rung.r3 .who{color:var(--accent-ink)}
 .rung.r4{border-color:var(--line);border-style:dashed}
 .arrow{display:flex;align-items:center;gap:10px;padding:8px 19px;
-  color:var(--muted);font-size:.85rem}
+  color:var(--muted);font-size:0.875rem}
 .arrow::before{content:"";width:1px;height:20px;background:var(--line)}
 
 /* ---- 그림 카드 ---- */
@@ -193,9 +191,9 @@ td.where{color:var(--ink-2)}
   display:flex;flex-direction:column;gap:17px;margin:0}
 .mapcard svg{width:100%;height:auto;max-width:520px;margin:0 auto;display:block}
 .legend{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center}
-.legend span{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:8px;font-size:0.95rem;color:var(--ink-2)}
 .swatch{width:13px;height:13px;border-radius:3px;display:inline-block}
-.mapcard figcaption{color:var(--muted);font-size:.86rem;text-align:center;margin:0;
+.mapcard figcaption{color:var(--muted);font-size:0.875rem;text-align:center;margin:0;
   max-width:60ch;margin-inline:auto;text-wrap:pretty}
 
 /* ---- 인물·개념 카드 ---- */
@@ -204,12 +202,13 @@ td.where{color:var(--ink-2)}
   border-radius:var(--r-lg);overflow:hidden}
 .hcard{background:var(--surface);padding:19px 21px;display:flex;flex-direction:column;gap:7px;
   transition:background .18s var(--ease)}
-.hcard:hover{background:var(--surface-2)}
-.hcard .gen{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.hcard:hover{background:var(--accent-soft)}
+.hcard:hover .hname{color:var(--accent-ink)}
+.hcard .gen{font-family:var(--mono);font-size:0.875rem;color:var(--muted)}
 .hcard .hname{font-family:var(--display);font-weight:700;font-size:1.1rem;line-height:1.3;
   letter-spacing:-.014em}
-.hcard p{margin:0;font-size:.92rem;color:var(--ink-2);flex:1;text-wrap:pretty}
-.hcard .vs{font-family:var(--mono);font-size:.81rem;color:var(--accent)}
+.hcard p{margin:0;font-size:0.95rem;color:var(--ink-2);flex:1;text-wrap:pretty}
+.hcard .vs{font-family:var(--mono);font-size:0.875rem;color:var(--accent)}
 
 /* ---- 낱말 사전 ---- */
 .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(262px,1fr));gap:1px;
@@ -217,8 +216,8 @@ td.where{color:var(--ink-2)}
   border-radius:var(--r-lg);overflow:hidden;margin:0}
 .term{padding:19px 21px;display:flex;flex-direction:column;gap:6px;background:var(--surface)}
 .term dt{font-weight:600;font-size:1rem;margin:0}
-.term dd{margin:0;color:var(--ink-2);font-size:.93rem;text-wrap:pretty}
-.term .hanja{color:var(--muted);font-size:.85rem;font-weight:400;font-family:var(--mono)}
+.term dd{margin:0;color:var(--ink-2);font-size:0.95rem;text-wrap:pretty}
+.term .hanja{color:var(--muted);font-size:0.875rem;font-weight:400;font-family:var(--mono)}
 
 /* ---- 홈: 색인 ---- */
 .search-row{display:flex;gap:13px;flex-wrap:wrap;align-items:center;
@@ -228,7 +227,7 @@ td.where{color:var(--ink-2)}
   transition:border-color .2s var(--ease)}
 #q:focus{outline:0;border-bottom-color:var(--accent)}
 #q::placeholder{color:var(--muted)}
-.count{font-family:var(--mono);font-size:.83rem;color:var(--muted);
+.count{font-family:var(--mono);font-size:0.875rem;color:var(--muted);
   font-variant-numeric:tabular-nums;white-space:nowrap}
 
 .index-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
@@ -239,16 +238,17 @@ td.where{color:var(--ink-2)}
   transition:background .18s var(--ease),padding-inline-start .22s var(--ease)}
 .entry:hover{background:var(--surface);padding-inline-start:14px}
 .entry:active{background:var(--surface-2);padding-inline-start:11px}
-.entry-ref{font-family:var(--mono);font-size:.84rem;color:var(--accent);
+.entry-ref{font-family:var(--mono);font-size:0.875rem;color:var(--accent);
   padding-top:5px;line-height:1.55}
 .entry-main{display:flex;flex-direction:column;gap:9px;min-width:0}
 .entry-title{font-family:var(--display);font-weight:700;
   font-size:clamp(1.28rem,2.7vw,1.62rem);line-height:1.3;letter-spacing:-.022em;
   text-wrap:balance;transition:color .18s var(--ease)}
-.entry:hover .entry-title{color:var(--accent-ink)}
-.entry-desc{color:var(--ink-2);font-size:.96rem;max-width:64ch;text-wrap:pretty}
+.entry:hover .entry-title,.entry:focus-visible .entry-title{color:var(--accent-ink)}
+.entry:hover .entry-ref{color:var(--accent-ink);font-weight:500}
+.entry-desc{color:var(--ink-2);font-size:1.02rem;max-width:64ch;text-wrap:pretty}
 .entry-meta{display:flex;gap:9px;flex-wrap:wrap;align-items:center;
-  font-family:var(--mono);font-size:.76rem;color:var(--muted);
+  font-family:var(--mono);font-size:0.875rem;color:var(--muted);
   font-variant-numeric:tabular-nums}
 .tag{background:var(--surface-2);color:var(--ink-2);padding:2px 8px;border-radius:var(--r-sm)}
 .empty{color:var(--muted);padding:44px 0;text-align:center}
@@ -264,7 +264,7 @@ blockquote{margin:0;padding:17px 22px;border-inline-start:2px solid var(--line);
 blockquote p{margin:0;text-wrap:pretty}
 blockquote.bible{border-inline-start-color:var(--temple);background:var(--temple-soft)}
 blockquote.bible cite,blockquote.src cite{display:block;margin-top:9px;font-style:normal;
-  font-family:var(--mono);font-size:.8rem}
+  font-family:var(--mono);font-size:0.875rem}
 blockquote.bible cite{color:var(--temple)}
 blockquote.src{border-inline-start-color:var(--muted)}
 blockquote.src cite{color:var(--muted)}
@@ -273,14 +273,15 @@ blockquote.src cite{color:var(--muted)}
 .site-foot{border-top:1px solid var(--line);background:var(--surface)}
 .site-foot .inner{max-width:var(--measure);margin:0 auto;
   padding:40px clamp(18px,4vw,44px) 54px;display:flex;flex-direction:column;gap:11px;
-  color:var(--muted);font-size:.87rem}
+  color:var(--muted);font-size:0.875rem}
 .site-foot p{margin:0;max-width:70ch;text-wrap:pretty}
-.site-foot .src{font-family:var(--mono);font-size:.79rem;line-height:1.95}
+.site-foot .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+.site-foot .src{font-family:var(--mono);font-size:0.875rem;line-height:1.95}
 .site-foot a{color:var(--ink-2)}
-.site-foot a:hover{color:var(--accent)}
+.site-foot a:hover{color:var(--accent);text-decoration-thickness:2px}
 
 @media (max-width:620px){
-  body{font-size:16px}
+  body{font-size:17px}
   .site-head{position:static}
   .entry{grid-template-columns:1fr;gap:9px;padding-block:24px}
   .entry:hover{padding-inline-start:6px}

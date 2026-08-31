@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-성경연구노트 — 사이트 빌드 스크립트
+성경연구노트 사이트 빌드 스크립트
 
   python3 build.py            자료를 훑어 홈·사이트맵·RSS를 다시 만들고
                               모든 페이지에 공통 헤더/푸터/SEO 태그를 주입합니다.
@@ -11,11 +11,11 @@
 자료 페이지는 <head> 안의 메타 태그로 자기 정보를 알려 줍니다.
   <title>…</title>
   <meta name="description" content="…">
-  <meta name="study:scripture" content="누가복음 2:1–7">
+  <meta name="study:scripture" content="누가복음 2:1-7">
   <meta name="study:tags" content="연대기, 로마사">
   <meta name="study:date" content="2026-08-27">
   <meta name="study:updated" content="2026-08-27">   (선택)
-  <meta name="study:draft" content="true">           (선택 — 목록에서 숨김)
+  <meta name="study:draft" content="true">           (선택. 목록에서 숨김)
 """
 import os, re, json, html, sys, datetime, glob
 
@@ -56,7 +56,7 @@ def meta_of(path):
         return html.unescape(r.group(1)).strip() if r else ""
     t = re.search(r"<title>(.*?)</title>", src, re.S | re.I)
     title = html.unescape(t.group(1)).strip() if t else os.path.basename(path)
-    title = re.sub(r"\s*[—|]\s*성경연구노트\s*$", "", title)
+    title = re.sub(r"\s*[-—|]\s*성경연구노트\s*$", "", title)
     tags = [x.strip() for x in re.split(r"[,·]", m("study:tags")) if x.strip()]
     return {
         "path": path,
@@ -96,18 +96,20 @@ def foot(cfg, depth):
     up = "../" if depth else ""
     year = datetime.date.today().year
     who = (" · " + esc(cfg["author"])) if cfg.get("author") else ""
-    rss = (' · <a href="%sfeed.xml">RSS</a>' % up) if cfg.get("site_url") else ""
+    rss = (' <a href="%sfeed.xml">RSS</a>' % up) if cfg.get("site_url") else ""
     return """<footer class="site-foot">
       <div class="inner">
-        <p><strong>{name}</strong> — {desc}</p>
+        <p><strong>{name}</strong></p>
+        <p>{desc}</p>
         <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 &ldquo;이견&rdquo;으로 표시합니다.</p>
-        <p class="src">© {year} {name}{who} · <a href="{up}index.html">자료 목록</a> · <a href="{up}about.html">소개</a>{rss}</p>
+        <p class="src">© {year} {name}{who}</p>
+        <p class="foot-links"><a href="{up}index.html">자료 목록</a> <a href="{up}about.html">소개</a>{rss}</p>
       </div>
     </footer>""".format(name=esc(cfg["site_name"]), desc=esc(cfg["description"]),
                         year=year, who=who, up=up, rss=rss)
 
 def headtags(cfg, info, depth):
-    """canonical / Open Graph / JSON-LD — 검색엔진용"""
+    """canonical / Open Graph / JSON-LD. 검색엔진용"""
     base = cfg.get("site_url", "").rstrip("/")
     url = (base + "/" + info["url"]) if base else ""
     parts = []
@@ -226,11 +228,13 @@ def build_index(cfg, studies):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{name} — {tag}</title>
+<title>{name} - {tag}</title>
 <meta name="description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="assets/site.css">\n{favicon}
 {rsslink}<script>try{{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 </head>
@@ -280,11 +284,13 @@ def build_404(cfg):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>찾는 자료가 없습니다 — {name}</title>
+<title>찾는 자료가 없습니다 - {name}</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="{base}/assets/site.css">
 <link rel="icon" type="image/svg+xml" href="{base}/assets/favicon.svg">
 <meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">
@@ -381,7 +387,7 @@ SKELETON = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — 성경연구노트</title>
+<title>{title} - 성경연구노트</title>
 <meta name="description" content="여기에 한 문장 요약을 씁니다. 검색 결과에 그대로 보입니다.">
 <meta name="study:scripture" content="">
 <meta name="study:tags" content="">
@@ -389,7 +395,9 @@ SKELETON = """<!doctype html>
 <meta name="study:updated" content="{today}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="../assets/site.css">
 <script>try{{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 <!--#HEAD--><!--/#HEAD-->
@@ -405,7 +413,7 @@ SKELETON = """<!doctype html>
       </header>
 
       <section>
-        <h2><span class="num">1</span>첫 절</h2>
+        <h2>첫 절</h2>
         <div class="prose"><p>내용.</p></div>
       </section>
     </article>
@@ -464,7 +472,7 @@ def collect_quotes():
     for f in sorted(glob.glob(os.path.join(ROOT, "studies", "*.html"))):
         src = read(f)
         t = re.search(r"<title>(.*?)</title>", src, re.S)
-        title = re.sub(r"\s*[—|]\s*성경연구노트\s*$", "",
+        title = re.sub(r"\s*[-—|]\s*성경연구노트\s*$", "",
                        html.unescape(t.group(1)).strip()) if t else os.path.basename(f)
         for m in BQ.finditer(src):
             ref = html.unescape(m.group(1)).strip()
@@ -498,7 +506,7 @@ def build_quotes(cfg):
         tc = sum(r["chars"] for r in rows)
         lines += [f"**전체 {len(rows)}건 · 약 {tv}절 · 한글 {tc:,}자**", ""]
         for ver, rs in sorted(by_ver.items()):
-            lines += [f"## {ver} — {len(rs)}건 · 약 {sum(r['verses'] for r in rs)}절", "",
+            lines += [f"## {ver}: {len(rs)}건 · 약 {sum(r['verses'] for r in rs)}절", "",
                       "| 자료 | 구절 | 절 수 | 한글 글자 수 |", "|---|---|---:|---:|"]
             for r in sorted(rs, key=lambda x: x["page"]):
                 lines.append(f"| {r['title']} | {r['ref']} | {r['verses']} | {r['chars']} |")
