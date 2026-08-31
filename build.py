@@ -69,6 +69,8 @@ def meta_of(path):
         "date": m("study:date") or "1970-01-01",
         "updated": m("study:updated") or m("study:date") or "1970-01-01",
         "draft": m("study:draft").lower() == "true",
+        "hero": m("study:hero"),
+        "hero_alt": m("study:hero-alt"),
         "src": src,
     }
 
@@ -124,9 +126,10 @@ def headtags(cfg, info, depth):
         '<meta name="twitter:card" content="summary_large_image">',
     ]
     if base:
+        img = ("/assets/img/" + info["hero"]) if info.get("hero") else "/assets/og.png"
         parts += [
-            '<meta property="og:image" content="%s">' % esc(base + "/assets/og.png"),
-            '<meta name="twitter:image" content="%s">' % esc(base + "/assets/og.png"),
+            '<meta property="og:image" content="%s">' % esc(base + img),
+            '<meta name="twitter:image" content="%s">' % esc(base + img),
         ]
     if url:
         parts.insert(-1, '<meta property="og:url" content="%s">' % esc(url))
@@ -148,6 +151,7 @@ def headtags(cfg, info, depth):
     return "\n    ".join(parts)
 
 MARK = {
+    "HERO":   ("<!--#HERO-->",   "<!--/#HERO-->"),
     "HEAD":   ("<!--#HEAD-->",   "<!--/#HEAD-->"),
     "HEADER": ("<!--#HEADER-->", "<!--/#HEADER-->"),
     "FOOTER": ("<!--#FOOTER-->", "<!--/#FOOTER-->"),
@@ -203,6 +207,20 @@ def stamp_assets(src, ver):
                      lambda m: m.group(1) + "?v=" + ver[key], src)
     return src
 
+
+def hero_band(info, depth):
+    """study:hero 로 지정된 이미지를 제목 위 밴드로 만든다."""
+    if not info.get("hero"):
+        return ""
+    up = "../" if depth else ""
+    alt = info.get("hero_alt") or (info["title"] + " 분위기 그림")
+    return ('<figure class="hero-band">\n'
+            '        <span class="frame"><img src="%sassets/img/%s" alt="%s" '
+            'width="1400" height="594" loading="eager" decoding="async"></span>\n'
+            '        <figcaption>%s</figcaption>\n'
+            '      </figure>') % (up, esc(info["hero"]), esc(alt),
+                                  esc("그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다."))
+
 # ---------- 홈 ----------
 def card(cfg, s):
     search = " ".join([s["title"], s["description"], s["scripture"]] + s["tags"]).lower()
@@ -243,6 +261,10 @@ def build_index(cfg, studies):
 
     <main id="main" class="wrap">
       <header>
+        <figure class="hero-band">
+          <span class="frame"><img src="assets/img/hero-home.jpg" alt="올리브 나무가 선 유대 산지의 계단밭과 멀리 성벽으로 둘러싸인 마을을 그린 그림" width="1400" height="594" loading="eager" decoding="async"></span>
+          <figcaption>그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다.</figcaption>
+        </figure>
         <div class="eyebrow">성경 배경 연구</div>
         <h1>{tag}</h1>
         <p class="lede">{desc}</p>
@@ -391,6 +413,8 @@ SKELETON = """<!doctype html>
 <meta name="description" content="여기에 한 문장 요약을 씁니다. 검색 결과에 그대로 보입니다.">
 <meta name="study:scripture" content="">
 <meta name="study:tags" content="">
+<meta name="study:hero" content="">
+<meta name="study:hero-alt" content="">
 <meta name="study:date" content="{today}">
 <meta name="study:updated" content="{today}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -407,6 +431,7 @@ SKELETON = """<!doctype html>
 
     <article class="wrap">
       <header>
+        <!--#HERO--><!--/#HERO-->
         <div class="eyebrow">본문 표기</div>
         <h1>{title}</h1>
         <p class="lede">한 문단 도입부.</p>
@@ -539,6 +564,7 @@ def main():
         src, ok1 = inject(src, "HEAD", headtags(cfg, i, 1))
         src, ok2 = inject(src, "HEADER", nav(cfg, 1))
         src, ok3 = inject(src, "FOOTER", foot(cfg, 1))
+        src, _   = inject(src, "HERO", hero_band(i, 1))
         src = ensure_head_links(src, 1)
         src = ensure_main_id(src)
         src = stamp_assets(src, ver)
