@@ -28,7 +28,7 @@
     /* 홈 화면 검색 */
     var q=document.getElementById('q');
     if(q){
-      var cards=[].slice.call(document.querySelectorAll('.grid .card'));
+      var cards=[].slice.call(document.querySelectorAll('.index-list .entry'));
       var count=document.getElementById('count');
       var empty=document.getElementById('empty');
       var total=cards.length;
@@ -37,7 +37,7 @@
         var n=0;
         cards.forEach(function(c){
           var hit = !t || (c.dataset.search||'').indexOf(t)>-1;
-          c.style.display = hit ? '' : 'none';
+          var row = c.closest('li') || c; row.style.display = hit ? '' : 'none';
           if(hit) n++;
         });
         if(count) count.textContent = t ? n+' / '+total+' 편' : total+' 편';

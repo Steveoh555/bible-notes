@@ -212,7 +212,7 @@ def build_index(cfg, studies):
 <meta name="description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">\n{favicon}
 {rsslink}<script>try{{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 </head>
@@ -229,7 +229,7 @@ def build_index(cfg, studies):
       <section>
         <div class="search-row">
           <label for="q" class="sr-only" style="position:absolute;left:-9999px">자료 검색</label>
-          <input id="q" type="search" placeholder="본문·주제·인물로 찾기 — 누가복음, 호적, 헤롯…" autocomplete="off">
+          <input id="q" type="search" placeholder="본문, 주제, 인물로 찾기. 누가복음, 호적, 헤롯…" autocomplete="off">
           <span class="count" id="count">{n} 편</span>
         </div>
         <ol class="index-list">
@@ -369,7 +369,7 @@ SKELETON = """<!doctype html>
 <meta name="study:updated" content="{today}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="../assets/site.css">
 <script>try{{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 <!--#HEAD--><!--/#HEAD-->
