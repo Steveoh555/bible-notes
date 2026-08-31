@@ -90,13 +90,13 @@ img{max-width:100%;height:auto}
 .brand span{font-size:0.875rem;color:var(--muted);letter-spacing:.01em}
 .site-nav{display:flex;gap:2px;align-items:center}
 .site-nav a{font-size:0.95rem;color:var(--ink-2);text-decoration:none;padding:7px 12px;
-  border-radius:var(--r-sm);transition:color .18s var(--ease),background .18s var(--ease)}
+  border-radius:var(--r-sm);transition:color .18s var(--ease),background-color .18s var(--ease)}
 .site-nav a:hover{background:var(--accent-soft);color:var(--accent-ink)}
 .site-nav a[aria-current="page"]{color:var(--ink);font-weight:600;
   box-shadow:inset 0 -2px 0 var(--accent)}
 .theme-btn{background:transparent;border:1px solid var(--line);color:var(--ink-2);
   border-radius:var(--r-sm);padding:6px 11px;cursor:pointer;font-size:0.875rem;line-height:1;
-  transition:background .18s var(--ease),color .18s var(--ease),transform .1s var(--ease)}
+  transition:background-color .18s var(--ease),color .18s var(--ease),transform .1s var(--ease)}
 .theme-btn:hover{background:var(--surface-2);color:var(--ink)}
 .theme-btn:active{transform:scale(.96)}
 
@@ -141,7 +141,7 @@ article > header{display:flex;flex-direction:column;gap:17px}
   letter-spacing:.005em}
 .scroller tbody td{padding:15px 19px;border-bottom:1px solid var(--line-soft);vertical-align:top}
 .scroller tbody tr:last-child td{border-bottom:none}
-.scroller tbody tr{transition:background .16s var(--ease)}
+.scroller tbody tr{transition:background-color .16s var(--ease)}
 .scroller tbody tr:hover{background:var(--surface-2)}
 td.role{white-space:nowrap}
 td.where{color:var(--ink-2)}
@@ -202,7 +202,7 @@ td.where{color:var(--ink-2)}
   background:var(--line-soft);border:1px solid var(--line);
   border-radius:var(--r-lg);overflow:hidden}
 .hcard{background:var(--surface);padding:19px 21px;display:flex;flex-direction:column;gap:7px;
-  transition:background .18s var(--ease)}
+  transition:background-color .18s var(--ease)}
 .hcard:hover{background:var(--accent-soft)}
 .hcard:hover .hname{color:var(--accent-ink)}
 .hcard .gen{font-family:var(--mono);font-size:0.875rem;color:var(--muted)}
@@ -236,7 +236,7 @@ td.where{color:var(--ink-2)}
 .index-list li:last-child{border-bottom:0}
 .entry{display:grid;grid-template-columns:minmax(150px,215px) 1fr;gap:clamp(16px,3vw,42px);
   padding:clamp(22px,3vw,30px) 6px;text-decoration:none;color:inherit;
-  transition:background .18s var(--ease),padding-inline-start .22s var(--ease)}
+  transition:background-color .18s var(--ease),padding-inline-start .22s var(--ease)}
 .entry:hover{background:var(--surface);padding-inline-start:14px}
 .entry:active{background:var(--surface-2);padding-inline-start:11px}
 .entry-ref{font-family:var(--mono);font-size:0.875rem;color:var(--accent);
