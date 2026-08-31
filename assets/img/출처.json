@@ -1,0 +1,39 @@
+{
+  "_설명": "이미지 출처·라이선스 원장. build.py 가 이 파일을 읽어 그림 밑 출처 문구를 자동으로 만들고, verify.py 가 빠진 항목을 잡아낸다. 새 이미지를 넣으면 반드시 여기에 먼저 등록할 것.",
+  "_분류": {
+    "사료": "실제 유물·고지도·고문서의 사진 또는 스캔. 퍼블릭 도메인이나 CC0 만 허용한다.",
+    "삽화": "AI 로 만든 분위기 그림. 사료가 아님을 캡션에 반드시 밝힌다."
+  },
+  "_허용라이선스": ["Public domain", "CC0", "PD-old", "PD-US", "No restrictions"],
+
+  "coin-augustus.jpg": {
+    "분류": "사료",
+    "제목": "옥타비아누스(아우구스투스) 은 데나리온",
+    "연도": "기원전 29~27년 주조",
+    "제작자": "",
+    "소장": "미국 메트로폴리탄 미술관",
+    "라이선스": "CC0",
+    "라이선스URL": "https://creativecommons.org/publicdomain/zero/1.0/deed.ko",
+    "원본페이지": "https://commons.wikimedia.org/wiki/File:Silver_denarius_of_Octavian_(Augustus)_MET_LC-08_170_89b.jpg",
+    "설명": "누가복음 2장의 \"가이사 아구스도\"가 바로 이 사람이다. 월계관을 쓴 젊은 옥타비아누스의 옆얼굴이 새겨진 은화로, 예수님이 태어나시기 약 30년 전에 만들어졌다.",
+    "alt": "월계관을 쓴 젊은 옥타비아누스의 옆얼굴이 새겨진 고대 로마 은화 데나리온"
+  },
+
+  "map-palestine-1864.jpg": {
+    "분류": "사료",
+    "제목": "팔레스타인, 곧 성지 지도",
+    "연도": "1864년",
+    "제작자": "새뮤얼 오거스터스 미첼 2세",
+    "소장": "Geographicus Rare Antique Maps 제공",
+    "라이선스": "Public domain",
+    "라이선스URL": "",
+    "원본페이지": "https://commons.wikimedia.org/wiki/File:1864_Mitchell_Map_of_Palestine,_Israel_or_the_Holy_Land_-_Geographicus_-_Palestine-mitchell-1864.jpg",
+    "설명": "북쪽 갈릴리의 나사렛(Nazareth)에서 남쪽 유대의 베들레헴(Bethlehem)까지, 요셉과 마리아가 지나간 땅이 한 장에 들어 있다. 지도 오른쪽 아래에는 예루살렘 시내가 따로 그려져 있다.",
+    "alt": "1864년에 그려진 팔레스타인 채색 고지도. 갈릴리·사마리아·유대와 요단 동편이 모두 담겨 있다."
+  },
+
+  "hero-home.jpg":    {"분류": "삽화", "alt": "베들레헴 언덕의 새벽 풍경을 그린 그림"},
+  "hero-about.jpg":   {"분류": "삽화", "alt": "펼쳐진 두루마리와 등불을 그린 그림"},
+  "hero-rulers.jpg":  {"분류": "삽화", "alt": "로마 시대 유대 땅의 성읍과 언덕을 그린 그림"},
+  "hero-journey.jpg": {"분류": "삽화", "alt": "나사렛에서 베들레헴으로 향하는 길을 그린 그림"}
+}

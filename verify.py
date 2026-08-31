@@ -162,6 +162,68 @@ for p_ in sorted(glob.glob(os.path.join(ROOT, "studies", "*.html"))):
 if not any_q:
     print("    표시된 성경 인용 없음")
 
+# ---------- [7] 이미지 출처와 라이선스 ----------
+print("\n[7] 이미지 출처")
+CRED = os.path.join(ROOT, "assets", "img", "출처.json")
+FREE = ("public domain", "cc0", "pd-old", "pd-us", "no restrictions", "pd")
+cred = {}
+if not os.path.exists(CRED):
+    problems.append("assets/img/출처.json 이 없습니다")
+    print("    X 출처 원장이 없습니다")
+else:
+    try:
+        cred = json.load(io.open(CRED, encoding="utf-8"))
+    except Exception as e:
+        problems.append("출처.json 을 읽을 수 없습니다: %s" % e)
+        print("    X 출처.json 파손:", e)
+
+# 원장 자체가 온전한가
+for k, c in cred.items():
+    if k.startswith("_"):
+        continue
+    if not os.path.exists(os.path.join(ROOT, "assets", "img", k)):
+        problems.append("출처.json 에 있으나 파일이 없습니다: %s" % k)
+        print("    X 파일 없음:", k)
+        continue
+    if c.get("분류") == "사료":
+        lic = (c.get("라이선스") or "").strip().lower()
+        miss = [f for f in ("제목", "라이선스", "원본페이지") if not c.get(f)]
+        if miss:
+            problems.append("%s: 출처 항목 누락 %s" % (k, ", ".join(miss)))
+            print("    X %s — %s 가 비어 있습니다" % (k, ", ".join(miss)))
+        elif not lic.startswith(FREE):
+            problems.append("%s: 허용되지 않는 라이선스 '%s'" % (k, c.get("라이선스")))
+            print("    X %s — 라이선스 '%s' 는 쓸 수 없습니다" % (k, c.get("라이선스")))
+        else:
+            print("    OK %s — %s · %s" % (k, c.get("제목"), c.get("라이선스")))
+    elif c.get("분류") == "삽화":
+        print("    OK %s — AI 삽화 (사료 아님을 캡션에 밝힘)" % k)
+    else:
+        problems.append("%s: 분류가 '사료' 나 '삽화' 가 아닙니다" % k)
+        print("    X %s — 분류 없음" % k)
+
+# 페이지가 쓰는 이미지가 모두 원장에 있는가
+used = set()
+for p_ in pages():
+    for m in re.finditer(r'assets/img/([^"\'?\s>]+)', read(p_)):
+        used.add(m.group(1))
+for u in sorted(used):
+    if u not in cred:
+        problems.append("원장에 없는 이미지를 쓰고 있습니다: %s" % u)
+        print("    X 원장 미등록:", u)
+
+# 사료 도판이 출처 없이 붙어 있지 않은가
+for p_ in pages():
+    src = read(p_)
+    for m in re.finditer(r'<!--#PLATE:([^>]*?)-->(.*?)<!--/#PLATE-->', src, re.S):
+        fn = m.group(1).split("|")[0].strip()
+        body = m.group(2)
+        c = cred.get(fn, {})
+        if c.get("분류") == "사료" and "plate-src" not in body:
+            problems.append("%s: %s 도판에 출처 표기가 렌더링되지 않았습니다" % (rel(p_), fn))
+            print("    X %s — %s 출처 미표기 (build.py 를 먼저 돌리세요)" % (rel(p_), fn))
+
+
 print("\n" + "=" * 52)
 if problems:
     print("문제 %d건" % len(problems))

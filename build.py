@@ -208,6 +208,118 @@ def stamp_assets(src, ver):
     return src
 
 
+# ---------- 이미지 출처 원장 ----------
+CRED_PATH = os.path.join(ROOT, "assets", "img", "출처.json")
+AI_NOTE = "그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다."
+FREE_LICENSES = ("public domain", "cc0", "pd-old", "pd-us", "no restrictions", "pd")
+
+def credits():
+    """assets/img/출처.json 을 읽는다. 없으면 빈 원장."""
+    if not os.path.exists(CRED_PATH):
+        return {}
+    try:
+        with open(CRED_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        print("  ! 출처.json 을 읽지 못했습니다: %s" % e)
+        return {}
+
+def is_free(lic):
+    return (lic or "").strip().lower().startswith(FREE_LICENSES)
+
+def jpeg_size(path):
+    """JPEG/PNG 의 가로·세로를 헤더에서 읽는다. 실패하면 None."""
+    try:
+        with open(path, "rb") as f:
+            d = f.read(24)
+            if d[:8] == b"\x89PNG\r\n\x1a\n":
+                import struct
+                return struct.unpack(">II", d[16:24])
+            if d[:2] != b"\xff\xd8":
+                return None
+            f.seek(2)
+            while True:
+                b = f.read(1)
+                while b and b != b"\xff":
+                    b = f.read(1)
+                m = f.read(1)
+                while m == b"\xff":
+                    m = f.read(1)
+                if not m:
+                    return None
+                if m[0] in range(0xC0, 0xD0) and m[0] not in (0xC4, 0xC8, 0xCC):
+                    f.read(3)
+                    import struct
+                    h, w = struct.unpack(">HH", f.read(4))
+                    return (w, h)
+                import struct
+                ln = struct.unpack(">H", f.read(2))[0]
+                f.seek(ln - 2, 1)
+    except Exception:
+        return None
+
+PLATE_RE = re.compile(r"<!--#PLATE:([^>]*?)-->.*?<!--/#PLATE-->", re.S)
+
+def plate_figure(spec, cred, depth):
+    """<!--#PLATE:파일명|옵션--> 을 출처가 붙은 그림으로 바꾼다."""
+    bits  = [x.strip() for x in spec.split("|")]
+    fname = bits[0]
+    opts  = [b for b in bits[1:] if b]
+    c     = cred.get(fname)
+    if c is None:
+        return None, "원장에 %s 항목이 없습니다" % fname
+    if c.get("분류") == "사료" and not is_free(c.get("라이선스")):
+        return None, "%s 의 라이선스(%s)는 허용 목록에 없습니다" % (fname, c.get("라이선스"))
+
+    up  = "../" if depth else ""
+    dim = jpeg_size(os.path.join(ROOT, "assets", "img", fname))
+    wh  = ' width="%d" height="%d"' % dim if dim else ""
+    alt = c.get("alt") or c.get("제목") or fname
+    cls = " ".join(["plate"] + opts)
+
+    img = ('<img src="%sassets/img/%s" alt="%s"%s loading="lazy" decoding="async">'
+           % (up, esc(fname), esc(alt), wh))
+
+    if c.get("분류") != "사료":
+        return ('<figure class="%s">\n        %s\n        <figcaption>%s</figcaption>\n      </figure>'
+                % (esc(cls), img, esc(AI_NOTE))), None
+
+    src_page = c.get("원본페이지", "")
+    if src_page:
+        img = '<a class="plate-img" href="%s" target="_blank" rel="noopener">%s</a>' % (esc(src_page), img)
+
+    head = esc(c.get("제목", fname))
+    if c.get("연도"):
+        head += ' <span class="plate-year">%s</span>' % esc(c["연도"])
+
+    line = []
+    if c.get("제작자"): line.append(esc(c["제작자"]))
+    if c.get("소장"):   line.append(esc(c["소장"]))
+    lic = esc(c.get("라이선스", ""))
+    if c.get("라이선스URL"):
+        lic = '<a href="%s" target="_blank" rel="noopener">%s</a>' % (esc(c["라이선스URL"]), lic)
+    if lic: line.append(lic + " · 자유 이용")
+    if src_page: line.append('<a href="%s" target="_blank" rel="noopener">원본 보기</a>' % esc(src_page))
+
+    note = ('<span class="plate-note">%s</span>' % esc(c["설명"])) if c.get("설명") else ""
+    return ('<figure class="%s">\n        %s\n        <figcaption>'
+            '<b class="plate-title">%s</b>%s'
+            '<span class="plate-src">%s</span>'
+            '</figcaption>\n      </figure>'
+            % (esc(cls), img, head, note, " · ".join(line))), None
+
+def inject_plates(src, cred, depth, slug=""):
+    """페이지 안의 모든 PLATE 표시자를 채운다. 반환: (본문, 경고목록)"""
+    warns = []
+    def one(m):
+        fig, err = plate_figure(m.group(1), cred, depth)
+        if err:
+            warns.append("%s: %s" % (slug, err))
+            return m.group(0)
+        return "<!--#PLATE:%s-->\n      %s\n      <!--/#PLATE-->" % (m.group(1), fig)
+    return PLATE_RE.sub(one, src), warns
+
+
 def hero_band(info, depth):
     """study:hero 로 지정된 이미지를 제목 위 밴드로 만든다."""
     if not info.get("hero"):
@@ -219,7 +331,7 @@ def hero_band(info, depth):
             'width="1400" height="594" loading="eager" decoding="async"></span>\n'
             '        <figcaption>%s</figcaption>\n'
             '      </figure>') % (up, esc(info["hero"]), esc(alt),
-                                  esc("그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다."))
+                                  esc(AI_NOTE))
 
 # ---------- 홈 ----------
 def card(cfg, s):
@@ -559,12 +671,16 @@ def main():
 
     print("자료 %d편 (초안 %d편 제외)" % (len(live), len(infos) - len(live)))
     warn = 0
+    cred = credits()
+    plate_warn = []
     for i in infos:
         src = i["src"]
         src, ok1 = inject(src, "HEAD", headtags(cfg, i, 1))
         src, ok2 = inject(src, "HEADER", nav(cfg, 1))
         src, ok3 = inject(src, "FOOTER", foot(cfg, 1))
         src, _   = inject(src, "HERO", hero_band(i, 1))
+        src, pw  = inject_plates(src, cred, 1, i["slug"])
+        plate_warn += pw
         src = ensure_head_links(src, 1)
         src = ensure_main_id(src)
         src = stamp_assets(src, ver)
@@ -585,6 +701,10 @@ def main():
         s = stamp_assets(s, ver)
         s, _ = inject(s, "FOOTER", foot(cfg, 0))
         write(ap, s)
+
+    for w in plate_warn:
+        print("  ! 도판 %s" % w)
+    warn += len(plate_warn)
 
     qrows = build_quotes(cfg)
     if qrows:
