@@ -210,7 +210,8 @@ def stamp_assets(src, ver):
 
 # ---------- 이미지 출처 원장 ----------
 CRED_PATH = os.path.join(ROOT, "assets", "img", "출처.json")
-AI_NOTE = "내용을 돕기 위한 AI 생성 삽화입니다."
+# 홈·소개 템플릿(아래 hero figcaption)과 문구가 같아야 한다. 고치면 양쪽 다 고칠 것.
+AI_NOTE = "그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다."
 FREE_LICENSES = ("public domain", "cc0", "pd-old", "pd-us", "no restrictions", "pd")
 
 def credits():
