@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141714" media="(prefers-color-scheme: dark)">
+<title>왜 사자가 아니고 독수리인가 - 성경연구노트</title>
+<meta name="description" content="이사야 40:31이 하필 독수리를 고른 이유를 원문으로 확인했습니다. 28~31절의 주제어는 '힘'이 아니라 '지침'이고, 히브리어는 강함을 사자에, 지치지 않음을 독수리에 나눠 맡깁니다. 구약 נשר 26회 전수 분류와, 70인역·불가타·타르굼이 한목소리로 '깃털'로 읽은 31절.">
+<meta name="study:scripture" content="이사야 40:28-31">
+<meta name="study:tags" content="어휘 연구, 히브리어 전수 집계, 70인역, 타르굼, 통념 검증">
+<meta name="study:date" content="2026-09-01">
+<meta name="study:updated" content="2026-09-01">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../assets/site.css?v=4de83ffd">
+<script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+  /* 이 페이지 전용: 용례 막대그래프와 수치 타일 */
+  :root{ --s1:#008F80; --s2:#B2591F; --s0:#5F665F; --grid:#CBD2C4; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; --grid:#39433F; } }
+  :root[data-theme="dark"]{ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; --grid:#39433F; }
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .tile{background-color:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+    padding:20px;display:flex;flex-direction:column;gap:6px}
+  .tile .k{font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;color:var(--muted)}
+  .tile .v{font-family:var(--display);font-weight:700;font-size:2.05rem;line-height:1;
+    font-variant-numeric:tabular-nums}
+  .tile .u{font-size:.95rem;font-weight:400;color:var(--ink-2)}
+  .tile .n{font-size:.86rem;color:var(--muted);text-wrap:pretty}
+  .tile.a .v{color:var(--s1)} .tile.b .v{color:var(--s2)}
+
+  .chartcard{border:1px solid var(--line);border-radius:var(--r-lg);background-color:var(--surface);
+    padding:clamp(16px,3vw,24px);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;margin:0}
+  .chart-head{display:flex;flex-direction:column;gap:4px}
+  .chart-head h3{font-size:1.1rem;margin:0}
+  .chart-head p{margin:0;color:var(--muted);font-size:.87rem}
+  .chart-wrap{position:relative}
+  .chart-scroll{overflow-x:auto}
+  .chart-scroll svg{display:block;min-width:660px;width:100%;height:auto}
+  .ax{fill:var(--muted);font-size:11px;font-family:var(--mono)}
+  .cat{fill:var(--ink-2);font-size:12.5px}
+  .val{fill:var(--ink);font-size:12.5px;font-weight:600;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .gl{stroke:var(--grid);stroke-width:1}
+  .bar{cursor:pointer}
+  .bar:hover{opacity:.82}
+  .chart-legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.88rem;color:var(--ink-2)}
+  .chart-legend span{display:inline-flex;align-items:center;gap:8px}
+  .chart-legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .tt{position:absolute;pointer-events:none;background-color:var(--ink);color:var(--ground);
+    padding:8px 11px;border-radius:var(--r-sm);font-size:.82rem;line-height:1.5;white-space:nowrap;
+    opacity:0;transition:opacity .12s;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+  .tt b{font-family:var(--mono)}
+
+  .verdict{font-family:var(--mono);font-size:.8rem;white-space:nowrap}
+  .verdict.ok{color:var(--accent-ink)}
+  .verdict.no{color:var(--s2)}
+  .verdict.hold{color:var(--muted)}
+  :root[data-theme="dark"] .verdict.ok{color:var(--accent)}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .verdict.ok{color:var(--accent)} }
+  details > summary{cursor:pointer;color:var(--ink-2);font-size:.93rem;padding:6px 0}
+</style>
+<!--#HEAD-->
+    <link rel="canonical" href="https://steveoh555.github.io/bible-notes/studies/isaiah-40-31-eagle.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="성경연구노트">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:title" content="왜 사자가 아니고 독수리인가">
+    <meta property="og:description" content="이사야 40:31이 하필 독수리를 고른 이유를 원문으로 확인했습니다. 28~31절의 주제어는 &#x27;힘&#x27;이 아니라 &#x27;지침&#x27;이고, 히브리어는 강함을 사자에, 지치지 않음을 독수리에 나눠 맡깁니다. 구약 נשר 26회 전수 분류와, 70인역·불가타·타르굼이 한목소리로 &#x27;깃털&#x27;로 읽은 31절.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://steveoh555.github.io/bible-notes/assets/og.png">
+    <meta property="og:url" content="https://steveoh555.github.io/bible-notes/studies/isaiah-40-31-eagle.html">
+    <meta name="twitter:image" content="https://steveoh555.github.io/bible-notes/assets/og.png">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "왜 사자가 아니고 독수리인가", "description": "이사야 40:31이 하필 독수리를 고른 이유를 원문으로 확인했습니다. 28~31절의 주제어는 '힘'이 아니라 '지침'이고, 히브리어는 강함을 사자에, 지치지 않음을 독수리에 나눠 맡깁니다. 구약 נשר 26회 전수 분류와, 70인역·불가타·타르굼이 한목소리로 '깃털'로 읽은 31절.", "datePublished": "2026-09-01", "dateModified": "2026-09-01", "inLanguage": "ko", "isPartOf": {"@type": "WebSite", "name": "성경연구노트"}, "mainEntityOfPage": "https://steveoh555.github.io/bible-notes/studies/isaiah-40-31-eagle.html", "author": {"@type": "Person", "name": "도서출판동행"}, "keywords": "어휘 연구, 히브리어 전수 집계, 70인역, 타르굼, 통념 검증"}</script>
+    <!--/#HEAD-->
+</head>
+<body>
+    <!--#HEADER-->
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
+    <header class="site-head">
+      <div class="bar">
+        <a class="brand" href="../index.html">
+          <b>성경연구노트</b><span>1차 자료로 확인하는 성경 배경</span>
+        </a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="../index.html">자료 목록</a>
+          <a href="../about.html">소개</a>
+        </nav>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="화면 테마 바꾸기">자동</button>
+      </div>
+    </header>
+    <!--/#HEADER-->
+
+    <article id="main" class="wrap">
+
+      <header>
+        <div class="eyebrow">이사야 40:28-31 어휘와 이미지</div>
+        <h1>왜 사자가 아니고 독수리인가</h1>
+        <p class="lede">힘을 잃은 사람에게 주는 약속인데, 왜 하필 독수리일까요. 사자도 황소도 있는데 말입니다. 28~31절의 히브리어를 세어 보면, 이 단락이 다루는 문제가 &lsquo;힘이 약하다&rsquo;가 아니라 &lsquo;지친다&rsquo;라는 것이 드러납니다.</p>
+        <div class="stamp">🪶 구약 <b>נֶשֶׁר 26회</b> · 위로의 용례는 <b>3회</b></div>
+      </header>
+
+      <section>
+        <div class="tiles">
+          <div class="tile"><span class="k">이 단락의 주제어</span><span class="v">4<span class="u"> 회</span></span><span class="n">&lsquo;지치다&rsquo;(יָעֵף)는 구약에 13회뿐인데 그중 4회가 40:28~31에 있습니다</span></div>
+          <div class="tile b"><span class="k">위협적 용례</span><span class="v">17<span class="u"> 회</span></span><span class="n">덮치는 적군·시체를 먹는 새·부정한 새·제국의 상징</span></div>
+          <div class="tile a"><span class="k">위로의 용례</span><span class="v">3<span class="u"> 회</span></span><span class="n">출 19:4 · 신 32:11 · 시 103:5. 40:31은 이 셋을 겨냥합니다</span></div>
+          <div class="tile"><span class="k">이사야 전체</span><span class="v">1<span class="u"> 회</span></span><span class="n">독수리는 이사야에서 40:31 단 한 번 나옵니다</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>이 단락이 다루는 것은 힘이 아니라 지침이다</h2>
+        <p class="sub">28절부터 31절까지 두 낱말이 계속 돌아옵니다. יָעֵף(지치다)와 יָגַע(곤비하다)입니다.</p>
+
+        <div class="ladder">
+          <div class="rung r3">
+            <span class="who">28절 · 하나님</span>
+            <span class="what"><b>לֹא יִיעַף וְלֹא יִיגָע</b> — 피곤하지 않으시며 곤비하지 않으시며</span>
+          </div>
+          <div class="arrow">그런데 사람은</div>
+          <div class="rung r1">
+            <span class="who">30절 · 소년과 장정</span>
+            <span class="what"><b>וְיִעֲפוּ … וְיִגָעוּ</b> — 소년이라도 피곤하며 곤비하며</span>
+          </div>
+          <div class="arrow">같은 두 낱말이, 순서만 뒤집혀</div>
+          <div class="rung r3">
+            <span class="who">31절 · 앙망하는 자</span>
+            <span class="what"><b>וְלֹא יִיגָעוּ … וְלֹא יִיעָפוּ</b> — 곤비하지 아니하겠고 피곤하지 아니하리로다</span>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>31절은 28절이 <strong>하나님께만 붙였던 술어</strong>를, 순서만 바꿔 사람에게 그대로 돌려 놓습니다. 약속의 내용은 &lsquo;더 센 힘&rsquo;이 아니라 <strong>하나님의 지치지 않으심 그 자체</strong>입니다.</p>
+          <p>그리고 30절이 이미 답 하나를 지웁니다. 넘어지는 사람은 <b>נְעָרִים</b>(소년)과 <b>בַּחוּרִים</b>(장정, &lsquo;뽑힌 자&rsquo;로 징집 연령의 최강자)입니다. 인간 체력의 최댓값을 먼저 탈락시켰으니, 뒤에 올 이미지는 <strong>&ldquo;더 센 무엇&rdquo;일 수가 없습니다.</strong></p>
+          <blockquote class="bible" data-ref="이사야 40:30" data-version="개역개정"><p>소년이라도 피곤하며 곤비하며 장정이라도 넘어지며 쓰러지되</p><cite>이사야 40:30 · 개역개정</cite></blockquote>
+        </div>
+      </section>
+
+      <section>
+        <h2>히브리어는 사자와 독수리를 이미 나눠 쓴다</h2>
+        <p class="sub">한 문장 안에서 두 짐승이 서로 다른 일을 맡는 구절이 있습니다.</p>
+        <div class="prose">
+          <blockquote class="bible" data-ref="사무엘하 1:23" data-version="개역개정"><p>사울과 요나단이 생전에 사랑스럽고 아름다운 자이러니 죽을 때에도 서로 떠나지 아니하였도다 그들은 <strong>독수리보다 빠르고 사자보다 강하였도다</strong></p><cite>사무엘하 1:23 · 개역개정</cite></blockquote>
+          <p>히브리어로는 독수리에 <b>קַלּוּ</b>(빠르다·가볍다), 사자에 <b>גָּבֵרוּ</b>(강하다)가 붙습니다. 관용 자체가 두 짐승의 담당 영역을 갈라놓은 셈입니다.</p>
+          <p><strong>이사야 40:31은 גְּבוּרָה(용력)를 약속하지 않습니다.</strong> 사자를 넣으면 묻지도 않은 질문에 답하게 됩니다.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>구약의 독수리는 대개 무서운 새다</h2>
+        <p class="sub">웨스트민스터 레닌그라드 사본 형태소 본문에서 נֶשֶׁר 전 용례를 뽑아 문맥으로 분류했습니다. 통념과 꽤 다릅니다.</p>
+
+        <figure class="chartcard">
+          <div class="chart-head">
+            <h3>구약 נֶשֶׁר 26회는 어떤 자리에 쓰였나</h3>
+            <p>막대에 손을 올리면 해당 구절이 보입니다. 가로축은 용례 수.</p>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-scroll">
+              <svg viewBox="0 0 760 322" role="img" aria-labelledby="cTitle cDesc">
+                <title id="cTitle">구약 독수리(네셰르) 용례 26회의 문맥별 분포</title>
+                <desc id="cDesc">덮치는 적군·추격 7회, 그룹의 얼굴과 그 밖 6회, 시체를 먹는 새 3회, 높은 둥지에서 끌어내려짐 3회, 하나님의 구원과 젊음의 갱신 3회, 제국의 상징 2회, 먹지 못할 부정한 새 2회. 위로의 이미지는 26회 중 3회뿐입니다. 자세한 구절은 아래 표에 있습니다.</desc>
+
+                <line class="gl" x1="200" y1="12" x2="200" y2="288"/>
+                <line class="gl" x1="332" y1="12" x2="332" y2="288"/>
+                <line class="gl" x1="464" y1="12" x2="464" y2="288"/>
+                <line class="gl" x1="596" y1="12" x2="596" y2="288"/>
+                <text class="ax" x="200" y="304" text-anchor="middle">0</text>
+                <text class="ax" x="332" y="304" text-anchor="middle">2</text>
+                <text class="ax" x="464" y="304" text-anchor="middle">4</text>
+                <text class="ax" x="596" y="304" text-anchor="middle">6</text>
+                <text class="ax" x="700" y="304" text-anchor="middle">용례 수</text>
+
+                <g id="bars"></g>
+              </svg>
+            </div>
+            <div class="tt" id="tt"></div>
+          </div>
+          <div class="chart-legend">
+            <span><i style="background-color:var(--s2)"></i>위협·부정</span>
+            <span><i style="background-color:var(--s0)"></i>그 밖</span>
+            <span><i style="background-color:var(--s1)"></i>구원·갱신</span>
+          </div>
+          <figcaption>26회 가운데 17회가 위협적이고, 2회는 &ldquo;먹지 말라&rdquo;는 정결법 목록입니다. 위로의 이미지는 셋뿐입니다.</figcaption>
+        </figure>
+
+        <details>
+          <summary>구절 표로 보기</summary>
+          <div class="scroller" style="margin-top:10px">
+            <table>
+              <caption>OSHB morphhb 렘마 H5404 전수 · 26회</caption>
+              <thead><tr><th scope="col">분류</th><th scope="col">구절</th><th scope="col">회수</th></tr></thead>
+              <tbody>
+                <tr><td class="role"><span class="chip rome">적군의 급습·추격</span></td><td class="where">신 28:49, 렘 4:13, 렘 48:40, 렘 49:22, 애 4:19, 합 1:8, 호 8:1</td><td>7</td></tr>
+                <tr><td class="role">그룹의 네 얼굴 · 그 밖</td><td class="where">겔 1:10, 겔 10:14, 잠 23:5(재물의 덧없음), 미 1:16(대머리), 잠 30:19(알 수 없는 길), 삼하 1:23(빠름)</td><td>6</td></tr>
+                <tr><td class="role"><span class="chip rome">시체·주검을 먹는 새</span></td><td class="where">욥 9:26, 욥 39:30, 잠 30:17</td><td>3</td></tr>
+                <tr><td class="role"><span class="chip rome">높은 둥지 → 끌어내려짐</span></td><td class="where">옵 1:4, 렘 49:16, 욥 39:27</td><td>3</td></tr>
+                <tr><td class="role"><span class="chip judea">하나님의 구원·젊음의 갱신</span></td><td class="where"><b>출 19:4</b>(독수리 날개로 업어 냄), <b>신 32:11</b>(새끼를 깃 위에), <b>시 103:5</b>(청춘이 새로워짐)</td><td>3</td></tr>
+                <tr><td class="role"><span class="chip rome">제국의 상징</span></td><td class="where">겔 17:3, 겔 17:7 (느부갓네살)</td><td>2</td></tr>
+                <tr><td class="role"><span class="chip rome">먹지 못할 부정한 새</span></td><td class="where">레 11:13, 신 14:12 — 혐오 목록의 <b>첫 이름</b></td><td>2</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <div class="prose">
+          <p>정리하면 이렇습니다. 성경에서 독수리는 대개 <strong>덮치는 적군</strong>이거나 <strong>시체를 뜯는 새</strong>이고, 정결법에서는 <strong>먹지 못할 새 목록의 첫 이름</strong>입니다. &ldquo;용맹의 상징이라서 골랐다&rdquo;는 설명은 본문 분포와 맞지 않습니다.</p>
+          <p>위로의 용례는 정확히 셋뿐인데, <strong>이사야 40:31은 그 셋을 정조준합니다.</strong> 참고로 נשר는 이사야 전체에서 40:31 단 한 번 나옵니다. 아무 데나 쓰는 상투어가 아니라 여기서만 꺼낸 카드입니다.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>그 새는 우리가 상상하는 독수리가 아닐 수 있다</h2>
+        <p class="sub">국장(國章)에 새겨진 위풍당당한 맹금을 떠올리기 쉽지만, 본문이 이 새를 묘사하는 방식은 다릅니다.</p>
+
+        <div class="scroller">
+          <table>
+            <thead><tr><th scope="col">본문</th><th scope="col">묘사</th><th scope="col">함의</th></tr></thead>
+            <tbody>
+              <tr><td class="role"><span class="ref">욥 39:30</span></td><td class="where">&ldquo;주검이 있는 곳에는 그것이 있느니라&rdquo;</td><td>시체 청소부</td></tr>
+              <tr><td class="role"><span class="ref">잠 30:17</span></td><td class="where">눈알을 &ldquo;독수리 새끼가 먹으리라&rdquo;</td><td>시체 청소부</td></tr>
+              <tr><td class="role"><span class="ref">미 1:16</span></td><td class="where">&ldquo;네 머리가 크게 <b>벗어지게</b> 하기를 독수리같이 하라&rdquo;</td><td><b>민머리</b></td></tr>
+              <tr><td class="role"><span class="ref">욥 39:27-29</span></td><td class="where">바위 끝에 둥지를 틀고, 먹이를 <b>멀리서</b> 봄</td><td>절벽 서식 · 고공 탐색</td></tr>
+              <tr><td class="role"><span class="ref">레 11:13</span></td><td class="where">혐오하여 먹지 말아야 할 새</td><td>식용 불가</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose">
+          <blockquote class="bible" data-ref="미가 1:16" data-version="개역개정"><p>너는 네 기뻐하는 자식으로 인하여 네 머리털을 깎아 대머리 같게 할지어다 <strong>네 머리가 크게 벗어지게 하기를 독수리 같게 할지어다</strong> 이는 그들이 사로잡혀 너를 떠났음이라</p><cite>미가 1:16 · 개역개정</cite></blockquote>
+          <p>민머리와 시체 섭식은 <b>그리핀 독수리</b>(<i>Gyps fulvus</i>)와 정확히 맞습니다. 70인역이 ἀετός로 옮기고, 신약이 마태복음 24:28에서 같은 낱말을 &ldquo;주검이 있는 곳에 모이는 새&rdquo;로 쓰는 것도 같은 방향입니다.</p>
+          <div class="tip">
+            <strong>여기까지만 말할 수 있습니다</strong>
+            <p>נֶשֶׁר가 검독수리까지 아우르는 상위어일 가능성이 남아 <strong>종 확정은 미결</strong>로 둡니다. 확인되는 것은 &ldquo;우리가 떠올리는 위풍당당한 맹금 이미지는 본문의 것이 아니다&rdquo;까지입니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>왜 이 새여야 했나 — 날갯짓 없이 나는 새</h2>
+        <p class="sub">고대 관찰자가 볼 수 있었던 큰 동물 중에, 움직이는데 힘을 쓰지 않는 것처럼 보이는 유일한 존재였습니다.</p>
+
+        <div class="tiles">
+          <div class="tile"><span class="k">쉴 때 심박</span><span class="v">45<span class="u">–52 bpm</span></span><span class="n">그리핀 독수리, 안정 시</span></div>
+          <div class="tile a"><span class="k">떠서 나는 중 심박</span><span class="v">81<span class="u">–104 bpm</span></span><span class="n">쉬는 상태에 근접합니다</span></div>
+          <div class="tile b"><span class="k">이·착륙 순간 심박</span><span class="v">222<span class="u">–316 bpm</span></span><span class="n">비용은 뜨고 내릴 때 발생합니다</span></div>
+          <div class="tile"><span class="k">비행 중 날갯짓 비율</span><span class="v">&lt;5<span class="u"> %</span></span><span class="n">나머지는 상승기류를 탑니다</span></div>
+        </div>
+
+        <div class="prose">
+          <p>자유 비행 중인 그리핀 독수리에 심박·GPS 기록계를 달아 측정한 결과입니다. 떠서 나는 데 드는 대사 비용은 <strong>기초대사량의 약 1.43배</strong>인 반면, 날갯짓이나 보행은 <strong>3배 이상</strong>이었습니다.</p>
+          <p>말을 달리게 하면 지치고, 사자가 사냥하면 지칩니다. <strong>힘이 세면 셀수록 그 힘을 쓰는 대가가 큽니다.</strong> 31절이 상대하는 문제가 정확히 그 대가입니다.</p>
+          <div class="tip">
+            <strong>고대 저자가 이 수치를 알았다는 뜻은 아닙니다</strong>
+            <p>육안 관찰로도 같은 인상에 도달한다는 뜻입니다. 계측치는 그 인상이 착각이 아니었음을 뒤늦게 확인해 줍니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>그런데 31절에는 &lsquo;날다&rsquo;가 없다</h2>
+        <p class="sub">가장 자주 놓치는 지점입니다. 원문을 직역하면 &ldquo;독수리처럼 <b>깃을 올린다</b>&rdquo;이고, 날다(עוף)라는 동사는 쓰이지 않았습니다.</p>
+
+        <div class="prose">
+          <blockquote class="bible" data-ref="이사야 40:31" data-version="개역개정"><p>오직 여호와를 앙망하는 자는 새 힘을 얻으리니 독수리가 날개치며 올라감 같을 것이요 달음박질하여도 곤비하지 아니하겠고 걸어가도 피곤하지 아니하리로다</p><cite>이사야 40:31 · 개역개정</cite></blockquote>
+        </div>
+
+        <div class="scroller">
+          <table>
+            <caption>31절 중반 &ldquo;יַעֲלוּ אֵבֶר כַּנְּשָׁרִים&rdquo; 을 고대 역본들은 어떻게 옮겼나</caption>
+            <thead><tr><th scope="col">역본</th><th scope="col">본문</th><th scope="col">읽기</th></tr></thead>
+            <tbody>
+              <tr><td class="role">마소라 본문</td><td class="where">יַעֲלוּ אֵבֶר כַּנְּשָׁרִים</td><td><span class="name">깃을 올린다</span><span class="alt">두 읽기를 다 허용</span></td></tr>
+              <tr><td class="role"><span class="chip temple">70인역</span></td><td class="where"><b>πτεροφυήσουσιν</b> ὡς ἀετοί</td><td><span class="name">깃털이 돋아난다</span><span class="alt">πτεροφυέω = 깃이 나다</span></td></tr>
+              <tr><td class="role"><span class="chip temple">불가타</span></td><td class="where"><b>assument pennas</b> sicut aquilæ</td><td><span class="name">깃털을 입는다</span></td></tr>
+              <tr><td class="role"><span class="chip temple">타르굼 요나단</span></td><td class="where">כְּצִימוּחַ דְסָלֵיק … עַל גַדְפֵי נִשְׁרִין</td><td><span class="name">싹처럼 돋아난다</span><span class="alt">시 103:5를 끌어옴</span></td></tr>
+              <tr><td class="role">개역개정</td><td class="where">독수리가 날개치며 올라감 같을 것이요</td><td><span class="name">상승</span></td></tr>
+              <tr><td class="role">KJV</td><td class="where">mount up with wings as eagles</td><td><span class="name">상승</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose">
+          <p><strong>고대 역본 셋이 모두 비상이 아니라 깃갈이(換羽) 쪽입니다.</strong> 상승 쪽으로 기운 것은 근대 이후의 번역입니다.</p>
+          <p>이것이 31절의 첫 동사와 맞물립니다. <b>יַחֲלִיפוּ כֹחַ</b> — חלף는 &lsquo;옷을 <strong>갈아입다</strong>&rsquo;(창 35:2), &lsquo;나무가 <strong>다시 움트다</strong>&rsquo;(욥 14:7)에 쓰는 낱말입니다. 새 힘을 <strong>얻는(get)</strong> 것이 아니라 힘을 <strong>갈아입는(exchange)</strong> 그림입니다. 헌 깃을 떨구고 새 깃이 나는 새가 이 동사에 정확히 맞습니다. 사자에게는 이 그림이 없습니다.</p>
+          <blockquote class="src"><p>&ldquo;여호와의 구원을 바라는 자들은 포로 가운데서 모여 힘을 더하고, <strong>돋아나는 싹처럼 그들의 젊음이 새로워지리라.</strong> 독수리의 날개 위로 달음질하여도 곤하지 않으리라.&rdquo;</p><cite>타르굼 요나단, 이사야 40:31 (아람어 역·주해)</cite></blockquote>
+        </div>
+      </section>
+
+      <section>
+        <h2>깃(אֵבֶר)이 놓였던 세 자리</h2>
+        <p class="sub">&lsquo;깃&rsquo;은 구약에 일곱 번뿐이고, 그중 맹금의 깃은 셋입니다. 그 셋이 이렇습니다.</p>
+
+        <div class="cards">
+          <div class="hcard">
+            <span class="gen">신명기 32:11</span>
+            <span class="hname">하나님의 깃</span>
+            <p>독수리가 둥지를 흔들고 새끼를 &ldquo;그 <b>깃</b> 위에 업는&rdquo;(עַל אֶבְרָתוֹ) 그림. 출애굽을 회고하는 모세의 노래입니다.</p>
+            <span class="vs">업어 내옴</span>
+          </div>
+          <div class="hcard">
+            <span class="gen">에스겔 17:3</span>
+            <span class="hname">제국의 깃</span>
+            <p>&ldquo;<b>깃이 길고</b>(אֶרֶךְ הָאֵבֶר) 털이 숱한 큰 독수리&rdquo;. 에스겔이 느부갓네살을 부르는 이름입니다.</p>
+            <span class="vs">채어 감</span>
+          </div>
+          <div class="hcard">
+            <span class="gen">이사야 40:31</span>
+            <span class="hname">앙망하는 자의 깃</span>
+            <p>힘이 다한 사람들이 &ldquo;독수리처럼 <b>깃을 올린다</b>&rdquo;(יַעֲלוּ אֵבֶר). 제국이 독점하던 깃이 여기서 돌아옵니다.</p>
+            <span class="vs">되돌려 받음</span>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>포로기 청중에게 &lsquo;독수리의 깃&rsquo;은 두 기억뿐이었습니다. <strong>그들을 애굽에서 업어낸 깃</strong>, 그리고 <strong>그들을 바벨론으로 채간 깃.</strong> 40:31은 둘 중 앞의 것을 택합니다.</p>
+          <div class="tip">
+            <strong>이 깃은 도피를 주지 않습니다</strong>
+            <p>같은 낱말이 시편 55:7에도 나옵니다. &ldquo;내게 <b>비둘기 같은 깃</b>이 있다면 날아가 편히 쉬리로다&rdquo; — 벗어나고 싶다는 소원입니다. 40:31의 깃을 받은 사람은 벗어나지 않습니다. 계속 <strong>달리고 걷습니다.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>40장 안에서 시선이 올라간다</h2>
+        <p class="sub">독수리는 갑자기 등장하지 않습니다. 장 전체가 사람의 위치를 옮겨 놓습니다.</p>
+
+        <div class="ladder">
+          <div class="rung r4"><span class="who">40:22</span><span class="what">하나님이 보시기에 땅의 주민은 <b>메뚜기 같다</b>(כַּחֲגָבִים) — 가장 낮고 서툰 비행체</span></div>
+          <div class="arrow">그런데</div>
+          <div class="rung r2"><span class="who">40:26</span><span class="what">&ldquo;눈을 <b>높이 들어</b>(מָרוֹם) 보라&rdquo; · 하나님은 <b>רֹב אוֹנִים</b>(능력이 많으심)</span></div>
+          <div class="arrow">그 낱말을 그대로 건네</div>
+          <div class="rung r2"><span class="who">40:29</span><span class="what"><b>לְאֵין אוֹנִים</b>(능력 없는 자)에게 그 능력을 주심</span></div>
+          <div class="arrow">그래서 마지막에</div>
+          <div class="rung r3"><span class="who">40:31</span><span class="what">메뚜기였던 자들이 <b>독수리의 깃</b>을 올림</span></div>
+        </div>
+
+        <div class="prose">
+          <div class="tip">
+            <strong>마지막 순서는 일부러 시시해집니다</strong>
+            <p>올라감(יַעֲלוּ) → 달림(יָרוּצוּ) → <strong>걸음</strong>(יֵלְכוּ). 점점 평범해집니다. 절정은 나는 데 있지 않고 <strong>끝까지 걷는 데</strong> 있습니다. 포로기 청중에게 필요했던 것은 비상이 아니라 지속이었습니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>판정 정리</h2>
+        <div class="scroller">
+          <table>
+            <caption>확인된 것과 추론을 구분합니다</caption>
+            <thead><tr><th scope="col">항목</th><th scope="col">근거</th><th scope="col">판정</th></tr></thead>
+            <tbody>
+              <tr><td class="where">28~31절이 &lsquo;힘&rsquo;이 아니라 &lsquo;지침&rsquo;을 주제로 삼는다</td><td class="where">יעף·יגע 배치, 28절↔31절 역순 대응</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td class="where">히브리어에서 독수리=빠름, 사자=강함으로 갈린다</td><td class="where">삼하 1:23</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td class="where">נשר 용례의 다수가 위협적이며 부정한 새 목록 첫 이름이다</td><td class="where">26회 전수 집계</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td class="where">독수리가 가장 힘센 짐승이라 골랐다</td><td class="where">30절이 인간 체력의 최댓값을 먼저 탈락시킴</td><td><span class="verdict no">반증</span></td></tr>
+              <tr><td class="where">40:31이 출 19:4·신 32:11·시 103:5를 겨냥한다</td><td class="where">어휘 일치는 확인, 의도성은 추론</td><td><span class="verdict ok">확인</span> <span class="verdict hold">+ 추론</span></td></tr>
+              <tr><td class="where">31절이 비상보다 깃갈이·갱신을 뜻한다</td><td class="where">70인역·불가타·타르굼 일치. 단 마소라 본문 자체는 중의적</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td class="where">נשר = 그리핀 독수리(Gyps fulvus)</td><td class="where">본문 묘사는 부합하나 상위어 가능성이 남음</td><td><span class="verdict hold">미결</span></td></tr>
+              <tr><td class="where">&ldquo;독수리가 40세에 부리를 깨고 갱신한다&rdquo;</td><td class="where">조류학·출처 추적</td><td><span class="verdict no">거짓</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>덤 — 설교에서 자주 쓰는 그 예화</h2>
+        <p class="sub">&ldquo;독수리는 40년쯤 살면 산에 올라가 부리를 바위에 쳐서 깨고, 발톱과 깃털을 뽑아 30년을 더 산다&rdquo;는 이야기입니다.</p>
+
+        <div class="scroller">
+          <table>
+            <thead><tr><th scope="col">예화의 주장</th><th scope="col">실제</th></tr></thead>
+            <tbody>
+              <tr><td class="where">40세쯤 부리가 굽어 못 먹게 된다</td><td class="where">부리와 발톱은 케라틴으로 <b>평생 자라며</b> 자연 탈락하지 않습니다</td></tr>
+              <tr><td class="where">바위에 쳐서 부리를 깨고 새로 난다</td><td class="where">그런 행동은 관찰된 바가 없습니다</td></tr>
+              <tr><td class="where">깃털을 다 뽑고 새로 난다</td><td class="where">환우는 <b>좌우 대칭으로 점진적으로</b> 일어납니다. 다 뽑으면 날지 못해 굶어 죽습니다</td></tr>
+              <tr><td class="where">그 후 30년을 더 산다</td><td class="where">야생 수명은 대체로 30년 안팎입니다</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose">
+          <p>출처를 따라가면 성경도, 조류학도 아닙니다. <strong>2007년 무렵 인터넷 프레젠테이션(&ldquo;The Rebirth of the Eagle&rdquo;)으로 퍼진 창작물</strong>입니다. 미네소타대학교 랩터센터는 정확한 기원은 불명이지만 &ldquo;그중 어느 것도 사실이 아님은 확언할 수 있다&rdquo;고 답합니다.</p>
+          <div class="tip">
+            <strong>역설적인 지점</strong>
+            <p>본문이 실제로 말하는 것이 바로 <strong>점진적인 깃갈이</strong>입니다(πτεροφυήσουσιν). 극적인 자해 뒤의 재탄생이 아니라, 헌 깃이 빠진 자리에 새 깃이 나는 동안에도 계속 나는 새. 만들어낸 이야기가 오히려 본문을 가리고 있는 경우입니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>참고 자료</h2>
+        <div class="prose">
+          <ul>
+            <li><b>원문</b> — Westminster Leningrad Codex / OSHB morphhb 형태소 본문. נשר 26회·אבר 7회·יעף 13회 전수 집계는 이 자료로 직접 계산했습니다.</li>
+            <li><b>70인역</b> — Swete, <i>The Old Testament in Greek</i>, 이사야 40:28–31</li>
+            <li><b>불가타</b> — Vulgata Clementina, 이사야 40:31</li>
+            <li><b>타르굼</b> — Targum Jonathan on Isaiah 40:31</li>
+            <li><b>랍비 주석</b> — Rashi on Isaiah 40:31 (&ldquo;אבר는 날개다&rdquo; 한 줄 주석)</li>
+            <li><b>자연사</b> — Duriez O. et al., &ldquo;How Cheap Is Soaring Flight in Raptors? A Preliminary Investigation in Freely-Flying Vultures,&rdquo; <i>PLOS ONE</i> 9(1): e84887 (2014)</li>
+            <li><b>통념 검증</b> — Snopes, &ldquo;The Rebirth of the Eagle&rdquo; 및 미네소타대학교 The Raptor Center 견해</li>
+            <li>성경 인용은 개역개정입니다.</li>
+          </ul>
+        </div>
+      </section>
+
+    </article>
+
+    <!--#FOOTER-->
+    <footer class="site-foot">
+      <div class="inner">
+        <p><strong>성경연구노트</strong></p>
+        <p>성경 본문의 역사·지리·문헌 배경을 1차 자료로 확인해 정리한 연구 자료 모음입니다.</p>
+        <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 &ldquo;이견&rdquo;으로 표시합니다.</p>
+        <p class="src">© 2026 성경연구노트 · 도서출판동행</p>
+        <p class="foot-links"><a href="../index.html">자료 목록</a> <a href="../about.html">소개</a> <a href="../feed.xml">RSS</a></p>
+      </div>
+    </footer>
+    <!--/#FOOTER-->
+<script src="../assets/site.js?v=78b4f90e"></script>
+<script>
+(function(){
+  var D=[
+    ["적군의 급습·추격",7,"s2","신 28:49 · 렘 4:13 · 렘 48:40 · 렘 49:22 · 애 4:19 · 합 1:8 · 호 8:1"],
+    ["그룹의 얼굴·그 밖",6,"s0","겔 1:10 · 겔 10:14 · 잠 23:5 · 미 1:16 · 잠 30:19 · 삼하 1:23"],
+    ["시체를 먹는 새",3,"s2","욥 9:26 · 욥 39:30 · 잠 30:17"],
+    ["높은 둥지 → 끌어내림",3,"s2","옵 1:4 · 렘 49:16 · 욥 39:27"],
+    ["하나님의 구원·갱신",3,"s1","출 19:4 · 신 32:11 · 시 103:5"],
+    ["제국의 상징",2,"s2","겔 17:3 · 겔 17:7"],
+    ["먹지 못할 부정한 새",2,"s2","레 11:13 · 신 14:12"]
+  ];
+  var g=document.getElementById('bars'), tt=document.getElementById('tt');
+  if(!g) return;
+  var NS='http://www.w3.org/2000/svg', X0=200, U=66, H=22;
+  D.forEach(function(d,i){
+    var y=20+i*40, w=d[1]*U;
+    var r=document.createElementNS(NS,'rect');
+    r.setAttribute('class','bar'); r.setAttribute('x',X0); r.setAttribute('y',y);
+    r.setAttribute('width',w); r.setAttribute('height',H); r.setAttribute('rx',4);
+    r.setAttribute('fill','var(--'+d[2]+')');
+    r.setAttribute('tabindex','0'); r.setAttribute('role','img');
+    r.setAttribute('aria-label',d[0]+' '+d[1]+'회. '+d[3]);
+    function show(){
+      tt.innerHTML='<b>'+d[0]+' · '+d[1]+'회</b><br>'+d[3];
+      tt.style.opacity='1';
+      var svg=r.ownerSVGElement, box=svg.getBoundingClientRect(),
+          wrap=tt.parentElement.getBoundingClientRect(), s=box.width/760;
+      var left=(X0+w/2)*s+box.left-wrap.left-tt.offsetWidth/2;
+      tt.style.left=Math.min(Math.max(left,4),Math.max(4,wrap.width-tt.offsetWidth-4))+'px';
+      tt.style.top=Math.max(2,(y)*s+box.top-wrap.top-tt.offsetHeight-8)+'px';
+    }
+    function hide(){ tt.style.opacity='0'; }
+    r.addEventListener('mouseenter',show); r.addEventListener('focus',show);
+    r.addEventListener('mouseleave',hide); r.addEventListener('blur',hide);
+    g.appendChild(r);
+
+    var lab=document.createElementNS(NS,'text');
+    lab.setAttribute('class','cat'); lab.setAttribute('x',190);
+    lab.setAttribute('y',y+16); lab.setAttribute('text-anchor','end');
+    lab.textContent=d[0]; g.appendChild(lab);
+
+    var val=document.createElementNS(NS,'text');
+    val.setAttribute('class','val'); val.setAttribute('x',X0+w+9);
+    val.setAttribute('y',y+16); val.textContent=d[1]; g.appendChild(val);
+  });
+})();
+</script>
+</body>
+</html>
