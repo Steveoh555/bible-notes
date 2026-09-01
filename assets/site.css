@@ -275,7 +275,8 @@ blockquote.src cite{color:var(--muted)}
 .hero-band .frame{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);
   background-color:var(--surface-2);box-shadow:var(--shadow);line-height:0}
 .hero-band img{display:block;width:100%;height:auto;aspect-ratio:1400/594;object-fit:cover}
-.hero-band figcaption{color:var(--muted);font-size:0.875rem;margin:0;line-height:1.6}
+.hero-band figcaption{color:var(--muted);font-size:0.8rem;margin:0;line-height:1.6;
+  text-align:right}
 @media (max-width:620px){
   .hero-band img{aspect-ratio:3/2}
 }
@@ -302,6 +303,9 @@ blockquote.src cite{color:var(--muted)}
 .plate .plate-src{font-size:0.82rem;line-height:1.65;color:var(--muted)}
 .plate .plate-src a{color:var(--muted);text-underline-offset:3px}
 .plate .plate-src a:hover{color:var(--accent-ink)}
+/* AI 삽화는 사료가 아니므로 출처 막대를 두지 않고, 표기만 오른쪽 아래에 둔다 */
+.plate.ai figcaption{border-inline-start:0;padding-inline-start:0;
+  text-align:right;color:var(--muted);font-size:0.8rem;line-height:1.6}
 
 /* ---- 푸터 ---- */
 .site-foot{border-top:1px solid var(--line);background-color:var(--surface)}

@@ -210,7 +210,7 @@ def stamp_assets(src, ver):
 
 # ---------- 이미지 출처 원장 ----------
 CRED_PATH = os.path.join(ROOT, "assets", "img", "출처.json")
-AI_NOTE = "그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다."
+AI_NOTE = "내용을 돕기 위한 AI 생성 삽화입니다."
 FREE_LICENSES = ("public domain", "cc0", "pd-old", "pd-us", "no restrictions", "pd")
 
 def credits():
@@ -275,7 +275,7 @@ def plate_figure(spec, cred, depth):
     dim = jpeg_size(os.path.join(ROOT, "assets", "img", fname))
     wh  = ' width="%d" height="%d"' % dim if dim else ""
     alt = c.get("alt") or c.get("제목") or fname
-    cls = " ".join(["plate"] + opts)
+    cls = " ".join(["plate"] + opts + ([] if c.get("분류") == "사료" else ["ai"]))
 
     img = ('<img src="%sassets/img/%s" alt="%s"%s loading="lazy" decoding="async">'
            % (up, esc(fname), esc(alt), wh))
