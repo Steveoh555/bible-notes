@@ -262,6 +262,63 @@ for p_ in pages():
         print("    X %s — 어미 혼용: 해요체 %d · 합니다체 %d" % (rel(p_), hy, hp))
 
 
+# ---------- [9] 줄바꿈 (권고) ----------
+# word-break:keep-all 은 어절만 지키고 text-wrap:balance 는 의미 단위를 모른다.
+# 관형어+의존명사("추론한 것"), 수+단위("26 회")가 줄 첫머리에서 갈라지면 읽기가 끊긴다.
+# 제목·짧은 표시 문구에서만 본다. 배포를 막지는 않고 알려만 준다.
+print("\n[9] 줄바꿈 (권고 — 배포를 막지 않습니다)")
+
+DEPENDENT = "것 수 줄 리 바 때 데 뿐 지 채 터 만큼 대로".split()
+UNITS = "회 편 절 장 일 년 개 명 번 시간 km m".split()
+DISPLAY = re.compile(
+    r'<(h1|h2|h3|caption|figcaption|summary|dt)[^>]*>(.*?)</\1>'
+    r'|<(p|div)[^>]*class="(?:lede|sub|stamp)"[^>]*>(.*?)</\3>', re.S)
+
+def jong(ch):
+    """한글 음절의 받침 번호. ㄴ=4, ㄹ=8."""
+    o = ord(ch) - 0xAC00
+    return (o % 28) if 0 <= o < 11172 else -1
+
+def loose_pairs(text):
+    out, w = [], text.split(" ")
+    for i in range(len(w) - 1):
+        a, b = w[i], w[i + 1]
+        if not a or not b:
+            continue
+        head = b[0]
+        two = b[:2]
+        # 의존명사 뒤에는 조사·접미사·문장부호만 와야 한다.
+        # 그래야 "지역마다"(= '지'로 시작하는 보통명사) 같은 오탐을 거른다.
+        TAIL = set("이가을를은는와과의도로만에서부터까지처럼들뿐이나라며야여요·,.?!)\u201d\u2019\u300d\u300f")
+        tail_ok = len(b) == 1 or all(c in TAIL for c in b[1:])
+        if (head in DEPENDENT or two in ("만큼", "대로")) and tail_ok and jong(a[-1]) in (4, 8):
+            out.append("%s %s" % (a, b))
+        elif a[-1].isdigit() and (head in UNITS or two in ("시간", "km")):
+            out.append("%s %s" % (a, b))
+    return out
+
+flagged = 0
+for p_ in pages():
+    src = read(p_)
+    src = re.sub(r'(?s)<head.*?</head>', ' ', src)
+    src = re.sub(r'(?s)<script.*?</script>', ' ', src)
+    for m in DISPLAY.finditer(src):
+        inner = m.group(2) if m.group(2) is not None else m.group(4)
+        if inner is None:
+            continue
+        # 이미 묶어 둔 것은 검사에서 뺀다 (span 이든 b 든 class 에 nb 가 있으면)
+        inner = re.sub(r'(?s)<(\w+)[^>]*class="[^"]*\bnb\b[^"]*"[^>]*>.*?</\1>', "\u3007", inner)
+        txt = " ".join(re.sub(r'<[^>]*>', " ", inner).replace("\u00a0", "\u3007").split())
+        if len(txt) > 90:
+            continue
+        for pair in loose_pairs(txt):
+            flagged += 1
+            print('    !  %s — 「%s」 이 갈라질 수 있습니다' % (rel(p_), pair))
+            print('       <span class="nb">%s</span> 로 묶으세요' % pair)
+if not flagged:
+    print("    OK 묶여야 할 짝이 모두 묶여 있습니다")
+
+
 print("\n" + "=" * 52)
 if problems:
     print("문제 %d건" % len(problems))

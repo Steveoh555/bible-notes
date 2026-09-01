@@ -438,7 +438,7 @@ def build_404(cfg):
       <header>
         <p class="eyebrow">404</p>
         <h1>이 주소에는 자료가 없습니다</h1>
-        <p class="lede">주소가 바뀌었거나, 아직 없는 자료일 수 있습니다.
+        <p class="lede">주소가 바뀌었거나, 아직 없는 <span class="nb">자료일 수</span> 있습니다.
           자료 목록에서 찾아보시면 대부분 해결됩니다.</p>
       </header>
       <section>

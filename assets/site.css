@@ -61,6 +61,11 @@ body{margin:0;background-color:var(--ground);color:var(--ink);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   word-break:keep-all;overflow-wrap:break-word}
 
+/* 줄 첫머리에 오면 안 되는 짝을 묶는다 — 관형어+의존명사(추론한 것), 수+단위(26 회) 등.
+   word-break:keep-all 은 어절만 지키고, text-wrap:balance 는 의미 단위를 모른다.
+   자세한 기준은 작업규약.md 「문체」 절의 '줄바꿈' 항목. */
+.nb{white-space:nowrap}
+
 /* 종이 결 — 완전 평면을 깬다 */
 body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;
   opacity:.032;mix-blend-mode:multiply;
