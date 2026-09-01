@@ -224,6 +224,44 @@ for p_ in pages():
             print("    X %s — %s 출처 미표기 (build.py 를 먼저 돌리세요)" % (rel(p_), fn))
 
 
+# ---------- [8] 문체 통일 ----------
+# 규약: 자료 페이지 본문은 해요체. 「근거 자료」 절과 푸터만 합니다체.
+# 자세한 규정은 작업규약.md 의 「문체」 절.
+print("\n[8] 문체")
+
+HAEYO = re.compile(r'(어요|에요|예요|아요|해요|세요|네요|잖아요|거든요|죠)[.!?]')
+HAPNIDA = re.compile(r'(습니다|입니다|ㅂ니다)[.!?]')
+
+def body_text(src):
+    """머리·스타일·스크립트·푸터·「근거 자료」 절을 뺀 본문만 남긴다."""
+    src = re.sub(r'(?s)<head.*?</head>', ' ', src)
+    src = re.sub(r'(?s)<script.*?</script>', ' ', src)
+    src = re.sub(r'(?s)<style.*?</style>', ' ', src)
+    src = re.sub(r'(?s)<footer.*?</footer>', ' ', src)
+    # 히어로 밴드의 AI 삽화 고정 문구는 build.py 가 넣는 것이라 검사 대상이 아니다
+    src = re.sub(r'(?s)<figure class="hero-band">.*?</figure>', ' ', src)
+    # 근거 자료 / 참고 자료 / 참고 문헌 절은 합니다체 허용 — 통째로 제외
+    src = re.sub(r'(?s)<section>\s*<h2>\s*(근거 자료|참고 자료|참고 문헌)\s*</h2>.*?</section>', ' ', src)
+    return re.sub(r'<[^>]*>', ' ', src)
+
+for p_ in pages():
+    # 검사 대상은 자료 페이지(studies/)뿐. 홈·404·소개는 제외한다.
+    if os.sep + "studies" + os.sep not in p_:
+        continue
+    t = body_text(read(p_))
+    hy, hp = len(HAEYO.findall(t)), len(HAPNIDA.findall(t))
+    if hy + hp == 0:
+        print("    -- %s (검사할 문장 없음)" % rel(p_))
+    elif hp == 0:
+        print("    OK %s — 해요체 %d문장" % (rel(p_), hy))
+    elif hy == 0:
+        problems.append("%s: 본문이 합니다체입니다 (규약은 해요체)" % rel(p_))
+        print("    X %s — 합니다체 %d문장. 작업규약.md 「문체」 절을 보세요" % (rel(p_), hp))
+    else:
+        problems.append("%s: 해요체와 합니다체가 섞였습니다 (해요 %d / 합니다 %d)" % (rel(p_), hy, hp))
+        print("    X %s — 어미 혼용: 해요체 %d · 합니다체 %d" % (rel(p_), hy, hp))
+
+
 print("\n" + "=" * 52)
 if problems:
     print("문제 %d건" % len(problems))
