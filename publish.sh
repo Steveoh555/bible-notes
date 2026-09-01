@@ -55,6 +55,14 @@ if [ ! -s .git/.git-credentials ]; then
   echo "  GitHub 토큰을 site/github-token.txt 에 저장해 주시면 설정합니다."
   exit 0
 fi
+# 이 폴더의 절대경로는 세션마다 바뀐다. 저장된 credential.helper 가 옛 세션 경로를
+# 가리키면 git 이 자격 증명을 못 읽어 "could not read Username" 으로 실패한다.
+# 매번 현재 경로로 다시 맞춘다.
+git config --local credential.helper "store --file=$PWD/.git/.git-credentials"
+# 프록시 자격 증명이 중복 누적되므로 같은 줄은 하나만 남긴다.
+awk '!seen[$0]++' .git/.git-credentials > .git/_cred.tmp 2>/dev/null \
+  && cat .git/_cred.tmp > .git/.git-credentials && : > .git/_cred.tmp
+
 unlock
 BR="$(git branch --show-current)"
 if git rev-parse --abbrev-ref "@{upstream}" >/dev/null 2>&1; then
