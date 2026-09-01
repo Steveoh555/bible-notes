@@ -211,7 +211,7 @@ def stamp_assets(src, ver):
 # ---------- 이미지 출처 원장 ----------
 CRED_PATH = os.path.join(ROOT, "assets", "img", "출처.json")
 # 홈·소개 템플릿(아래 hero figcaption)과 문구가 같아야 한다. 고치면 양쪽 다 고칠 것.
-AI_NOTE = "그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다."
+AI_NOTE = "그림: 내용을 돕기 위한 AI 생성 삽화입니다."
 FREE_LICENSES = ("public domain", "cc0", "pd-old", "pd-us", "no restrictions", "pd")
 
 def credits():
@@ -376,7 +376,7 @@ def build_index(cfg, studies):
       <header>
         <figure class="hero-band">
           <span class="frame"><img src="assets/img/hero-home.jpg" alt="올리브 나무가 선 유대 산지의 계단밭과 멀리 성벽으로 둘러싸인 마을을 그린 그림" width="1400" height="594" loading="eager" decoding="async"></span>
-          <figcaption>그림: 내용을 돕기 위한 AI 생성 삽화입니다. 실제 유물이나 사료가 아닙니다.</figcaption>
+          <figcaption>그림: 내용을 돕기 위한 AI 생성 삽화입니다.</figcaption>
         </figure>
         <div class="eyebrow">성경 배경 연구</div>
         <h1>{tag}</h1>
