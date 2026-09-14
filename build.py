@@ -103,11 +103,11 @@ def foot(cfg, depth):
       <div class="inner">
         <p><strong>{name}</strong></p>
         <p>{desc}</p>
-        <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 &ldquo;이견&rdquo;으로 표시합니다.</p>
+        <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 <span class="nb">&ldquo;이견&rdquo;으로 표시합니다.</span></p>
         <p class="src">© {year} {name}{who}</p>
         <p class="foot-links"><a href="{up}index.html">자료 목록</a> <a href="{up}about.html">소개</a>{rss}</p>
       </div>
-    </footer>""".format(name=esc(cfg["site_name"]), desc=esc(cfg["description"]),
+    </footer>""".format(name=esc(cfg["site_name"]), desc=nb_last2(cfg["description"]),
                         year=year, who=who, up=up, rss=rss)
 
 def headtags(cfg, info, depth):
@@ -335,6 +335,17 @@ def hero_band(info, depth):
                                   esc(AI_NOTE))
 
 # ---------- 홈 ----------
+def nb_last2(text):
+    """마지막 두 어절을 .nb 로 묶어 고아줄(한 어절짜리 마지막 줄)을 막는다. 작업규약 「글꼴」 참조."""
+    toks = text.split()
+    if len(text) <= 24 or len(toks) < 2:
+        return esc(text)
+    last2 = toks[-2] + " " + toks[-1]
+    if len(last2) > 15:
+        return esc(text)
+    head = text[: len(text) - len(last2)].rstrip()
+    return esc(head) + ' <span class="nb">' + esc(last2) + "</span>"
+
 def card(cfg, s):
     search = " ".join([s["title"], s["description"], s["scripture"]] + s["tags"]).lower()
     tags = "".join('<span class="tag">%s</span>' % esc(t) for t in s["tags"][:3])
@@ -348,7 +359,7 @@ def card(cfg, s):
         </a></li>""".format(
         url=esc(s["url"]), search=esc(search),
         scripture=esc(s["scripture"] or "성경 배경"),
-        title=esc(s["title"]), desc=esc(s["description"]),
+        title=esc(s["title"]), desc=nb_last2(s["description"]),
         date=esc(s["date"]), tags=tags)
 
 def build_index(cfg, studies):
