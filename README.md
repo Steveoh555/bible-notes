@@ -68,15 +68,49 @@ python3 -m http.server 8000
 브라우저에서 `http://localhost:8000` 을 엽니다.
 (파일을 그냥 더블클릭해도 열리지만, 링크 경로는 서버로 봐야 정확합니다.)
 
-## 공개 준비 — 한 번만 하면 되는 일 (아직 안 됨)
+## 도메인과 배포 (2026-09-16 전환 완료)
 
-1. GitHub에서 저장소를 만듭니다 (공개 / Public).
-2. `site.config.json` 의 `site_url` 에 사이트 주소를 적습니다.
-   예: `https://아이디.github.io/저장소이름`
-3. 저장소 **Settings → Pages** 에서 Source 를 `main` 브랜치 `/ (root)` 로 지정합니다.
-4. 검색 등록 — 구글 [Search Console](https://search.google.com/search-console) 과
-   네이버 [서치어드바이저](https://searchadvisor.naver.com) 양쪽에 사이트를 등록하고
-   `sitemap.xml` 을 제출합니다. 네이버는 `Yeti` 로봇을 허용해 두었습니다.
+**사이트 주소: <https://성경연구노트.kr>**
+퓨니코드는 `xn--289a0mi4h6svvsf8ov.kr` — **설정 칸에는 언제나 이 값을 넣는다.**
+한글을 그대로 넣으면 GitHub·DNS 어느 쪽도 못 알아듣는다. 주소창에는 한글로 보인다.
+
+- 등록업체 **반값도메인(다우도메인)**, 네임서버도 그곳 것을 쓴다.
+- `site.config.json` 의 `site_url` 도 **퓨니코드**로 적는다.
+  sitemap 의 URL 은 ASCII 여야 하고, 호스트의 올바른 escape 가 퓨니코드이기 때문이다.
+  이 한 줄만 바꾸면 canonical·og:url·og:image·sitemap·feed·robots.txt·404 링크가 전부 따라온다.
+- 저장소 루트의 **`CNAME` 파일(퓨니코드 한 줄)이 커스텀 도메인을 정한다.** 지우면 주소가 풀린다.
+  `build.py` 는 이 파일을 건드리지 않는다.
+
+### DNS 레코드 (반값도메인)
+
+| 종류 | 호스트 | 값 |
+|---|---|---|
+| A | `@` | `185.199.108.153` |
+| CNAME | `www` | `steveoh555.github.io` |
+
+반값도메인 패널은 **같은 호스트에 A 레코드를 하나만** 받는다. GitHub 이 안내하는 네 개
+(`185.199.108~111.153`)는 서로 다른 데이터센터가 아니라 같은 애니캐스트 주소 네 벌이라
+하나만 걸어도 동작한다. 네 개를 다 넣고 싶어지면 네임서버를 클라우드플레어로 옮기되
+**반드시 회색 구름(DNS only)** 으로 둔다 — 오렌지 구름(프록시)을 켜면 GitHub 의 인증서
+발급이 실패한다. 파킹·포워딩·DNSSEC 도 꺼 두어야 한다.
+
+### 옮길 때의 순서 (다시 옮길 일이 있다면)
+
+DNS 를 **먼저** 넣고 퍼진 걸 확인한 다음에 `CNAME` 파일을 올린다.
+`CNAME` 이 저장소에 들어가는 순간 옛 주소가 새 도메인으로 301 리다이렉트되므로,
+DNS 가 아직이면 양쪽 다 안 열린다.
+
+옛 주소 `steveoh555.github.io/bible-notes` 는 **깊은 링크까지 유지한 채** 새 도메인으로
+넘어간다. 검색 순위도 따라온다.
+
+## 남은 일
+
+1. 저장소 **Settings → Pages → Enforce HTTPS** 체크. (인증서는 이미 발급되어 `https://` 로
+   열리지만, 이걸 켜야 `http://` 접속이 `https://` 로 넘어간다.)
+2. 검색 등록 — 구글 [Search Console](https://search.google.com/search-console) 은
+   '도메인' 속성으로 등록하고 TXT 레코드로 소유를 확인한다. 네이버
+   [서치어드바이저](https://searchadvisor.naver.com) 도 새 도메인으로 등록.
+   양쪽에 `sitemap.xml` 제출. 네이버 `Yeti` 로봇은 robots.txt 에서 이미 허용해 두었다.
 
 ## 성경 본문 인용에 대하여
 
