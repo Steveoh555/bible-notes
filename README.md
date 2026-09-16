@@ -103,14 +103,30 @@ DNS 가 아직이면 양쪽 다 안 열린다.
 옛 주소 `steveoh555.github.io/bible-notes` 는 **깊은 링크까지 유지한 채** 새 도메인으로
 넘어간다. 검색 순위도 따라온다.
 
+## ⚠️ 지우면 안 되는 파일
+
+루트의 **검색엔진 소유확인 파일**은 지우거나 이름을 바꾸면 소유확인이 풀린다.
+`build.py` 는 이 파일들을 건드리지 않으니 그냥 두면 된다.
+
+| 파일 | 용도 |
+|---|---|
+| `google7c4348bed913a0c2.html` | 구글 서치콘솔 소유확인 (2026-09-16) |
+
+`CNAME` 도 마찬가지다 — 지우면 커스텀 도메인이 풀린다.
+
 ## 남은 일
 
-1. 저장소 **Settings → Pages → Enforce HTTPS** 체크. (인증서는 이미 발급되어 `https://` 로
-   열리지만, 이걸 켜야 `http://` 접속이 `https://` 로 넘어간다.)
-2. 검색 등록 — 구글 [Search Console](https://search.google.com/search-console) 은
-   '도메인' 속성으로 등록하고 TXT 레코드로 소유를 확인한다. 네이버
-   [서치어드바이저](https://searchadvisor.naver.com) 도 새 도메인으로 등록.
-   양쪽에 `sitemap.xml` 제출. 네이버 `Yeti` 로봇은 robots.txt 에서 이미 허용해 두었다.
+1. ~~**Enforce HTTPS**~~ — **완료(2026-09-16).** `http://` 로 들어가면 `https://` 로 넘어간다.
+2. **구글 서치콘솔** — 소유확인 파일은 올렸다(위 표). 'URL 접두어' 속성
+   `https://성경연구노트.kr/` 로 등록하고, 확인 후 **색인 생성 → Sitemaps** 에
+   `sitemap.xml` 제출.
+   (TXT 레코드를 넣을 수 있게 되면 '도메인' 속성으로도 등록해 두면 좋다.)
+3. **네이버 서치어드바이저** — [searchadvisor.naver.com](https://searchadvisor.naver.com)
+   에 같은 주소로 등록. 소유확인은 **HTML 파일** 방식으로 한다 —
+   **메타태그 방식은 쓰지 말 것.** `index.html` 은 `build.py` 가 매번 새로 만들어서
+   `<head>` 에 넣은 태그가 지워지고, 네이버 메타태그는 1년마다 재인증도 해야 한다.
+   확인 뒤 **요청 → 사이트맵 제출**(`sitemap.xml`)과 **RSS 제출**(`feed.xml`) 둘 다.
+   네이버는 수집까지 2주 안팎 걸린다.
 
 ## 성경 본문 인용에 대하여
 
