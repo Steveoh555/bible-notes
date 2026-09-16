@@ -240,6 +240,8 @@ def body_text(src):
     src = re.sub(r'(?s)<footer.*?</footer>', ' ', src)
     # 히어로 밴드의 AI 삽화 고정 문구는 build.py 가 넣는 것이라 검사 대상이 아니다
     src = re.sub(r'(?s)<figure class="hero-band">.*?</figure>', ' ', src)
+    # 본문 속 AI 삽화 도판(.plate.ai)의 고정 문구도 build.py 가 넣는다 (2026-09-16)
+    src = re.sub(r'(?s)<figure class="plate[^"]*\bai\b[^"]*">.*?</figure>', ' ', src)
     # 근거 자료 / 참고 자료 / 참고 문헌 절은 합니다체 허용 — 통째로 제외
     src = re.sub(r'(?s)<section>\s*<h2>\s*(근거 자료|참고 자료|참고 문헌)\s*</h2>.*?</section>', ' ', src)
     return re.sub(r'<[^>]*>', ' ', src)
