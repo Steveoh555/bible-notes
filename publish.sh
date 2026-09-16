@@ -77,5 +77,5 @@ if echo "$OUT" | grep -qiE 'error|fatal|rejected|denied'; then
   exit 1
 fi
 echo "$OUT" | quiet | grep -viE '^remote:|^To |^ \*|^Enumerating|^Counting|^Compressing|^Writing|^Total|^delta' | head -3
-echo "  올렸습니다 → https://steveoh555.github.io/bible-notes"
+echo "  올렸습니다 → https://성경연구노트.kr"
 echo "  GitHub Pages 반영까지 1~3분 걸립니다."
