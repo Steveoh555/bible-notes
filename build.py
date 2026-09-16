@@ -346,10 +346,49 @@ def nb_last2(text):
     head = text[: len(text) - len(last2)].rstrip()
     return esc(head) + ' <span class="nb">' + esc(last2) + "</span>"
 
-def card(cfg, s):
+# 홈 목록에서 한 번에 보여 줄 편수. 「더 보기」 버튼이 같은 수만큼 이어 붙인다.
+# assets/site.js 의 PAGE 와 반드시 같아야 한다.
+PAGE_SIZE = 5
+
+# ---------- 성경 순서 ----------
+# 목록의 「성경순」 정렬에 쓴다. study:scripture 의 첫 책 이름을 찾아 정경 순서로 옮긴다.
+BIBLE_BOOKS = [
+    "창세기","출애굽기","레위기","민수기","신명기","여호수아","사사기","룻기",
+    "사무엘상","사무엘하","열왕기상","열왕기하","역대상","역대하","에스라","느헤미야",
+    "에스더","욥기","시편","잠언","전도서","아가","이사야","예레미야","예레미야애가",
+    "에스겔","다니엘","호세아","요엘","아모스","오바댜","요나","미가","나훔","하박국",
+    "스바냐","학개","스가랴","말라기",
+    "마태복음","마가복음","누가복음","요한복음","사도행전","로마서",
+    "고린도전서","고린도후서","갈라디아서","에베소서","빌립보서","골로새서",
+    "데살로니가전서","데살로니가후서","디모데전서","디모데후서","디도서","빌레몬서",
+    "히브리서","야고보서","베드로전서","베드로후서",
+    "요한일서","요한이서","요한삼서","유다서","요한계시록",
+]
+# 긴 이름을 먼저 찾아야 한다. "예레미야애가"가 "예레미야"로, "요한계시록"이 "요한"으로 잡히면 안 된다.
+_BOOK_ORDER = sorted(((b, i + 1) for i, b in enumerate(BIBLE_BOOKS)),
+                     key=lambda x: -len(x[0]))
+
+def bible_key(scripture):
+    """'누가복음 2:4-7' → '43002004'. 책을 못 찾으면 맨 뒤로 보낸다."""
+    text = scripture or ""
+    num, pos = 99, len(text) + 1
+    for name, idx in _BOOK_ORDER:
+        at = text.find(name)
+        if at > -1 and at < pos:
+            num, pos = idx, at
+            tail = text[at + len(name):]
+    if num == 99:
+        return "99000000"
+    m = re.search(r'(\d+)\s*(?::\s*(\d+)|장)?', tail)
+    ch = int(m.group(1)) if m else 0
+    vs = int(m.group(2)) if (m and m.group(2)) else 0
+    return "%02d%03d%03d" % (num, min(ch, 999), min(vs, 999))
+
+
+def card(cfg, s, i=0):
     search = " ".join([s["title"], s["description"], s["scripture"]] + s["tags"]).lower()
     tags = "".join('<span class="tag">%s</span>' % esc(t) for t in s["tags"][:3])
-    return """        <li><a class="entry" href="{url}" data-search="{search}">
+    return """        <li data-order="{order}"{hide}><a class="entry" href="{url}" data-search="{search}">
           <span class="entry-ref">{scripture}</span>
           <span class="entry-main">
             <span class="entry-title">{title}</span>
@@ -357,13 +396,14 @@ def card(cfg, s):
             <span class="entry-meta"><time datetime="{date}">{date}</time>{tags}</span>
           </span>
         </a></li>""".format(
+        order=bible_key(s["scripture"]), hide=(" hidden" if i >= PAGE_SIZE else ""),
         url=esc(s["url"]), search=esc(search),
         scripture=esc(s["scripture"] or "성경 배경"),
         title=esc(s["title"]), desc=nb_last2(s["description"]),
         date=esc(s["date"]), tags=tags)
 
 def build_index(cfg, studies):
-    cards = "\n".join(card(cfg, s) for s in studies) or ""
+    cards = "\n".join(card(cfg, s, i) for i, s in enumerate(studies)) or ""
     n = len(studies)
     body = """<!doctype html>
 <html lang="ko">
@@ -398,12 +438,20 @@ def build_index(cfg, studies):
         <div class="search-row">
           <label for="q" class="sr-only" style="position:absolute;left:-9999px">자료 검색</label>
           <input id="q" type="search" placeholder="본문, 주제, 인물로 찾기. 누가복음, 호적, 헤롯…" autocomplete="off">
+          <div class="sort-tabs" role="group" aria-label="목록 차례">
+            <button type="button" class="sort-tab" data-sort="new" aria-pressed="true">최신순</button>
+            <button type="button" class="sort-tab" data-sort="bible" aria-pressed="false">성경순</button>
+          </div>
           <span class="count" id="count">{n} 편</span>
         </div>
         <ol class="index-list">
 {cards}
         </ol>
         <p class="empty" id="empty" hidden>찾는 자료가 없습니다. 다른 낱말로 검색해 보세요.</p>
+        <div class="more-row" id="moreRow" hidden>
+          <button type="button" class="btn-more" id="moreBtn">더 보기<span class="more-rest" id="moreRest"></span></button>
+        </div>
+        <noscript><style>.index-list li[hidden]{{display:block}}.sort-tabs,.more-row{{display:none}}</style></noscript>
       </section>
     </main>
 

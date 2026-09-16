@@ -271,6 +271,29 @@ td.where{color:var(--ink-2)}
 .tag{background-color:var(--surface-2);color:var(--ink-2);padding:2px 8px;border-radius:var(--r-sm)}
 .empty{color:var(--muted);padding:44px 0;text-align:center}
 
+/* 목록 차례(최신순·성경순)와 「더 보기」.
+   작업규약: 테마 토큰 배경에는 transition 을 걸지 않는다(다크모드 색 고착). */
+.sort-tabs{display:flex;align-items:center;gap:1px}
+.sort-tab{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);
+  line-height:var(--lh-caption);color:var(--muted);background:transparent;border:0;
+  padding:7px 11px;border-radius:var(--r-sm);cursor:pointer;white-space:nowrap;
+  box-shadow:inset 0 -1px 0 transparent;transition:color .18s var(--ease)}
+.sort-tab+.sort-tab{margin-inline-start:2px}
+.sort-tab:hover{color:var(--ink-2);background-color:var(--surface)}
+.sort-tab:active{background-color:var(--surface-2)}
+.sort-tab[aria-pressed="true"]{color:var(--accent-ink);box-shadow:inset 0 -1px 0 var(--accent)}
+
+.more-row{display:flex;justify-content:center;padding-top:26px}
+.btn-more{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);
+  line-height:var(--lh-caption);color:var(--ink-2);background:transparent;
+  border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 28px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;transition:color .18s var(--ease),border-color .18s var(--ease)}
+.btn-more:hover{color:var(--accent-ink);border-color:var(--accent);background-color:var(--surface)}
+.btn-more:active{background-color:var(--surface-2)}
+.more-rest{color:var(--muted);font-variant-numeric:tabular-nums}
+.btn-more:hover .more-rest{color:var(--ink-2)}
+.index-list li[hidden]{display:none}
+
 /* ---- 본문 산문 ---- */
 .prose{display:flex;flex-direction:column;gap:17px}
 .prose p{margin:0;max-width:58ch;color:var(--ink-2);text-wrap:pretty}
@@ -340,4 +363,10 @@ blockquote.src cite{color:var(--muted)}
   .entry{grid-template-columns:1fr;gap:9px;padding-block:24px}
   .entry:hover{padding-inline-start:6px}
   .entry-ref{padding-top:0}
+  /* 좁은 화면에서는 검색칸이 한 줄을 다 쓰고, 차례와 편수가 아래로 내려온다 */
+  #q{flex:1 0 100%}
+  .search-row{gap:6px 13px}
+  .sort-tabs{margin-inline-start:-11px}
+  .count{margin-inline-start:auto}
+  .btn-more{width:100%;justify-content:center}
 }
