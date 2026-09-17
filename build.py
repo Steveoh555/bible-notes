@@ -71,8 +71,23 @@ def meta_of(path):
         "draft": m("study:draft").lower() == "true",
         "hero": m("study:hero"),
         "hero_alt": m("study:hero-alt"),
+        "kind": m("study:kind"),
+        "minutes": reading_minutes(src),
         "src": src,
     }
+
+# ---------- 읽는 시간 ----------
+# 난도를 별점으로 매기지 않는다(평점으로 오해된다). 대신 객관적으로 셀 수 있는
+# 분량과, 페이지가 스스로 밝히는 성격(study:kind)을 색인에 적는다. [[작업규약]]
+CPM = 500  # 한글 밀집 산문 + 표를 섞어 읽는 속도. 분당 글자 수.
+
+def reading_minutes(src):
+    t = re.sub(r"<(script|style)\b.*?</\1>", " ", src, flags=re.S | re.I)
+    t = re.sub(r"<!--.*?-->", " ", t, flags=re.S)
+    t = re.sub(r"<[^>]+>", " ", t)
+    t = html.unescape(t)
+    n = len(re.sub(r"\s+", "", t))
+    return max(3, -(-n // CPM))
 
 # ---------- 주입 블록 ----------
 def nav(cfg, depth, current=None):
@@ -386,21 +401,25 @@ def bible_key(scripture):
 
 
 def card(cfg, s, i=0):
-    search = " ".join([s["title"], s["description"], s["scripture"]] + s["tags"]).lower()
-    tags = "".join('<span class="tag">%s</span>' % esc(t) for t in s["tags"][:3])
+    search = " ".join([s["title"], s["description"], s["scripture"], s["kind"]] + s["tags"]).lower()
+    # 성격 표시가 붙으면 한 줄이 빽빽해지므로 태그를 둘로 줄인다.
+    tag_n = 2 if s["kind"] else 3
+    tags = "".join('<span class="tag">%s</span>' % esc(t) for t in s["tags"][:tag_n])
     return """        <li data-order="{order}"{hide}><a class="entry" href="{url}" data-search="{search}">
           <span class="entry-ref">{scripture}</span>
           <span class="entry-main">
             <span class="entry-title">{title}</span>
             <span class="entry-desc">{desc}</span>
-            <span class="entry-meta"><time datetime="{date}">{date}</time>{tags}</span>
+            <span class="entry-meta"><time datetime="{date}">{date}</time><span class="entry-read">{minutes}분</span>{kind}{tags}</span>
           </span>
         </a></li>""".format(
         order=bible_key(s["scripture"]), hide=(" hidden" if i >= PAGE_SIZE else ""),
         url=esc(s["url"]), search=esc(search),
         scripture=esc(s["scripture"] or "성경 배경"),
         title=esc(s["title"]), desc=nb_last2(s["description"]),
-        date=esc(s["date"]), tags=tags)
+        date=esc(s["date"]), minutes=s["minutes"],
+        kind=('<span class="entry-kind">%s</span>' % esc(s["kind"]) if s["kind"] else ""),
+        tags=tags)
 
 def build_index(cfg, studies):
     cards = "\n".join(card(cfg, s, i) for i, s in enumerate(studies)) or ""
@@ -585,6 +604,7 @@ SKELETON = """<!doctype html>
 <meta name="description" content="여기에 한 문장 요약을 씁니다. 검색 결과에 그대로 보입니다.">
 <meta name="study:scripture" content="">
 <meta name="study:tags" content="">
+<meta name="study:kind" content="배경 읽기">
 <meta name="study:hero" content="">
 <meta name="study:hero-alt" content="">
 <meta name="study:date" content="{today}">

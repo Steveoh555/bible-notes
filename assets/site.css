@@ -278,6 +278,11 @@ td.alt,th.alt{display:table-cell;margin-top:0}
   font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--muted);
   font-variant-numeric:tabular-nums}
 .tag{background-color:var(--surface-2);color:var(--ink-2);padding:2px 8px;border-radius:var(--r-sm)}
+/* 색인 행의 분량·성격 표시. 난도를 별점으로 매기지 않는 대신 쓰는 두 칸이다.
+   성격만 강조색을 옅게 깔아 구분하고, 분량은 글자색만 쓴다. */
+.entry-read{color:var(--ink-2)}
+.entry-kind{background-color:var(--accent-soft);color:var(--accent-ink);
+  padding:2px 8px;border-radius:var(--r-sm);white-space:nowrap}
 .empty{color:var(--muted);padding:44px 0;text-align:center}
 
 /* 목록 차례(최신순·성경순)와 「더 보기」.

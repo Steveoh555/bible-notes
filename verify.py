@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 VOID = {'br','img','hr','meta','link','input','path','rect','circle','line',
         'use','source','col','area','base','polyline','polygon','ellipse','stop'}
 problems = []
+advice = []
 
 def read(p):
     return io.open(p, encoding='utf-8').read()
@@ -73,6 +74,8 @@ for p in sorted(glob.glob(os.path.join(ROOT, "studies", "*.html"))):
     for k in ("study:scripture", "study:date"):
         if not re.search(r'<meta name="%s" content="[^"]+"' % k, s):
             miss.append(k)
+    if not re.search(r'<meta name="study:kind" content="[^"]+"', s):
+        advice.append(f"{rel(p)}: study:kind 가 없어 색인에 성격 표시가 안 붙습니다")
     for mk in ("HEAD", "HEADER", "FOOTER"):
         if "<!--#%s-->" % mk not in s:
             miss.append("#" + mk + " 표시자")
@@ -320,6 +323,13 @@ for p_ in pages():
 if not flagged:
     print("    OK 묶여야 할 짝이 모두 묶여 있습니다")
 
+
+print("\n[10] 색인 표시 (권고 — 배포를 막지 않습니다)")
+if advice:
+    for a_ in advice:
+        print("    !  " + a_)
+else:
+    print("    OK 모든 자료에 study:kind 가 있습니다")
 
 print("\n" + "=" * 52)
 if problems:
