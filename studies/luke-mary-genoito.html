@@ -20,10 +20,10 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="../assets/site.css?v=4c85e70c">
+<link rel="stylesheet" href="../assets/site.css?v=ed5000ca">
 <script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>
-  /* 이 페이지 전용: 수치 타일과 판정 표시 (john-tereo-keep 과 같은 구현) */
+  /* 이 페이지 전용: 숫자 칸과 판정 표시 (john-tereo-keep 과 같은 구현) */
   :root{ --s1:#008F80; --s2:#B2591F; --s0:#5F665F; }
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; } }
   :root[data-theme="dark"]{ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; }
@@ -46,7 +46,7 @@
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .verdict.ok{color:var(--accent)} }
 
   .gk{font-family:var(--mono);font-size:.95em}
-  .he{font-family:var(--mono);font-size:1.05em}
+  .gk .note,.he .alt{font-family:var(--body)}
   tr.hi td{background-color:var(--accent-soft)}
 </style>
 <!--#HEAD-->
@@ -97,19 +97,19 @@
 
       <section>
         <h2>마리아는 네 번 <span class="nb">고백했을까요?</span></h2>
-        <p class="sub">두 번이에요. 나머지 두 자리는 <span class="nb">마리아의 말이 아니에요.</span></p>
+        <p class="sub">두 번이에요. 나머지 두 번은 <span class="nb">마리아의 말이 아니에요.</span></p>
 
         <p>마리아의 고백으로 함께 묶여 다니는 구절이 넷 <span class="nb">있어요.</span> 누가복음 1장 38절, 1장 46~48절, 2장 19절, 2장 <span class="nb">51절이에요.</span> 그런데 원문을 열어 보면 뒤의 둘은 누가가 마리아를 <b>가리켜 쓴 문장</b>이에요. 마리아가 입으로 한 말이 <span class="nb">아니에요.</span></p>
 
         <div class="scroller">
           <table>
             <caption>네 구절의 <span class="nb">화자 구분</span></caption>
-            <thead><tr><th scope="col">본문</th><th scope="col">첫머리 원문</th><th scope="col">화자</th></tr></thead>
+            <thead><tr><th scope="col">본문</th><th scope="col">첫머리 원문 · 사역</th><th scope="col">화자</th></tr></thead>
             <tbody>
-              <tr class="hi"><td><span class="ref">눅 1:38</span></td><td class="gk">εἶπεν δὲ Μαριάμ</td><td><b>마리아</b><span class="note">직접 <span class="nb">한 말이에요.</span></span></td></tr>
-              <tr class="hi"><td><span class="ref">눅 1:46</span></td><td class="gk">καὶ εἶπεν Μαριάμ</td><td><b>마리아</b><span class="note">찬가 <span class="nb">전체의 도입이에요.</span></span></td></tr>
-              <tr><td><span class="ref">눅 2:19</span></td><td class="gk">ἡ δὲ Μαρία&hellip; συνετήρει</td><td class="alt">누가<span class="note">3인칭 <span class="nb">서술이에요.</span></span></td></tr>
-              <tr><td><span class="ref">눅 2:51</span></td><td class="gk">ἡ μήτηρ αὐτοῦ διετήρει</td><td class="alt">누가<span class="note">&ldquo;그의 어머니는&rdquo;으로 <span class="nb">시작해요.</span></span></td></tr>
+              <tr class="hi"><td><span class="ref">눅 1:38</span></td><td class="gk">εἶπεν δὲ Μαριάμ<span class="note">그런데 마리아가 말하였다</span></td><td><b>마리아</b><span class="note">직접 <span class="nb">한 말이에요.</span></span></td></tr>
+              <tr class="hi"><td><span class="ref">눅 1:46</span></td><td class="gk">καὶ εἶπεν Μαριάμ<span class="note">그리고 마리아가 말하였다</span></td><td><b>마리아</b><span class="note">찬가 <span class="nb">전체의 도입이에요.</span></span></td></tr>
+              <tr><td><span class="ref">눅 2:19</span></td><td class="gk">ἡ δὲ Μαρία&hellip; συνετήρει<span class="note">그런데 마리아는 &hellip; 간직하고 있었다</span></td><td class="alt">누가<span class="note">3인칭 <span class="nb">서술이에요.</span></span></td></tr>
+              <tr><td><span class="ref">눅 2:51</span></td><td class="gk">ἡ μήτηρ αὐτοῦ διετήρει<span class="note">그의 어머니는 &hellip; 간직하고 있었다</span></td><td class="alt">누가<span class="note">&ldquo;그의 어머니는&rdquo;으로 <span class="nb">시작해요.</span></span></td></tr>
             </tbody>
           </table>
         </div>
@@ -150,7 +150,7 @@
           <div class="tile"><span class="k">μὴ γένοιτο</span><span class="v">15</span><span class="u">회</span><span class="n">&ldquo;결코 그럴 수 없다&rdquo;. 바울이 14회, 누가복음 20:16이 <span class="nb">한 회예요</span></span></div>
         </div>
 
-        <p>두 번째 타일이 이 페이지의 <span class="nb">출발점이에요.</span> 신약에서 이 낱말은 열일곱 번 <span class="nb">나와요.</span> 그런데 <b>열여섯 번이 &ldquo;아니다&rdquo;예요.</b> 바울은 &ldquo;그럴 수 없느니라&rdquo;로 열네 번을 쓰고, 누가복음 20장 16절에서는 포도원 비유를 들은 사람들이 &ldquo;그렇게 되지 말지어다&rdquo; 하고 <span class="nb">물러서요.</span> 사도행전 5장 24절은 &ldquo;이 일이 어찌 될까&rdquo; 하는 간접 <span class="nb">의문문이에요.</span></p>
+        <p>가운데 숫자 칸이 이 페이지의 <span class="nb">출발점이에요.</span> 신약에서 이 낱말은 열일곱 번 <span class="nb">나와요.</span> 그런데 <b>열여섯 번이 &ldquo;아니다&rdquo;예요.</b> 바울은 &ldquo;그럴 수 없느니라&rdquo;로 열네 번을 쓰고, 누가복음 20장 16절에서는 포도원 비유를 들은 사람들이 &ldquo;그렇게 되지 말지어다&rdquo; 하고 <span class="nb">물러서요.</span> 사도행전 5장 24절은 &ldquo;이 일이 어찌 될까&rdquo; 하는 간접 <span class="nb">의문문이에요.</span></p>
 
         <div class="scroller">
           <table>
@@ -172,15 +172,15 @@
         <h2>구약에서 이 낱말은 <span class="nb">뭐였을까요?</span></h2>
         <p class="sub"><b>아멘</b>이었어요. 70인역이 히브리어 &lsquo;아멘&rsquo;을 <span class="nb">옮길 때</span> 쓰는 말이 <span class="nb">게노이토예요.</span></p>
 
-        <p>여기가 이 연구에서 가장 <span class="nb">중요한 자리예요.</span> 구약을 헬라어로 옮긴 70인역을 열어 보면 <b class="he">아멘(אָמֵן)</b>이 <span class="gk">γένοιτο</span>로 <span class="nb">나타나요.</span> 두 자리를 <span class="nb">보세요.</span></p>
+        <p>여기가 이 연구에서 가장 <span class="nb">중요한 곳이에요.</span> 구약을 헬라어로 옮긴 70인역을 열어 보면 <b class="he">아멘(אָמֵן)</b>이 <span class="gk">γένοιτο</span>로 <span class="nb">나타나요.</span> 두 곳을 <span class="nb">보세요.</span></p>
 
         <div class="scroller">
           <table>
-            <caption>70인역이 &lsquo;아멘&rsquo;을 <span class="nb">옮긴 자리</span></caption>
+            <caption>70인역이 &lsquo;아멘&rsquo;을 <span class="nb">옮긴 곳</span></caption>
             <thead><tr><th scope="col">본문</th><th scope="col">상황</th><th scope="col">헬라어</th></tr></thead>
             <tbody>
               <tr><td><b class="nb">신명기 27:15~26</b></td><td>언약의 저주를 읽을 때마다 온 백성이 응답해요</td><td class="gk">γένοιτο <span class="alt">(열두 번)</span></td></tr>
-              <tr><td><b class="nb">민수기 5:22</b></td><td>간음을 의심받은 여인이 저주의 정식에 응답해요</td><td class="gk">γένοιτο, γένοιτο</td></tr>
+              <tr><td><b class="nb">민수기 5:22</b></td><td>간음을 의심받은 여인이 저주 선언에 응답해요</td><td class="gk">γένοιτο, γένοιτο</td></tr>
             </tbody>
           </table>
         </div>
@@ -194,9 +194,9 @@
             <caption>어근 <span class="he">אמן</span>의 <span class="nb">세 갈래</span></caption>
             <thead><tr><th scope="col">형태</th><th scope="col">뜻</th><th scope="col">용례</th></tr></thead>
             <tbody>
-              <tr><td class="he">נֶאֱמָן <span class="alt">니팔</span></td><td>확고하다 · 신실하다</td><td class="alt">서다 · <span class="nb">버티다</span></td></tr>
-              <tr class="hi"><td class="he">הֶאֱמִין <span class="alt">히필</span></td><td><b>믿다</b></td><td class="alt">&ldquo;아브람이 여호와를 믿으니&rdquo;<span class="nb">(창세기 15:6)</span></td></tr>
-              <tr class="hi"><td class="he">אָמֵן</td><td><b>아멘</b></td><td class="alt">신명기 27장 · <span class="nb">민수기 5:22</span></td></tr>
+              <tr><td class="he">נֶאֱמָן<span class="alt">네에만 · 니팔</span></td><td>확고하다 · 신실하다</td><td><span class="alt">서다 · <span class="nb">버티다</span></span></td></tr>
+              <tr class="hi"><td class="he">הֶאֱמִין<span class="alt">헤에민 · 히필</span></td><td><b>믿다</b></td><td><span class="alt">&ldquo;아브람이 여호와를 믿으니&rdquo;<span class="nb">(창세기 15:6)</span></span></td></tr>
+              <tr class="hi"><td class="he">אָמֵן<span class="alt">아멘</span></td><td><b>아멘</b></td><td><span class="alt">신명기 27장 · <span class="nb">민수기 5:22</span></span></td></tr>
             </tbody>
           </table>
         </div>
@@ -213,7 +213,7 @@
         <h2>시내산 백성과는 <span class="nb">뭐가 달랐을까요?</span></h2>
         <p class="sub">둘 다 언약에 응답한 <span class="nb">말이에요.</span> 그런데 <b>주어가 뒤바뀌어 있어요.</b></p>
 
-        <p>하나님의 말씀을 받고 응답한 자리가 구약에 <span class="nb">또 있어요.</span> 시내산에서 백성이 한 대답인데, 70인역 원문을 보면 마리아와 동사 모양이 <span class="nb">정반대예요.</span></p>
+        <p>하나님의 말씀을 받고 응답한 대목이 구약에 <span class="nb">또 있어요.</span> 시내산에서 백성이 한 대답인데, 70인역 원문을 보면 마리아와 동사 모양이 <span class="nb">정반대예요.</span></p>
 
         <div class="scroller">
           <table>
@@ -233,7 +233,7 @@
 
       <section>
         <h2>&ldquo;주의 여종&rdquo;은 흔한 <span class="nb">말이었을까요?</span></h2>
-        <p class="sub">여자가 자기를 낮춰 부르는 정식은 <span class="nb">맞아요.</span> 그런데 마리아는 <b>한 글자를 바꿨어요.</b></p>
+        <p class="sub">여자가 자기를 낮춰 부르는 굳어진 표현은 <span class="nb">맞아요.</span> 그런데 마리아는 <b>한 글자를 바꿨어요.</b></p>
 
         <p>&ldquo;여종&rdquo;으로 옮긴 말은 <b class="gk">둘레(δούλη)</b>예요. 하녀가 아니라 <span class="nb">노예예요.</span> 신약 전체에 세 번밖에 안 <span class="nb">나와요.</span></p>
 
@@ -244,14 +244,14 @@
             <tbody>
               <tr class="hi"><td><span class="ref">눅 1:38</span></td><td>마리아가 <span class="nb">자기를 가리켜</span></td></tr>
               <tr class="hi"><td><span class="ref">눅 1:48</span></td><td>마리아가 <span class="nb">자기를 가리켜</span></td></tr>
-              <tr><td><span class="ref">행 2:18</span></td><td class="alt">베드로가 요엘서를 <span class="nb">인용한 자리예요</span></td></tr>
+              <tr><td><span class="ref">행 2:18</span></td><td><span class="alt">베드로가 요엘서를 <span class="nb">인용한 대목이에요</span></span></td></tr>
             </tbody>
           </table>
         </div>
 
-        <p>남성형 <b class="gk">둘로스(δοῦλος)</b>는 백스물여섯 번 <span class="nb">나오는데,</span> 자기를 그렇게 부른 자리는 거의 다 편지 <span class="nb">첫인사예요.</span> 로마서 1장 1절의 바울, 야고보서 1장 1절, 베드로후서 1장 1절, 유다서 1절, 요한계시록 1장 <span class="nb">1절이에요.</span> <b>복음서 이야기 안에서 자기를 &ldquo;종&rdquo;이라 부른 첫 사람이 마리아예요.</b></p>
+        <p>남성형 <b class="gk">둘로스(δοῦλος)</b>는 백스물여섯 번 <span class="nb">나오는데,</span> 자기를 그렇게 부른 곳은 거의 다 편지 <span class="nb">첫인사예요.</span> 로마서 1장 1절의 바울, 야고보서 1장 1절, 베드로후서 1장 1절, 유다서 1절, 요한계시록 1장 <span class="nb">1절이에요.</span> <b>복음서 이야기 안에서 자기를 &ldquo;종&rdquo;이라 부른 첫 사람이 마리아예요.</b></p>
 
-        <p>70인역에도 이 정식이 <span class="nb">있어요.</span> 한나가 서원할 때, 아비가일이 다윗 앞에 엎드릴 때 &ldquo;당신의 여종&rdquo;이라고 <span class="nb">말해요.</span> 사무엘상 25장 41절은 어구까지 <span class="nb">똑같아요.</span></p>
+        <p>70인역에도 같은 표현이 <span class="nb">있어요.</span> 한나가 서원할 때, 아비가일이 다윗 앞에 엎드릴 때 &ldquo;당신의 여종&rdquo;이라고 <span class="nb">말해요.</span> 사무엘상 25장 41절은 어구까지 <span class="nb">똑같아요.</span></p>
 
         <blockquote class="src">
           <p>보소서, 당신의 여종은 내 주의 종들의 발 씻길 종이니이다 <span class="gk">(Ἰδοὺ ἡ δούλη σου&hellip;)</span></p>
@@ -289,7 +289,7 @@
 
         <p>노래끼리는 <b>주제만</b> 닮았어요. 낮은 자를 높이고 배부른 자를 비우신다는 대목이 서로 <span class="nb">호응해요(삼상 2:5·2:7 ↔ 눅 1:52~53).</span> 낱말 그대로 옮겨 온 쪽은 아이를 하나님께 드리겠다고 서원하는 <span class="nb">그 기도예요.</span></p>
 
-        <p>여기 나오는 <b class="gk">타페이노시스(ταπείνωσις)</b>도 <span class="nb">짚어 둘게요.</span> 이 말은 <b>&lsquo;겸손&rsquo;이라는 덕이 아니에요.</b> 형편이 낮다는 <span class="nb">뜻이에요.</span> 신약에 네 번 나오는데 네 자리 모두 <span class="nb">처지예요.</span> 덕으로서의 겸손은 <b class="gk">타페이노프로쉬네(ταπεινοφροσύνη)</b>라는 다른 <span class="nb">낱말이에요.</span></p>
+        <p>여기 나오는 <b class="gk">타페이노시스(ταπείνωσις)</b>도 <span class="nb">짚어 둘게요.</span> 이 말은 <b>&lsquo;겸손&rsquo;이라는 덕이 아니에요.</b> 형편이 낮다는 <span class="nb">뜻이에요.</span> 신약에 네 번 나오는데 네 번 모두 <span class="nb">처지예요.</span> 덕으로서의 겸손은 <b class="gk">타페이노프로쉬네(ταπεινοφροσύνη)</b>라는 다른 <span class="nb">낱말이에요.</span></p>
 
         <p>그러니까 48절이 말하는 것은 하나님이 마리아의 <b>믿음</b>을 보셨다는 게 <span class="nb">아니에요.</span> 마리아의 <b>낮은 처지</b>를 보셨다는 <span class="nb">거예요.</span> 창세기 29장 32절에서 사랑받지 못한 레아가 &ldquo;주께서 나의 낮은 처지를 보셨다&rdquo;고 할 때 쓰는 그 <span class="nb">낱말이고요.</span></p>
       </section>
@@ -303,10 +303,10 @@
         <div class="tiles">
           <div class="tile b"><span class="k">누가복음 1인칭 &ldquo;믿는다&rdquo;</span><span class="v">0</span><span class="u">회</span><span class="n"><span class="gk">πιστεύω</span> 9회가 모두 2·3인칭이에요</span></div>
           <div class="tile a"><span class="k">&ldquo;네 믿음이&rdquo;</span><span class="v">4</span><span class="u">회</span><span class="n">예수님은 언제나 상대에게 돌려주세요. 눅 7:50 · 8:48 · 17:19 · <span class="nb">18:42예요</span></span></div>
-          <div class="tile"><span class="k">신약 1인칭 &ldquo;믿습니다&rdquo;</span><span class="v">5</span><span class="u">자리</span><span class="n">막 9:24 · 요 9:38 · 요 11:27 · 행 27:25 · 고후 4:13<span class="nb">(시편 인용)</span></span></div>
+          <div class="tile"><span class="k">신약 1인칭 &ldquo;믿습니다&rdquo;</span><span class="v">5</span><span class="u">곳</span><span class="n">막 9:24 · 요 9:38 · 요 11:27 · 행 27:25 · 고후 4:13<span class="nb">(시편 인용)</span></span></div>
         </div>
 
-        <p>세 번째 타일의 다섯 자리도 <span class="nb">들여다볼 만해요.</span> 마가복음 9장 24절은 &ldquo;내가 믿나이다&rdquo; 다음에 곧바로 <b>&ldquo;나의 믿음 없는 것을 도와주소서&rdquo;</b>가 <span class="nb">붙어요.</span> 고린도후서 4장 13절은 바울이 시편을 <span class="nb">인용한 거고요.</span> 성경에서 자기 입으로 자기 믿음을 말하는 일은 이만큼 <span class="nb">드물어요.</span></p>
+        <p>마지막 숫자 칸의 다섯 곳도 <span class="nb">들여다볼 만해요.</span> 마가복음 9장 24절은 &ldquo;내가 믿나이다&rdquo; 다음에 곧바로 <b>&ldquo;나의 믿음 없는 것을 도와주소서&rdquo;</b>가 <span class="nb">붙어요.</span> 고린도후서 4장 13절은 바울이 시편을 <span class="nb">인용한 거고요.</span> 성경에서 자기 입으로 자기 믿음을 말하는 일은 이만큼 <span class="nb">드물어요.</span></p>
 
         <p>그런데 마리아에게 &lsquo;믿음&rsquo;이라는 말이 붙지 않은 것은 <span class="nb">아니에요.</span> 붙어요. <b>다른 사람 입을 통해서요.</b></p>
 
@@ -319,7 +319,7 @@
 
         <p>스스로 말하면 <span class="nb">공로가 돼요.</span> 남이 알아보고 말하면 <b>복</b>이 <span class="nb">돼요.</span> 누가복음은 이 순서를 한 번도 <span class="nb">어기지 않아요.</span></p>
 
-        <p>같은 1장 안에 견주어 볼 자리가 <span class="nb">하나 더 있어요.</span> 사가랴예요.</p>
+        <p>같은 1장 안에 견주어 볼 대목이 <span class="nb">하나 더 있어요.</span> 사가랴예요.</p>
 
         <div class="scroller">
           <table>
@@ -362,7 +362,7 @@
           </table>
         </div>
 
-        <p>두 본문이 <span class="nb">어떤 자리인지 보세요.</span> 다니엘은 방금 본 환상을 <b>알아듣지 못한 채로</b> 마음에 <span class="nb">간직해요.</span> 야곱도 요셉의 꿈이 무슨 뜻인지 모르는 채로 그 말을 <span class="nb">붙들어요.</span> 누가는 마리아를 <b>그 두 사람이 서 있던 자리</b>에 <span class="nb">세워 둬요.</span></p>
+        <p>두 본문이 <span class="nb">어떤 대목인지 보세요.</span> 다니엘은 방금 본 환상을 <b>알아듣지 못한 채로</b> 마음에 <span class="nb">간직해요.</span> 야곱도 요셉의 꿈이 무슨 뜻인지 모르는 채로 그 말을 <span class="nb">붙들어요.</span> 누가는 마리아를 <b>그 두 사람이 서 있던 자리</b>에 <span class="nb">세워 둬요.</span></p>
 
         <!--#PLATE:plate-genoito.jpg-->
       <figure class="plate ai">
@@ -400,7 +400,7 @@
               <tr><td>누가는 마리아에게 &lsquo;믿음&rsquo; 언어를 쓰지 않는다</td><td>눅 1:45 <span class="gk">ἡ πιστεύσασα</span> &mdash; 쓴다. 다만 3인칭, <span class="nb">엘리사벳의 입으로</span></td><td><span class="verdict no">무너짐</span></td></tr>
               <tr><td><span class="gk">γένοιτο</span> 는 믿음의 언어가 아니다</td><td>70인역이 아멘을 이 낱말로 옮긴다(신 27장 12회 · 민 5:22). 히브리어 어근 <span class="he">אמן</span> 이 아멘과 &lsquo;믿다&rsquo;를 <span class="nb">함께 낳는다</span></td><td><span class="verdict no">무너짐</span></td></tr>
               <tr><td>마리아는 이해했기 때문에 승낙했다</td><td>눅 2:50 &ldquo;깨닫지 못하더라&rdquo; · 2:19·2:51 미완료 · <span class="gk">συμβάλλουσα</span> 는 &lsquo;풀어 보려 함&rsquo;</td><td><span class="verdict no">무너짐</span></td></tr>
-              <tr><td>눅 1:38 은 순종이지 신앙고백이 아니다</td><td>아멘은 언약 정식의 응답이므로 둘을 가를 수 없다. 갈리는 것은 주어다(출 19:8 대조)</td><td><span class="verdict no">가짜 대립</span></td></tr>
+              <tr><td>눅 1:38 은 순종이지 신앙고백이 아니다</td><td>아멘은 언약 선언에 대한 응답이므로 둘을 가를 수 없다. 갈리는 것은 주어다(출 19:8 대조)</td><td><span class="verdict no">가짜 대립</span></td></tr>
               <tr><td>눅 2:19·2:51 은 마리아의 말이 아니라 누가의 서술이다</td><td>원문 주어가 3인칭. 19절 <span class="gk">ἡ δὲ Μαρία</span> · 51절 <span class="gk">ἡ μήτηρ αὐτοῦ</span></td><td><span class="verdict ok">확인</span></td></tr>
               <tr><td>신약에서 부정어 없는 긍정 <span class="gk">γένοιτο</span> 는 눅 1:38 하나다</td><td>SBLGNT 27권 희구법 전수 68회. <span class="gk">γίνομαι</span> 희구법 17회 중 15회가 <span class="gk">μὴ γένοιτο</span>, 1회는 간접의문</td><td><span class="verdict ok">확인</span></td></tr>
               <tr><td>누가복음에 1인칭 &ldquo;내가 믿는다&rdquo;가 없다</td><td><span class="gk">πιστεύω</span> 9회 · <span class="gk">πίστις</span> 11회 전수. 모두 2·3인칭</td><td><span class="verdict ok">확인</span></td></tr>
@@ -428,7 +428,7 @@
           <div class="term"><dt>게노이토 <span class="hanja">γένοιτο</span></dt>
             <dd>&ldquo;되기를&rdquo;. 70인역이 히브리어 &lsquo;아멘&rsquo;을 <span class="nb">옮길 때</span> <span class="nb">쓰는 말이에요.</span></dd></div>
           <div class="term"><dt>아멘 <span class="hanja">אָמֵן</span></dt>
-            <dd>언약을 낭독하고 나서 백성이 하는 <span class="nb">응답이에요.</span> &lsquo;믿다&rsquo;와 <span class="nb">같은 어근이에요.</span></dd></div>
+            <dd>언약의 선언을 듣고 온 백성이 함께 하는 <span class="nb">대답이에요.</span> &lsquo;믿다&rsquo;와 <span class="nb">같은 어근이에요.</span></dd></div>
           <div class="term"><dt>둘레 <span class="hanja">δούλη</span></dt>
             <dd>여자 <span class="nb">노예예요.</span> 신약에 세 번 나오고, 자기를 이렇게 부른 사람은 <span class="nb">마리아뿐이에요.</span></dd></div>
           <div class="term"><dt>타페이노시스 <span class="hanja">ταπείνωσις</span></dt>

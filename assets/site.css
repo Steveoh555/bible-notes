@@ -23,6 +23,9 @@
   --display:"Gowun Batang","Nanum Myeongjo","Noto Serif KR",Georgia,serif;
   --body:"Pretendard Variable",Pretendard,"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,monospace;
+  /* 히브리어는 모노 글꼴에 글자가 없어 대체 글꼴로 떨어지면서 모음 기호가 뭉친다.
+     원문 표기는 세리프 계열로 따로 잡고, 크기도 라틴·헬라어보다 키운다. */
+  --hebrew:"Noto Serif Hebrew","David Libre","Frank Ruehl CLM","Times New Roman",serif;
   /* 글자 크기 — 6단계로 고정. 새 크기를 만들지 말고 아래 여섯 중 하나를 쓴다.
      역할: display=페이지 제목(h1)  h1=절 제목(h2)  h2=강조 블록·색인 제목
            h3=카드·차트 제목  body=본문·표  caption=메타·출처·칩 */
@@ -163,6 +166,12 @@ td.role{white-space:nowrap}
 td.where{color:var(--ink-2)}
 .name{font-weight:600;display:block}
 .alt{color:var(--muted);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);display:block;margin-top:2px}
+/* .alt 는 span 전용이다. td 에 직접 걸면 display:block 이 표 칸을 행에서 떼어 내
+   배경색과 칸 경계가 어긋난다(2026-09-17 히브리어 표에서 발견). 안전망으로 되돌린다. */
+td.alt,th.alt{display:table-cell;margin-top:0}
+/* 히브리어 원문 표기 — 페이지마다 다시 정의하지 말고 이 클래스를 쓴다. */
+.he{font-family:var(--hebrew);font-size:1.5em;line-height:1.7;font-weight:400;
+  font-feature-settings:"ccmp" 1}
 .note{display:block;color:var(--muted);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);margin-top:5px;white-space:normal}
 .ref{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--accent);white-space:nowrap}
 .ref.none{color:var(--muted)}
