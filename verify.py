@@ -331,6 +331,28 @@ if advice:
 else:
     print("    OK 모든 자료에 study:kind 가 있습니다")
 
+# ---------- [11] 어휘 (권고) ----------
+# 작업규약.md 「바꿔 쓰는 낱말」 표에 오른 낱말을 본문에서 찾는다. 표에 새 낱말을 적으면 여기에도 넣을 것.
+# (자리·정식은 허용 용법이 있어 자동 검사에서 뺐다. 눈으로 확인한다.)
+AVOID_WORDS = {
+    "경첩": "무엇이 뒤집히는지 직접 쓰기 · 핵심",
+    "타일": "숫자 칸",
+    "무너짐": "반증 (판정 칸)",
+}
+print("\n[11] 어휘 (권고 — 배포를 막지 않습니다)")
+_hit = 0
+for p_ in pages():
+    if os.sep + "studies" + os.sep not in p_:
+        continue
+    t_ = body_text(read(p_))
+    for w_, alt_ in AVOID_WORDS.items():
+        n_ = t_.count(w_)
+        if n_:
+            _hit += 1
+            print("    !  %s — 「%s」 %d번 → %s" % (rel(p_), w_, n_, alt_))
+if not _hit:
+    print("    OK 바꿔 쓸 낱말이 없습니다")
+
 print("\n" + "=" * 52)
 if problems:
     print("문제 %d건" % len(problems))
