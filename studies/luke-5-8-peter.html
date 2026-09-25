@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="../assets/site.css?v=0b76974f">
+<link rel="stylesheet" href="../assets/site.css?v=defb704f">
 <script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>
   /* 이 페이지 전용: 숫자 칸과 판정 표시 (luke-4-nazareth 와 같은 구현) */
@@ -379,6 +379,9 @@
         <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 <span class="nb">&ldquo;이견&rdquo;으로 표시합니다.</span></p>
         <p class="src">© 2026 성경연구노트 · 노트지기</p>
         <p class="foot-links"><a href="../index.html">자료 목록</a> <a href="../about.html">소개</a> <a href="../feed.xml">RSS</a></p>
+        <p class="visits" id="visits" hidden>방문 <span></span></p>
+        <script data-goatcounter="https://biblenotes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+        <script>fetch('https://biblenotes.goatcounter.com/counter/TOTAL.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.count)return;var v=document.getElementById('visits');v.querySelector('span').textContent=d.count;v.hidden=false}).catch(function(){});</script>
       </div>
     </footer>
     <!--/#FOOTER-->

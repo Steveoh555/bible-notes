@@ -114,16 +114,24 @@ def foot(cfg, depth):
     year = datetime.date.today().year
     who = (" · " + esc(cfg["author"])) if cfg.get("author") else ""
     rss = (' <a href="%sfeed.xml">RSS</a>' % up) if cfg.get("site_url") else ""
+    gc = cfg.get("goatcounter", "").strip()
+    visits = ""
+    if gc:
+        # GoatCounter: 방문 기록 + 푸터 맨 끝에 작은 글씨로 누적 방문 수
+        visits = """
+        <p class="visits" id="visits" hidden>방문 <span></span></p>
+        <script data-goatcounter="https://{gc}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+        <script>fetch('https://{gc}.goatcounter.com/counter/TOTAL.json').then(function(r){{return r.ok?r.json():null}}).then(function(d){{if(!d||!d.count)return;var v=document.getElementById('visits');v.querySelector('span').textContent=d.count;v.hidden=false}}).catch(function(){{}});</script>""".format(gc=gc)
     return """<footer class="site-foot">
       <div class="inner">
         <p><strong>{name}</strong></p>
         <p>{desc}</p>
         <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 <span class="nb">&ldquo;이견&rdquo;으로 표시합니다.</span></p>
         <p class="src">© {year} {name}{who}</p>
-        <p class="foot-links"><a href="{up}index.html">자료 목록</a> <a href="{up}about.html">소개</a>{rss}</p>
+        <p class="foot-links"><a href="{up}index.html">자료 목록</a> <a href="{up}about.html">소개</a>{rss}</p>{visits}
       </div>
     </footer>""".format(name=esc(cfg["site_name"]), desc=nb_last2(cfg["description"]),
-                        year=year, who=who, up=up, rss=rss)
+                        year=year, who=who, up=up, rss=rss, visits=visits)
 
 def headtags(cfg, info, depth):
     """canonical / Open Graph / JSON-LD. 검색엔진용"""
