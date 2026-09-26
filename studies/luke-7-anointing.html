@@ -46,8 +46,23 @@
   :root[data-theme="dark"] .verdict.ok{color:var(--accent)}
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .verdict.ok{color:var(--accent)} }
 
-  .gk{font-family:var(--mono);font-size:.95em}
+  /* 헬라어는 모노 글꼴에 글자가 없어 벌어져 보인다 → 세리프로 */
+  .gk{font-family:"Times New Roman",Tinos,"Liberation Serif","Noto Serif",serif;font-size:1.06em;letter-spacing:0}
   .gk .note{font-family:var(--body)}
+  .tile .k .gk{font-size:1.12em;letter-spacing:0;color:var(--ink-2)}
+
+  /* 한눈에 보기 + 차례 (twelve-disciples 의 .jump 와 같은 구현) */
+  .glance{display:flex;flex-direction:column;gap:18px}
+  .glance .rung .who{min-width:9.5em}
+  .jump{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .jump a{display:inline-flex;gap:6px;align-items:baseline;padding:6px 11px;border:1px solid var(--line);
+    border-radius:var(--r-sm);background-color:var(--surface);color:var(--ink);text-decoration:none;
+    transition:border-color 200ms var(--ease)}
+  .jump a:hover{background-color:var(--accent-soft);border-color:var(--accent)}
+  .jump a:active{background-color:var(--accent-soft);border-color:var(--accent-ink)}
+  .jump .no{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);color:var(--muted)}
+  article > section[id]{scroll-margin-top:24px}
+  .sub-h{margin:8px 0 0;font-family:var(--display);font-size:var(--fs-h3);font-weight:var(--fw-h3);line-height:var(--lh-h3);color:var(--ink)}
 </style>
 <!--#HEAD-->
     <link rel="canonical" href="https://xn--289a0mi4h6svvsf8ov.kr/studies/luke-7-anointing.html">
@@ -93,7 +108,28 @@
         <div class="stamp">📖 <b>누가복음 7:37–50</b> · 마가복음 14장 · 마태복음 26장 · 요한복음 12장과 <span class="nb">함께 읽음</span></div>
       </header>
 
-      <section>
+      <section class="glance" aria-label="한눈에 보기">
+        <h2>한눈에 보기</h2>
+        <div class="ladder">
+          <div class="rung r3"><span class="who">누구였나요?</span><span class="what">이름이 없어요. 누가는 &ldquo;그 동네의 죄인&rdquo;이라고만 <span class="nb">불러요(7:37).</span></span></div>
+          <div class="rung r2"><span class="who">막달라 마리아?</span><span class="what">아니에요. 세 여자를 한 사람으로 묶은 것은 591년의 <span class="nb">설교였어요.</span></span></div>
+          <div class="rung r2"><span class="who">향유 사건은 몇 번?</span><span class="what">베다니에서 한 번, 갈릴리에서 한 번. 두 사건으로 보는 견해가 <span class="nb">많아요.</span></span></div>
+          <div class="rung r3"><span class="who">왜 그렇게 했나요?</span><span class="what">이미 받은 용서가 커서 사랑으로 드러났다고 읽는 견해가 <span class="nb">많아요(7:47).</span></span></div>
+        </div>
+        <ul class="jump" aria-label="차례">
+          <li><a href="#who"><span class="no">1</span>이름</a></li>
+          <li><a href="#magdalene"><span class="no">2</span>막달라 마리아</a></li>
+          <li><a href="#four"><span class="no">3</span>4복음서 대조</a></li>
+          <li><a href="#feet"><span class="no">4</span>왜 발이었나</a></li>
+          <li><a href="#signs"><span class="no">5</span>눈물·머리털·입맞춤</a></li>
+          <li><a href="#simon"><span class="no">6</span>시몬</a></li>
+          <li><a href="#love"><span class="no">7</span>사랑과 용서</a></li>
+          <li><a href="#when"><span class="no">8</span>언제</a></li>
+          <li><a href="#summary"><span class="no">9</span>정리</a></li>
+        </ul>
+      </section>
+
+      <section id="who">
         <h2>이 여자의 이름은 <span class="nb">무엇이었을까요?</span></h2>
         <p class="sub">이름이 없어요. 누가는 &ldquo;그 동네의 죄인&rdquo;이라고만 <span class="nb">불러요.</span></p>
         <blockquote class="bible" data-ref="누가복음 7:37-38" data-version="개역개정">
@@ -107,7 +143,7 @@
         </div>
       </section>
 
-      <section>
+      <section id="magdalene">
         <h2>막달라 마리아가 <span class="nb">아니었나요?</span></h2>
         <p class="sub">아니에요. <span class="nb">누가는 바로</span> 다음 장에서 막달라 마리아를 <span class="nb">새로 소개해요.</span></p>
         <p>누가복음 8:2은 예수님을 따르던 여자들을 소개하면서 &ldquo;일곱 귀신이 나간 자 막달라인이라 하는 마리아&rdquo;를 처음 <span class="nb">등장시켜요.</span> 7장의 여자가 막달라 마리아였다면 한 단락 뒤에서 처음 보는 사람처럼 소개할 까닭이 없어요. 게다가 복음서에서 귀신 들림은 죄와 같은 것으로 다뤄지지 <span class="nb">않아요.</span></p>
@@ -132,7 +168,7 @@
         <p>동방 교회는 이 동일시를 받아들이지 않았어요. 막달라 마리아를 &ldquo;향유를 가진 여인&rdquo;, &ldquo;사도와 동등한 자&rdquo;로 기리며 다른 여자들과 구분해 왔어요. 로마 가톨릭은 1969년 전례력을 고치면서 동일시를 거두었고, 2016년에는 교황청 경신성사성이 막달라 마리아의 기념일을 축일로 올리며 그를 &ldquo;사도들의 사도&rdquo;라고 <span class="nb">불렀어요.</span></p>
       </section>
 
-      <section>
+      <section id="four">
         <h2>4복음서의 향유 이야기는 <span class="nb">몇 번일까요?</span></h2>
         <p class="sub">네 번 나오지만, 사건은 <span class="nb">둘로 보는</span> 견해가 <span class="nb">많아요.</span></p>
         <div class="scroller">
@@ -165,45 +201,61 @@
         </div>
         <p>그런데 누가와 요한만 겹치는 곳이 하나 <span class="nb">있어요.</span> 향유를 발에 붓고 머리털로 닦는 장면이에요. &ldquo;닦다&rdquo;(<span class="gk">ἐκμάσσω</span>)라는 동사는 신약에 다섯 번 나오는데, 누가와 요한에만 <span class="nb">있어요.</span></p>
         <div class="tiles">
-          <div class="tile a"><span class="k">ἐκμάσσω · 닦다</span><span class="v">5</span><span class="u">회</span><span class="n">누가 7:38·44, 요한 11:2·12:3, 그리고 <span class="nb">요한 13:5</span></span></div>
+          <div class="tile a"><span class="k">닦다 <span class="gk">ἐκμάσσω</span></span><span class="v">5</span><span class="u">회</span><span class="n">누가 7:38·44, 요한 11:2·12:3, 그리고 <span class="nb">요한 13:5</span></span></div>
           <div class="tile b"><span class="k">마가·마태의 동사</span><span class="v">머리</span><span class="u">에 쏟음</span><span class="n">κατέχεεν. 발이나 머리털은 <span class="nb">나오지 않아요</span></span></div>
-          <div class="tile"><span class="k">ἀλάβαστρον · 옥합</span><span class="v">4</span><span class="u">회</span><span class="n">마태 1 · 마가 2 · 누가 1. 모두 향유를 <span class="nb">붓는 장면</span></span></div>
+          <div class="tile"><span class="k">옥합 <span class="gk">ἀλάβαστρον</span></span><span class="v">4</span><span class="u">회</span><span class="n">마태 1 · 마가 2 · 누가 1. 모두 향유를 <span class="nb">붓는 장면</span></span></div>
         </div>
         <p>요한 13:5가 흥미로워요. 마리아가 예수님의 발을 닦은 그 동사로, 다음 장에서 예수님이 제자들의 발을 <span class="nb">닦으세요.</span> 누가와 요한이 발과 머리털을 함께 쓰는 까닭은 이야기가 전해지는 동안 두 장면이 서로 영향을 주었기 때문으로 봐요(WBC). 어느 쪽에서 어느 쪽으로 갔는지는 <span class="nb">미결이에요.</span></p>
       </section>
 
-      <section>
+      <section id="feet">
         <h2>왜 머리가 아니라 <span class="nb">발이었을까요?</span></h2>
         <p class="sub">식사 자세 때문이에요. 발이 <span class="nb">먼저 닿았어요.</span></p>
         <p>개역개정이 &ldquo;앉으셨다&rdquo;로 옮긴 말은 원문으로 &ldquo;기대어 누웠다&rdquo;(<span class="gk">κατεκλίθη</span>)예요. 잔치에서는 낮은 긴 의자에 비스듬히 누워 먹었어요. 머리는 식탁 쪽, 발은 바깥쪽이었어요. 그래서 여자가 &ldquo;뒤로 그 발 곁에&rdquo; 섰을 때 닿는 곳은 <span class="nb">발이었어요.</span></p>
         <p>잔칫집에 모르는 사람이 들어온 것도 이상한 일이 아니었어요. 초대받지 않은 사람도 가장자리에 서서 손님들의 대화를 들을 수 있었어요(IVP 배경주석). 누가복음 주석가 놀랜드는 &ldquo;당시의 삶은 우리의 삶보다 훨씬 공적이었다&rdquo;고 <span class="nb">말해요.</span></p>
         <p>놀랜드는 여자가 미리 계획한 것은 향유를 붓는 일 하나뿐이었다고 봐요. 향유는 원래 머리에 바르는 것이었어요. 그런데 눈물이 발에 떨어졌고, 닦을 것이 없어 머리털을 썼고, 그 가까움이 입맞춤으로 이어졌고, 머리까지 가지 못하니 발에 향유를 부었다는 거예요. 차례로 이어진 <span class="nb">반응이라는 해석이에요.</span></p>
+        <!--#PLATE:plate-anointing.jpg-->
+      <figure class="plate ai">
+        <img src="../assets/img/plate-anointing.jpg" alt="잔칫집 돌바닥에 머리를 길게 풀어 내린 여자가 등을 보인 채 무릎을 꿇고, 긴 의자에 기대 누운 사람의 맨발에 흰 옥합의 향유를 붓는 그림. 누운 사람도 등을 보이고 있고 뒤쪽에 다른 손님들이 흐릿하게 보인다" width="1200" height="674" loading="lazy" decoding="async">
+        <figcaption>그림: 내용을 돕기 위한 AI 생성 삽화입니다.</figcaption>
+      </figure>
+      <!--/#PLATE-->
       </section>
 
-      <section>
+      <section id="signs">
         <h2>눈물, 머리털, 입맞춤은 <span class="nb">무엇을 뜻했을까요?</span></h2>
         <p class="sub">하나하나가 체면을 내려놓는 <span class="nb">행동이었어요.</span></p>
         <div class="tiles">
-          <div class="tile a"><span class="k">δάκρυον · 눈물 · 복음서</span><span class="v">2</span><span class="u">회</span><span class="n">누가 7:38과 7:44뿐이에요. 네 복음서에서 &ldquo;눈물&rdquo;이라는 명사는 <span class="nb">이 단락에만</span></span></div>
-          <div class="tile b"><span class="k">καταφιλέω · 입 맞추다</span><span class="v">6</span><span class="u">회</span><span class="n">유다의 입맞춤 둘, 이 여자 둘, 탕자의 아버지, <span class="nb">에베소 장로들</span></span></div>
-          <div class="tile"><span class="k">μετάνοια · 회개 · 이 단락</span><span class="v">0</span><span class="u">회</span><span class="n">누가복음에는 &ldquo;회개&rdquo;가 열네 번 나오지만 7:36–50에는 <span class="nb">한 번도 없어요</span></span></div>
+          <div class="tile a"><span class="k">눈물 · 복음서 <span class="gk">δάκρυον</span></span><span class="v">2</span><span class="u">회</span><span class="n">누가 7:38과 7:44뿐이에요. 네 복음서에서 &ldquo;눈물&rdquo;이라는 명사는 <span class="nb">이 단락에만</span></span></div>
+          <div class="tile b"><span class="k">입 맞추다 <span class="gk">καταφιλέω</span></span><span class="v">6</span><span class="u">회</span><span class="n">유다의 입맞춤 둘, 이 여자 둘, 탕자의 아버지, <span class="nb">에베소 장로들</span></span></div>
+          <div class="tile"><span class="k">회개 · 이 단락 <span class="gk">μετάνοια</span></span><span class="v">0</span><span class="u">회</span><span class="n">누가복음에는 &ldquo;회개&rdquo;가 열네 번 나오지만 7:36–50에는 <span class="nb">한 번도 없어요</span></span></div>
         </div>
-        <p><b>눈물</b>은 슬픔보다 회한과 감사의 눈물로 봐요. 놀랜드는 이 여자를 이미 평안을 찾은 사람으로 보고, 그 눈물을 &ldquo;마음에서 우러나오는 진실하고 따뜻한 감사&rdquo;와 <span class="nb">잇는 눈물로 읽어요.</span></p>
-        <p><b>머리털</b>은 더 무거운 이야기예요. 유대 사회에서 여자가 사람들 앞에서 머리를 푸는 것은 부끄러운 일이었어요. 200년경 정리된 『미쉬나』는 아내를 위자료 없이 내보낼 수 있는 사유를 <span class="nb">이렇게 꼽아요.</span></p>
+        <div class="cards">
+          <div class="hcard"><span class="gen">7:38 · 7:44</span><span class="hname">눈물로 적심</span><p>슬픔보다 회한과 감사의 눈물로 <span class="nb">읽어요.</span></p></div>
+          <div class="hcard"><span class="gen">7:38 · 7:44</span><span class="hname">머리털로 닦음</span><p>사람들 앞에서 머리를 푸는 부끄러움을 스스로 <span class="nb">택했어요.</span></p></div>
+          <div class="hcard"><span class="gen">7:38 · 7:45</span><span class="hname">발에 입맞춤</span><p>그치지 않는 입맞춤이에요. 탕자의 아버지에게도 쓰인 <span class="nb">동사예요.</span></p></div>
+          <div class="hcard"><span class="gen">7:38 · 7:46</span><span class="hname">발에 향유</span><p>머리에 바르던 향유를 가장 낮은 발에 <span class="nb">부었어요.</span></p></div>
+        </div>
+        <h3 class="sub-h">눈물</h3>
+        <p>눈물은 슬픔보다 회한과 감사의 눈물로 봐요. 놀랜드는 이 여자를 이미 평안을 찾은 사람으로 보고, 그 눈물을 &ldquo;마음에서 우러나오는 진실하고 따뜻한 감사&rdquo;와 <span class="nb">잇는 눈물로 읽어요.</span></p>
+        <h3 class="sub-h">머리털</h3>
+        <p>머리털은 더 무거운 이야기예요. 유대 사회에서 여자가 사람들 앞에서 머리를 푸는 것은 부끄러운 일이었어요. 200년경 정리된 『미쉬나』는 아내를 위자료 없이 내보낼 수 있는 사유를 <span class="nb">이렇게 꼽아요.</span></p>
         <blockquote class="src">
           <p>유대 여인의 관습을 어기는 것은 무엇인가. 머리를 드러낸 채 밖에 나가는 것, 시장에서 실을 잣는 것, 아무 남자와나 이야기하는 것이다.</p>
           <cite>미쉬나 케투보트 7:6</cite>
         </blockquote>
         <p>민수기 5:18에서도 제사장은 부정을 의심받는 아내의 &ldquo;머리를 풀어요&rdquo;(<span class="he">וּפָרַע</span>, 우파라). 미쉬나 소타 1:5는 그 장면을 성전 니카노르 문에서 머리를 풀어 헤치는 일로 <span class="nb">그려요.</span> 이 여자는 스스로 그 부끄러움을 택한 셈이에요. 다만 케투보트 7:6은 결혼한 여자에 대한 규정이고, 이 여자가 결혼했는지는 본문이 말하지 <span class="nb">않아요.</span></p>
-        <p><b>입맞춤</b>은 <span class="gk">καταφιλέω</span>라는 강한 동사예요. 45절은 &ldquo;그치지 않고 입 맞추었다&rdquo;고 적어요. 같은 동사가 탕자를 끌어안은 아버지에게도 쓰여요(15:20). 놀랜드는 발 입맞춤을 용서를 비는 몸짓보다 감사의 표현으로 <span class="nb">읽어요.</span></p>
-        <p><b>향유</b>는 원래 머리에 바르는 것이었어요. 그것을 발에 부은 것은 가장 낮은 곳을 고른 행동이에요. IVP 배경주석은 향유가 이 여자의 생업 도구였을 가능성도 말하는데, 이것은 <span class="nb">가능성일 뿐이에요.</span></p>
+        <h3 class="sub-h">입맞춤</h3>
+        <p>입맞춤은 <span class="gk">καταφιλέω</span>라는 강한 동사예요. 45절은 &ldquo;그치지 않고 입 맞추었다&rdquo;고 적어요. 같은 동사가 탕자를 끌어안은 아버지에게도 쓰여요(15:20). 놀랜드는 발 입맞춤을 용서를 비는 몸짓보다 감사의 표현으로 <span class="nb">읽어요.</span></p>
+        <h3 class="sub-h">향유</h3>
+        <p>향유는 원래 머리에 바르는 것이었어요. 그것을 발에 부은 것은 가장 낮은 곳을 고른 행동이에요. IVP 배경주석은 향유가 이 여자의 생업 도구였을 가능성도 말하는데, 이것은 <span class="nb">가능성일 뿐이에요.</span></p>
         <div class="tip">
           <strong>이 여자는 <span class="nb">창녀였을까요?</span></strong>
           <p>본문은 말하지 않아요. IVP 배경주석은 창녀였거나 적어도 행실로 소문난 여자였을 것으로 봐요. 베르치만(2017)은 더 조심스러워요. 이 여자는 당시 잔치에 불려 온 접대부가 하던 일을 하나도 하지 않았어요. 다만 머리를 풀고 발을 만지고 입 맞춘 행동은 어떻든 오해를 사기 <span class="nb">쉬웠다고 봐요.</span></p>
         </div>
       </section>
 
-      <section>
+      <section id="simon">
         <h2>시몬은 <span class="nb">무례했을까요?</span></h2>
         <p class="sub">학자들 사이에 의견이 <span class="nb">갈려요.</span> <span class="nb">분명한 것은</span> 대비예요.</p>
         <p>예수님은 44–46절에서 처음으로 여자를 돌아보시며 시몬에게 세 가지를 <span class="nb">나란히 말씀하세요.</span></p>
@@ -219,11 +271,22 @@
           </table>
         </div>
         <p>기름은 향유로, 머리는 발로 바뀌어요. 여자 쪽은 값이 올라가고 닿는 곳은 <span class="nb">낮아져요.</span></p>
-        <p>그러면 시몬이 손님을 푸대접한 걸까요? IVP 배경주석은 그렇게 봐요. 아브라함이 손님에게 발 씻을 물을 가져온 이야기(창 18:4)를 생각하면 변명할 여지가 없다는 거예요. 놀랜드는 달라요. 유대 문헌에서 손님의 발 씻을 물이나 입맞춤, 머리 기름은 <b>의무 관례</b>로 나오지 않는다고 봐요. 그래서 시몬의 대접은 틀린 데 없이 &ldquo;반듯하기만 했다&rdquo;는 거예요. 이 해석을 따르면 예수님의 말씀은 시몬의 무례가 아니라 두 사람의 사랑의 크기를 <span class="nb">가리켜요.</span></p>
+        <p>그러면 시몬이 손님을 푸대접한 걸까요? 두 주석이 <span class="nb">다르게 봐요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>시몬의 대접을 보는 <span class="nb">두 견해</span></caption>
+            <thead><tr><th scope="col">주석</th><th scope="col">견해</th><th scope="col">근거</th></tr></thead>
+            <tbody>
+              <tr><td><b>IVP 배경주석</b></td><td>무례했다</td><td>아브라함이 손님에게 발 씻을 물을 가져온 이야기(창 18:4)를 생각하면 변명할 여지가 없어요</td></tr>
+              <tr><td><b>놀랜드 (WBC)</b></td><td>반듯하기만 했다</td><td>유대 문헌에서 발 씻을 물, 입맞춤, 머리 기름은 의무 관례로 나오지 않아요</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>놀랜드를 따르면 예수님의 말씀은 시몬의 무례가 아니라 두 사람의 사랑의 크기를 <span class="nb">가리켜요.</span></p>
         <p>베르치만(2017)은 여기서 한 걸음 더 나가요. 초대한 사람은 시몬이지만, 예수님은 여자의 몸짓을 &ldquo;대접&rdquo;으로 다시 읽어 그를 이 잔치의 <b>진짜 주인</b>으로 세우신다는 거예요. 판단하던 시몬이 도리어 <span class="nb">판단을 받아요.</span></p>
       </section>
 
-      <section>
+      <section id="love">
         <h2>사랑해서 용서받았을까요, <span class="nb">용서받아서 사랑했을까요?</span></h2>
         <p class="sub">용서받아서 사랑했다고 보는 견해가 <span class="nb">훨씬 많아요.</span></p>
         <blockquote class="bible" data-ref="누가복음 7:47" data-version="개역개정">
@@ -243,6 +306,13 @@
           <p>예수께서 여자에게 이르시되 네 믿음이 너를 구원하였으니 평안히 가라 하시니라</p>
           <cite>누가복음 7:50 · 개역개정</cite>
         </blockquote>
+        <p>본문의 순서를 차례로 놓으면 <span class="nb">이렇게 돼요.</span></p>
+        <div class="ladder" aria-label="누가복음 7장이 보여 주는 순서">
+          <div class="rung r2"><span class="who">① 이미 사함받음</span><span class="what">&ldquo;사하여졌도다&rdquo;는 완료형이에요 (7:47)</span></div>
+          <div class="rung r2"><span class="who">② 사랑으로 드러남</span><span class="what">눈물, 머리털, 입맞춤, 향유 (7:38, 44–46)</span></div>
+          <div class="rung r3"><span class="who">③ 예수님이 확인</span><span class="what">&ldquo;네 죄 사함을 받았느니라&rdquo; (7:48)</span></div>
+          <div class="rung r3"><span class="who">④ 믿음이 구원</span><span class="what">&ldquo;네 믿음이 너를 구원하였으니&rdquo; (7:50)</span></div>
+        </div>
         <div class="scroller">
           <table>
             <caption>47절 &ldquo;왜냐하면&rdquo;(ὅτι)의 <span class="nb">세 가지 읽기</span></caption>
@@ -258,14 +328,14 @@
         <p>48절 &ldquo;네 죄 사함을 받았느니라&rdquo;도 새로 용서하는 말이 아니라고 봐요. 놀랜드는 이 말을 이미 받은 용서를 예수님이 자신의 권위로 사람들 앞에서 <b>확인</b>해 주시는 말로 읽어요. 그래서 함께 앉은 손님들의 물음이 곧바로 &ldquo;이가 누구이기에 죄도 사하는가&rdquo;(7:49)로 <span class="nb">옮겨 가요.</span></p>
       </section>
 
-      <section>
+      <section id="when">
         <h2>그녀는 언제 <span class="nb">용서받았을까요?</span></h2>
         <p class="sub">본문은 말하지 않아요. 다만 <span class="nb">앞 단락이</span> 실마리를 <span class="nb">줘요.</span></p>
         <p>이 장면 바로 앞에서 누가는 &ldquo;모든 백성과 세리들은 이미 요한의 세례를 받았다&rdquo;고 적어요(7:29). 그리고 사람들은 예수님을 &ldquo;세리와 죄인의 친구&rdquo;라고 불렀어요(7:34). 놀랜드는 이 문맥에서 여자가 요한의 세례나 예수님의 말씀을 통해 이미 용서를 경험했고, 그 감사를 표하러 왔다고 봐요. 추론이지만 <span class="nb">문맥과 잘 맞아요.</span></p>
         <p>누가복음 7장 전체를 보면 흐름이 <span class="nb">보여요.</span> 이방인 백부장(1–10절), 아들을 잃은 과부(11–17절), 세례를 받은 세리들(29절), 그리고 이 여자예요. 예수님을 알아보고 받아들인 사람은 늘 뜻밖의 사람들이었어요. 그래서 이 장면은 바로 앞 35절 &ldquo;지혜는 자기의 모든 자녀로 인하여 옳다 함을 얻느니라&rdquo;의 실례로 읽혀요(WBC).</p>
       </section>
 
-      <section>
+      <section id="summary">
         <h2>정리하면</h2>
         <div class="scroller">
           <table>
