@@ -62,6 +62,9 @@
   .jump a:active{background-color:var(--accent-soft);border-color:var(--accent-ink)}
   .jump .no{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);color:var(--muted)}
   article > section[id]{scroll-margin-top:24px}
+  /* 본문 줄 길이: 섹션 바로 아래 문단이 본문 폭(1024px)을 다 써서 한 줄이 60자를 넘었다 → 약 40자로 */
+  article > section > p, article > section > ol, article > section > ul:not(.jump){max-width:40em}
+  article > section > ol{padding-inline-start:1.3em;display:flex;flex-direction:column;gap:10px}
   .sub-h{margin:8px 0 0;font-family:var(--display);font-size:var(--fs-h3);font-weight:var(--fw-h3);line-height:var(--lh-h3);color:var(--ink)}
 </style>
 <!--#HEAD-->
