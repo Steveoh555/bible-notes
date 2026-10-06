@@ -393,3 +393,5 @@ blockquote.src cite{color:var(--muted)}
 .tiles > .tile > .k, .tiles > .tile > .n{grid-column:1 / -1}
 .tiles > .tile > .v{grid-column:1}
 .tiles > .tile > .u{grid-column:2}
+/* 예외: 값이 숫자가 아니라 낱말이고 .u 가 따로 읽혀야 하는 칸은 class="tile stack" 으로 예전처럼 위아래로 둔다 */
+.tiles > .tile.stack{display:flex;flex-direction:column}
