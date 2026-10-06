@@ -63,8 +63,31 @@
   article > section > p, article > section > ol, article > section > ul:not(.jump){max-width:40em}
   article > section > ol{padding-inline-start:1.3em;display:flex;flex-direction:column;gap:10px}
   .sub-h{margin:8px 0 0;font-family:var(--display);font-size:var(--fs-h3);font-weight:var(--fw-h3);line-height:var(--lh-h3);color:var(--ink)}
-  #views .cards{grid-template-columns:minmax(0,1fr)}
-  @media (min-width:640px){ #views .cards{grid-template-columns:repeat(3,minmax(0,1fr))} }
+  /* 세 갈래: 누가가 보여 주는 순서 */
+  .views-lede{margin:6px 0 14px;max-width:40em;color:var(--ink-2)}
+  .lk-flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+  @media (min-width:760px){ .lk-flow{grid-template-columns:repeat(3,minmax(0,1fr));gap:30px} }
+  .lk-step{position:relative;display:flex;flex-direction:column;gap:8px;padding:18px 20px 20px;
+    background-color:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:var(--r-md)}
+  .lk-step:nth-child(2){border-top-color:var(--s2)}
+  .lk-step:nth-child(3){border-top-color:var(--s1)}
+  .lk-step:not(:last-child)::after{content:"↓";position:absolute;left:50%;bottom:-25px;transform:translateX(-50%);
+    font-family:var(--mono);font-size:var(--fs-h3);line-height:1;color:var(--muted)}
+  @media (min-width:760px){ .lk-step:not(:last-child)::after{content:"→";left:auto;right:-25px;bottom:auto;top:50%;transform:translateY(-50%)} }
+  .lk-where{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;padding:4px 10px 4px 4px;border-radius:var(--r-sm);
+    background-color:var(--accent-soft);color:var(--accent-ink);font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption)}
+  .lk-no{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background-color:var(--accent);color:var(--surface);font-weight:600}
+  .lk-view{font-family:var(--display);font-size:var(--fs-h3);font-weight:var(--fw-h3);line-height:var(--lh-h3);color:var(--ink)}
+  .lk-q{font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--muted)}
+  .lk-q::before{content:"묻는 것 · ";color:var(--ink-2)}
+  .lk-step p{margin:0;color:var(--ink-2);text-wrap:pretty}
+  .lk-step p b{color:var(--ink)}
+  .lk-sum{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;padding:14px 18px;
+    border-left:4px solid var(--accent);background-color:var(--accent-soft);border-radius:var(--r-sm)}
+  .lk-sum b{font-family:var(--display);font-size:var(--fs-h3);font-weight:var(--fw-h3);color:var(--accent-ink);white-space:nowrap}
+  .lk-sum span{color:var(--ink);text-wrap:pretty}
+  :root[data-theme="dark"] .lk-where, :root[data-theme="dark"] .lk-sum b{color:var(--accent)}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .lk-where, :root:not([data-theme="light"]) .lk-sum b{color:var(--accent)} }
 </style>
 <!--#HEAD-->
     <link rel="canonical" href="https://xn--289a0mi4h6svvsf8ov.kr/studies/luke-10-good-samaritan.html">
@@ -214,13 +237,29 @@
         <p>그렇다면 예수님은 불가능한 과제를 일부러 내밀어 율법교사를 은혜로 몰아가신 걸까요? 최근 학계의 견해는 <span class="nb">셋으로 갈려요.</span></p>
         <div id="views">
           <h3 class="sub-h">&ldquo;이를 행하라&rdquo;를 읽는 <span class="nb">세 갈래</span></h3>
-          <div class="cards">
-            <div class="hcard"><span class="gen">율법의 거울</span><span class="hname">깨닫게 하는 요구</span><p>요구는 참이지만 아무도 이루지 못해요. 그래서 은혜로 이끈다고 봐요. 모리스, 드루쉬(2020), 라이트(2022). 루터와 칼뱅 전통의 <span class="nb">&ldquo;율법의 제2용법&rdquo;이에요.</span></p></div>
-            <div class="hcard"><span class="gen">믿음의 열매</span><span class="hname">사랑으로 일하는 믿음</span><p>구원은 은혜로 믿음을 통해 받지만, 그 믿음은 사랑으로 일한다고 봐요. 스타인의 <span class="nb">견해예요.</span></p></div>
-            <div class="hcard"><span class="gen">언약 안의 순종</span><span class="hname">반어가 아닌 참말</span><p>&ldquo;예수가 불가능한 과제를 일부러 내민다는 암시는 서사에 없다&rdquo;고 봐요. 놀랜드(WBC), 데이비스(2025), <span class="nb">조다르(2020).</span></p></div>
-          </div>
+          <p class="views-lede">세 견해는 서로 싸우지 않아요. <b>각자 다른 질문에 답해요.</b> 그리고 누가는 이 셋을 <b>10장 → 18장 → 19장·사도행전</b> 순서로 직접 <span class="nb">보여 줘요.</span></p>
+          <ol class="lk-flow">
+            <li class="lk-step">
+              <span class="lk-where"><span class="lk-no">1</span>누가복음 10:28·37</span>
+              <span class="lk-view">언약 안의 순종</span>
+              <span class="lk-q">이 장면에서 &ldquo;행하라&rdquo;는 <span class="nb">무슨 뜻이었나?</span></span>
+              <p><b>반어가 아닌 참말이에요.</b> &ldquo;예수가 불가능한 과제를 일부러 내민다는 암시는 서사에 없다.&rdquo; 놀랜드(WBC), 데이비스(2025), <span class="nb">조다르(2020).</span></p>
+            </li>
+            <li class="lk-step">
+              <span class="lk-where"><span class="lk-no">2</span>누가복음 18:26–27</span>
+              <span class="lk-view">율법의 거울</span>
+              <span class="lk-q">이 요구는 구원 이야기에서 <span class="nb">어떤 구실을 하나?</span></span>
+              <p><b>아무도 이루지 못함을 드러내요.</b> &ldquo;누가 구원을 얻을 수 있나이까&rdquo; → &ldquo;하나님은 하실 수 있느니라.&rdquo; 모리스, 드루쉬(2020), 라이트(2022). 루터와 칼뱅 전통의 <span class="nb">&ldquo;율법의 제2용법&rdquo;이에요.</span></p>
+            </li>
+            <li class="lk-step">
+              <span class="lk-where"><span class="lk-no">3</span>누가 19:8–9 · 사도행전 16:33</span>
+              <span class="lk-view">믿음의 열매</span>
+              <span class="lk-q">구원받은 사람에게 이 명령은 <span class="nb">어떻게 적용되나?</span></span>
+              <p><b>은혜를 받은 사람이 자비를 행해요.</b> 삭개오의 나눔, 상처를 씻어 주는 간수. 믿음은 사랑으로 일한다는 스타인의 <span class="nb">견해예요.</span></p>
+            </li>
+          </ol>
+          <div class="lk-sum"><b>한 줄로 보면</b><span>요구는 참이다(10장) → 그러나 사람은 이루지 못한다(18장) → 은혜를 받은 사람이 그 요구를 살아 낸다(19장·사도행전)</span></div>
         </div>
-        <p>이 셋은 서로 싸우는 이론이라기보다 다른 질문에 답해요. 셋째는 &ldquo;28절이 이 장면에서 무슨 뜻이었나&rdquo;를, 첫째는 &ldquo;이 요구가 성경 전체의 구원 이야기에서 어떤 구실을 하나&rdquo;를, 둘째는 &ldquo;구원받은 사람에게 이 명령이 어떻게 적용되나&rdquo;를 말해요. 누가 자신이 10장에서 셋째를, 18:26–27에서 첫째의 결론을, 19장과 사도행전에서 둘째를 차례로 <span class="nb">보여 줘요.</span></p>
       </section>
 
       <section id="justify">
