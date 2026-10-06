@@ -385,3 +385,11 @@ blockquote.src cite{color:var(--muted)}
   .count{margin-inline-start:auto}
   .btn-more{width:100%;justify-content:center}
 }
+
+/* 숫자 칸: 큰 숫자(.v)와 단위(.u)를 한 줄에 붙인다 — "43회" (2026-10-06)
+   .tiles/.tile 본 모양은 페이지 <style> 에 있으므로, 배치만 여기서 덮어쓴다.
+   선택자를 '.tiles > .tile' 로 한 단계 높여 페이지 스타일보다 우선한다. */
+.tiles > .tile{display:grid;grid-template-columns:max-content minmax(0,1fr);column-gap:3px;align-items:baseline}
+.tiles > .tile > .k, .tiles > .tile > .n{grid-column:1 / -1}
+.tiles > .tile > .v{grid-column:1}
+.tiles > .tile > .u{grid-column:2}
