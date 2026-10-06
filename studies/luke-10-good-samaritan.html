@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141714" media="(prefers-color-scheme: dark)">
+<title>선을 행하면 영생을 얻을까 - 성경연구노트</title>
+<meta name="description" content="율법교사의 영생 질문과 선한 사마리아인 비유가 행함으로 구원받는다는 뜻인지를 헬라어 원문 집계, 레위기 18:5와 타르굼, 미쉬나, 누가복음 18장과 사도행전, 교부와 최근 논문으로 확인한 기록.">
+<meta name="study:scripture" content="누가복음 10:25-37">
+<meta name="study:tags" content="누가복음, 구원, 율법, 비유, 원어 연구, 교부">
+<meta name="study:kind" content="원문 파고들기">
+<meta name="study:hero" content="hero-samaritan.jpg">
+<meta name="study:hero-alt" content="해 질 녘 예루살렘에서 여리고로 내려가는 광야 길. 메마른 석회암 언덕 사이로 흰 흙길이 굽이져 내려가고, 길가에 작고 어두운 형체 하나가 쓰러져 있다. 멀리 요단 골짜기가 흐릿하다">
+<meta name="study:date" content="2026-10-06">
+<meta name="study:updated" content="2026-10-06">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../assets/site.css?v=defb704f">
+<script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+  /* 이 페이지 전용: 숫자 칸과 판정 표시 (luke-7-anointing 과 같은 구현) */
+  :root{ --s1:#008F80; --s2:#B2591F; --s0:#5F665F; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; } }
+  :root[data-theme="dark"]{ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; }
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+  .tile{background-color:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+    padding:20px;display:flex;flex-direction:column;gap:6px}
+  .tile .k{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);letter-spacing:.04em;color:var(--muted)}
+  .tile .v{font-family:var(--display);font-weight:var(--fw-h1);font-size:var(--fs-h1);line-height:1;
+    font-variant-numeric:tabular-nums}
+  .tile .u{font-size:var(--fs-body);font-weight:var(--fw-body);color:var(--ink-2)}
+  .tile .n{font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--muted);text-wrap:pretty}
+  .tile.a .v{color:var(--s1)} .tile.b .v{color:var(--s2)}
+
+  .verdict{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);white-space:nowrap}
+  .verdict.ok{color:var(--accent-ink)}
+  .verdict.no{color:var(--s2)}
+  .verdict.hold{color:var(--muted)}
+  :root[data-theme="dark"] .verdict.ok{color:var(--accent)}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .verdict.ok{color:var(--accent)} }
+
+  .gk{font-family:"Times New Roman",Tinos,"Liberation Serif","Noto Serif",serif;font-size:1.06em;letter-spacing:0}
+  .gk .note{font-family:var(--body)}
+  .tile .k .gk{font-size:1.12em;letter-spacing:0;color:var(--ink-2)}
+
+  .glance{display:flex;flex-direction:column;gap:18px}
+  .glance .rung .who{min-width:9.5em}
+  .jump{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .jump a{display:inline-flex;gap:6px;align-items:baseline;padding:6px 11px;border:1px solid var(--line);
+    border-radius:var(--r-sm);background-color:var(--surface);color:var(--ink);text-decoration:none;
+    transition:border-color 200ms var(--ease)}
+  .jump a:hover{background-color:var(--accent-soft);border-color:var(--accent)}
+  .jump a:active{background-color:var(--accent-soft);border-color:var(--accent-ink)}
+  .jump .no{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);color:var(--muted)}
+  article > section[id]{scroll-margin-top:24px}
+  article > section > p, article > section > ol, article > section > ul:not(.jump){max-width:40em}
+  article > section > ol{padding-inline-start:1.3em;display:flex;flex-direction:column;gap:10px}
+  .sub-h{margin:8px 0 0;font-family:var(--display);font-size:var(--fs-h3);font-weight:var(--fw-h3);line-height:var(--lh-h3);color:var(--ink)}
+  #views .cards{grid-template-columns:minmax(0,1fr)}
+  @media (min-width:640px){ #views .cards{grid-template-columns:repeat(3,minmax(0,1fr))} }
+</style>
+<!--#HEAD-->
+    <link rel="canonical" href="https://xn--289a0mi4h6svvsf8ov.kr/studies/luke-10-good-samaritan.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="성경연구노트">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:title" content="선을 행하면 영생을 얻을까">
+    <meta property="og:description" content="율법교사의 영생 질문과 선한 사마리아인 비유가 행함으로 구원받는다는 뜻인지를 헬라어 원문 집계, 레위기 18:5와 타르굼, 미쉬나, 누가복음 18장과 사도행전, 교부와 최근 논문으로 확인한 기록.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://xn--289a0mi4h6svvsf8ov.kr/assets/img/hero-samaritan.jpg">
+    <meta property="og:url" content="https://xn--289a0mi4h6svvsf8ov.kr/studies/luke-10-good-samaritan.html">
+    <meta name="twitter:image" content="https://xn--289a0mi4h6svvsf8ov.kr/assets/img/hero-samaritan.jpg">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "선을 행하면 영생을 얻을까", "description": "율법교사의 영생 질문과 선한 사마리아인 비유가 행함으로 구원받는다는 뜻인지를 헬라어 원문 집계, 레위기 18:5와 타르굼, 미쉬나, 누가복음 18장과 사도행전, 교부와 최근 논문으로 확인한 기록.", "datePublished": "2026-10-06", "dateModified": "2026-10-06", "inLanguage": "ko", "isPartOf": {"@type": "WebSite", "name": "성경연구노트"}, "mainEntityOfPage": "https://xn--289a0mi4h6svvsf8ov.kr/studies/luke-10-good-samaritan.html", "author": {"@type": "Person", "name": "노트지기"}, "keywords": "누가복음, 구원, 율법, 비유, 원어 연구, 교부"}</script>
+    <!--/#HEAD-->
+</head>
+<body>
+<!--#HEADER-->
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
+    <header class="site-head">
+      <div class="bar">
+        <a class="brand" href="../index.html">
+          <b>성경연구노트</b><span>1차 자료로 확인하는 성경 배경</span>
+        </a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="../index.html">자료 목록</a>
+          <a href="../about.html">소개</a>
+        </nav>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="화면 테마 바꾸기">자동</button>
+      </div>
+    </header>
+    <!--/#HEADER-->
+    <article id="main" class="wrap">
+      <header>
+        <!--#HERO-->
+    <figure class="hero-band">
+        <span class="frame"><img src="../assets/img/hero-samaritan.jpg" alt="해 질 녘 예루살렘에서 여리고로 내려가는 광야 길. 메마른 석회암 언덕 사이로 흰 흙길이 굽이져 내려가고, 길가에 작고 어두운 형체 하나가 쓰러져 있다. 멀리 요단 골짜기가 흐릿하다" width="1400" height="594" loading="eager" decoding="async"></span>
+        <figcaption>그림: 내용을 돕기 위한 AI 생성 삽화입니다.</figcaption>
+      </figure>
+    <!--/#HERO-->
+        <div class="eyebrow">누가복음 10:25–37</div>
+        <h1>선을 행하면 <span class="nb">영생을 얻을까</span></h1>
+        <p class="lede">한 율법교사가 예수님께 물었어요. &ldquo;내가 무엇을 하여야 영생을 얻으리이까?&rdquo; 예수님은 &ldquo;이를 행하라 그러면 살리라&rdquo;고 답하시고, 선한 사마리아인 이야기를 <span class="nb">들려주셨어요.</span> 그렇다면 이 본문은 선을 행해야 구원받는다고 <span class="nb">가르칠까요?</span></p>
+        <div class="stamp">📖 <b>누가복음 10:25–37</b> · 누가복음 18:18–30 · 레위기 18:5 · 사도행전 13장·16장과 <span class="nb">함께 읽음</span></div>
+      </header>
+
+      <section class="glance" aria-label="한눈에 보기">
+        <h2>한눈에 보기</h2>
+        <div class="ladder">
+          <div class="rung r2"><span class="who">영생과 구원은 다른가요?</span><span class="what">같은 것을 가리켜요. 누가는 18장에서 영생, 하나님 나라, 구원을 한 흐름으로 <span class="nb">바꿔 불러요.</span></span></div>
+          <div class="rung r2"><span class="who">그럼 무엇이 다른가요?</span><span class="what">얻는 길이에요. 질문이 &ldquo;무엇을 해 놓아야 상속합니까&rdquo;라는 <span class="nb">문장이에요.</span></span></div>
+          <div class="rung r3"><span class="who">&ldquo;행하라&rdquo;는 함정이었나요?</span><span class="what">아니에요. 율법이 약속한 참말이에요. 다만 비유가 그 요구를 원수 쪽까지 <span class="nb">넓혀요.</span></span></div>
+          <div class="rung r3"><span class="who">누가의 답은요?</span><span class="what">&ldquo;사람이 할 수 없는 것을 하나님은 하실 수 있느니라&rdquo;(18:27). 사도행전에서는 &ldquo;주 예수를 <span class="nb">믿으라&rdquo;예요.</span></span></div>
+        </div>
+        <ul class="jump" aria-label="차례">
+          <li><a href="#question"><span class="no">1</span>질문의 문장</a></li>
+          <li><a href="#life"><span class="no">2</span>영생과 구원</a></li>
+          <li><a href="#answer"><span class="no">3</span>행하라 그러면 살리라</a></li>
+          <li><a href="#justify"><span class="no">4</span>자기를 옳게</a></li>
+          <li><a href="#road"><span class="no">5</span>여리고 길</a></li>
+          <li><a href="#neighbor"><span class="no">6</span>누가 이웃인가</a></li>
+          <li><a href="#luke"><span class="no">7</span>누가의 답</a></li>
+          <li><a href="#order"><span class="no">8</span>구원과 자비의 순서</a></li>
+          <li><a href="#history"><span class="no">9</span>해석의 역사</a></li>
+          <li><a href="#summary"><span class="no">10</span>정리</a></li>
+        </ul>
+      </section>
+
+      <section id="question">
+        <h2>율법교사는 정확히 <span class="nb">무엇을 물었을까요?</span></h2>
+        <p class="sub">&ldquo;무엇을 <b>해 놓아야</b> 영생을 상속하겠습니까?&rdquo;예요. <span class="nb">행위가 수단으로</span> <span class="nb">놓인 질문이에요.</span></p>
+        <blockquote class="bible" data-ref="누가복음 10:25-26" data-version="개역개정">
+          <p>어떤 율법교사가 일어나 예수를 시험하여 이르되 선생님 내가 무엇을 하여야 영생을 얻으리이까 예수께서 이르시되 율법에 무엇이라 기록되었으며 네가 어떻게 읽느냐</p>
+          <cite>누가복음 10:25–26 · 개역개정</cite>
+        </blockquote>
+        <p>개역개정의 &ldquo;무엇을 하여야&rdquo;는 원문으로 &ldquo;무엇을 해 놓고서&rdquo;(<span class="gk">τί ποιήσας</span>)예요. 부정과거 분사라서, 영생을 받기 <b>전에</b> 끝나 있어야 할 행위를 묻는 꼴이에요. 마가와 마태는 같은 질문을 다르게 적었어요. 누가만 이 분사 문장을 쓰고, 그것도 두 번 <span class="nb">써요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>&ldquo;영생&rdquo; 질문의 <span class="nb">세 가지 문장</span></caption>
+            <thead><tr><th scope="col">본문</th><th scope="col">원문 · 사역</th></tr></thead>
+            <tbody>
+              <tr><td>마가 10:17</td><td class="gk">τί ποιήσω ἵνα ζωὴν αἰώνιον κληρονομήσω; <span class="note">무엇을 하리이까, 영생을 상속하도록</span></td></tr>
+              <tr><td>마태 19:16</td><td class="gk">τί ἀγαθὸν ποιήσω ἵνα σχῶ ζωὴν αἰώνιον; <span class="note">무슨 선한 일을 하리이까, 영생을 가지도록</span></td></tr>
+              <tr><td><b>누가 10:25 · 18:18</b></td><td class="gk"><b>τί ποιήσας ζωὴν αἰώνιον κληρονομήσω;</b> <span class="note">무엇을 해 놓고서 영생을 상속하리이까</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>&ldquo;얻다&rdquo;로 옮긴 동사도 눈여겨볼 만해요. 원문은 &ldquo;상속하다&rdquo;(<span class="gk">κληρονομέω</span>)예요. 상속은 해 놓은 일의 대가로 받는 것이 아니에요. 누구의 자녀인가로 정해져요. 바울도 &ldquo;아들이면 하나님으로 말미암아 유업을 받을 자&rdquo;라고 써요(갈라디아서 4:7). &ldquo;무엇을 해 놓아야 상속하느냐&rdquo;는 질문 안에 이미 어긋남이 들어 있는 셈이에요. 다만 이것은 문법에서 나온 관찰이에요. 누가가 이 어긋남을 노렸다고 단정할 근거는 <span class="nb">없어요.</span></p>
+        <div class="tip">
+          <strong>&ldquo;시험하여&rdquo;라는 <span class="nb">동사</span></strong>
+          <p>&ldquo;시험하다&rdquo;(<span class="gk">ἐκπειράζω</span>)는 신약에 네 번 나와요. 누가복음의 다른 한 번은 광야에서 예수님이 마귀에게 &ldquo;주 너의 하나님을 시험하지 말라&rdquo;(신명기 6:16)고 하신 말씀이에요(4:12). 율법교사는 신명기 6장의 사랑 계명을 외우면서, 같은 장이 금한 동사로 다가와요. 우연일 수도 있는 어휘 일치라 <span class="nb">울림 정도로만</span> <span class="nb">봐요.</span></p>
+        </div>
+      </section>
+
+      <section id="life">
+        <h2>율법교사의 &ldquo;영생&rdquo;과 우리가 말하는 &ldquo;구원&rdquo;은 <span class="nb">같은 것일까요?</span></h2>
+        <p class="sub"><span class="nb">가리키는 것은</span> 같아요. <span class="nb">다른 것은</span> <span class="nb">얻는 길이에요.</span></p>
+        <p>&ldquo;영생&rdquo;(<span class="gk">ζωὴ αἰώνιος</span>)이라는 말은 다니엘 12:2에서 처음 나와요. 히브리어로 &ldquo;영원한 생명&rdquo;(<span class="he">חַיֵּי עוֹלָם</span>, 하예 올람)이고, 땅의 티끌 가운데서 자는 자들이 깨어나 얻는 삶이에요. 마카베오하 7:9와 솔로몬의 시편 3:12도 영생을 부활과 함께 말해요. 율법교사가 물은 것은 죽은 뒤 막연히 사는 것이 아니에요. 오는 세대, 하나님 나라에서 누릴 <span class="nb">삶이에요.</span></p>
+        <div class="tiles">
+          <div class="tile a"><span class="k">영생 <span class="gk">ζωὴ αἰώνιος</span></span><span class="v">43</span><span class="u">회</span><span class="n">신약 전체. 요한복음 17, 요한1서 6, 누가-행전 <span class="nb">5</span></span></div>
+          <div class="tile"><span class="k">&ldquo;영생을 상속하다&rdquo;</span><span class="v">4</span><span class="u">회</span><span class="n">마 19:29, 막 10:17, 눅 10:25, <span class="nb">눅 18:18</span></span></div>
+          <div class="tile b"><span class="k"><span class="gk">τί ποιήσας</span> 질문</span><span class="v">2</span><span class="u">회</span><span class="n">눅 10:25와 18:18뿐. 신약에 <span class="nb">다른 예는 없어요</span></span></div>
+        </div>
+        <p>누가 자신이 이 둘을 같은 것으로 다뤄요. 18장에서 한 관리가 율법교사와 글자까지 같은 질문을 해요(18:18). 그 단락 안에서 누가는 &ldquo;영생을 상속함&rdquo;을 &ldquo;하나님 나라에 들어감&rdquo;(18:24–25), &ldquo;구원을 얻음&rdquo;(18:26), &ldquo;오는 세상에 영생을 받음&rdquo;(18:30)으로 바꿔 <span class="nb">불러요.</span> 네 표현이 한 대화 안에서 오가요. 그러니 &ldquo;율법교사의 영생은 우리의 구원과 다른 것&rdquo;이라고 풀면 본문과 맞지 <span class="nb">않아요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>율법교사의 질문과 교회의 고백, <span class="nb">그리고 누가의 답</span></caption>
+            <thead><tr><th scope="col"></th><th scope="col">율법교사 (10:25)</th><th scope="col">교회의 고백</th><th scope="col">누가가 적은 답</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">무엇을</th><td>오는 세대의 생명</td><td>죄 사함·칭의·영생·부활</td><td>영생 = 하나님 나라 = 구원 <span class="alt">18:24–30</span></td></tr>
+              <tr><th scope="row">누가</th><td>&ldquo;내가&rdquo; 해 놓고서</td><td>하나님이 주심</td><td>&ldquo;하나님은 하실 수 있느니라&rdquo; <span class="alt">18:27</span></td></tr>
+              <tr><th scope="row">어떻게</th><td>행함 (<span class="gk">ποιήσας</span>)</td><td>그리스도를 믿음</td><td>&ldquo;주 예수를 믿으라&rdquo; <span class="alt">행 16:31</span></td></tr>
+              <tr><th scope="row">행함은</th><td>조건</td><td>열매</td><td>사랑은 용서의 증거 <span class="alt">7:47</span></td></tr>
+              <tr><th scope="row">이웃은</th><td>경계를 묻는다</td><td>원수까지</td><td>이웃은 &ldquo;되는&rdquo; 것 <span class="alt">10:36</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="answer">
+        <h2>&ldquo;이를 행하라 그러면 살리라&rdquo;는 <span class="nb">함정이었을까요?</span></h2>
+        <p class="sub">아니에요. 율법이 <span class="nb">실제로 약속한</span> <span class="nb">말이에요.</span></p>
+        <blockquote class="bible" data-ref="누가복음 10:28-29" data-version="개역개정">
+          <p>예수께서 이르시되 네 대답이 옳도다 이를 행하라 그러면 살리라 하시니 그 사람이 자기를 옳게 보이려고 예수께 여짜오되 그러면 내 이웃이 누구니이까</p>
+          <cite>누가복음 10:28–29 · 개역개정</cite>
+        </blockquote>
+        <p>율법교사의 답은 신명기 6:5(하나님 사랑)와 레위기 19:18(이웃 사랑)을 묶은 것이었어요. 틀린 답이 아니었어요. 랍비 아키바도 레위기 19:18을 &ldquo;토라의 큰 원칙&rdquo;이라 했고(시프라 케도쉼 4:12), 힐렐도 황금률 하나를 &ldquo;토라 전체&rdquo;라 했어요(바빌론 탈무드 샤바트 31a). 예수님은 &ldquo;네 대답이 옳도다&rdquo; 하고 <span class="nb">인정하세요.</span></p>
+        <p>이어지는 &ldquo;이를 행하라 그러면 살리라&rdquo;는 레위기 18:5의 메아리예요. 그대로 옮긴 인용은 아니고, &ldquo;행하다&rdquo;와 &ldquo;살다&rdquo; 두 동사가 <span class="nb">겹쳐요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>레위기 18:5와 그 <span class="nb">메아리들</span></caption>
+            <thead><tr><th scope="col">본문</th><th scope="col">원문 · 사역</th><th scope="col">쓰임</th></tr></thead>
+            <tbody>
+              <tr><td>레위기 18:5 (70인역)</td><td class="gk">ἃ ποιήσας ἄνθρωπος ζήσεται ἐν αὐτοῖς <span class="note">사람이 그것들을 행하면 그것들로 살리라</span></td><td>율법의 약속</td></tr>
+              <tr><td>느헤미야 9:29 (70인역)</td><td class="gk">ἃ ποιήσας αὐτὰ ἄνθρωπος ζήσεται ἐν αὐτοῖς <span class="note">위와 같다</span></td><td>지키지 못한 역사의 회고</td></tr>
+              <tr><td><b>누가복음 10:28</b></td><td class="gk"><b>τοῦτο ποίει καὶ ζήσῃ</b> <span class="note">이것을 계속 행하라, 그러면 살리라</span></td><td>율법교사에게</td></tr>
+              <tr><td>로마서 10:5</td><td class="gk">ὁ ποιήσας ἄνθρωπος ζήσεται ἐν αὐτῇ <span class="note">행하는 사람은 그것으로 살리라</span></td><td>&ldquo;율법에서 난 의&rdquo;</td></tr>
+              <tr><td>갈라디아서 3:12</td><td class="gk">Ὁ ποιήσας αὐτὰ ζήσεται ἐν αὐτοῖς <span class="note">그것들을 행하는 자는 그것들로 살리라</span></td><td>&ldquo;율법은 믿음에서 난 것이 아니니&rdquo;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>&ldquo;행하라&rdquo;(<span class="gk">ποίει</span>)는 현재 명령형이에요. 한 번 선을 베풀라는 뜻이 아니라, 하나님을 온 존재로 사랑하고 이웃을 자기 몸처럼 사랑하는 삶을 <b>계속</b> 살라는 <span class="nb">뜻이에요.</span></p>
+        <p>그 시대 유대인도 이 구절을 영생과 이어 읽었어요. 아람어 번역인 타르굼 옹켈로스는 레위기 18:5의 &ldquo;살리라&rdquo;에 &ldquo;영원한 생명으로&rdquo;(<span class="he">לְחַיֵּי עָלְמָא</span>)를 덧붙여요. 위-요나단 타르굼은 &ldquo;영원한 생명 안에서 살고 그의 몫이 의인들과 함께 있으리라&rdquo;까지 <span class="nb">써요.</span> 율법교사가 영생을 묻자 예수님이 레위기 18:5로 답하신 것은 이 읽기와 정확히 맞물려요. 다만 두 타르굼의 지금 모양은 1세기보다 늦게 굳은 <span class="nb">것이에요.</span></p>
+        <div class="tip">
+          <strong>모든 랍비가 그렇게 <span class="nb">읽지는 않았어요</span></strong>
+          <p>시프라(레위기 랍비 주석)는 같은 구절에서 영생을 끌어내지 않아요. 대신 &ldquo;이스라엘&rdquo;이 아니라 &ldquo;사람&rdquo;이라고 했으니 토라를 행하는 이방인도 대제사장과 같다고 풀고, &ldquo;그것으로 살 것이요 그것으로 죽지 말 것이라&rdquo;고 읽어요(아하레이 모트 13:12–13). 레위기 18:5를 &ldquo;영생의 조건&rdquo;으로 읽은 것은 유대 전통 <span class="nb">가운데 한 갈래였어요.</span></p>
+        </div>
+        <p>그렇다면 예수님은 불가능한 과제를 일부러 내밀어 율법교사를 은혜로 몰아가신 걸까요? 최근 학계의 견해는 <span class="nb">셋으로 갈려요.</span></p>
+        <div id="views">
+          <h3 class="sub-h">&ldquo;이를 행하라&rdquo;를 읽는 <span class="nb">세 갈래</span></h3>
+          <div class="cards">
+            <div class="hcard"><span class="gen">율법의 거울</span><span class="hname">깨닫게 하는 요구</span><p>요구는 참이지만 아무도 이루지 못해요. 그래서 은혜로 이끈다고 봐요. 모리스, 드루쉬(2020), 라이트(2022). 루터와 칼뱅 전통의 <span class="nb">&ldquo;율법의 제2용법&rdquo;이에요.</span></p></div>
+            <div class="hcard"><span class="gen">믿음의 열매</span><span class="hname">사랑으로 일하는 믿음</span><p>구원은 은혜로 믿음을 통해 받지만, 그 믿음은 사랑으로 일한다고 봐요. 스타인의 <span class="nb">견해예요.</span></p></div>
+            <div class="hcard"><span class="gen">언약 안의 순종</span><span class="hname">반어가 아닌 참말</span><p>&ldquo;예수가 불가능한 과제를 일부러 내민다는 암시는 서사에 없다&rdquo;고 봐요. 놀랜드(WBC), 데이비스(2025), <span class="nb">조다르(2020).</span></p></div>
+          </div>
+        </div>
+        <p>이 셋은 서로 싸우는 이론이라기보다 다른 질문에 답해요. 셋째는 &ldquo;28절이 이 장면에서 무슨 뜻이었나&rdquo;를, 첫째는 &ldquo;이 요구가 성경 전체의 구원 이야기에서 어떤 구실을 하나&rdquo;를, 둘째는 &ldquo;구원받은 사람에게 이 명령이 어떻게 적용되나&rdquo;를 말해요. 누가 자신이 10장에서 셋째를, 18:26–27에서 첫째의 결론을, 19장과 사도행전에서 둘째를 차례로 <span class="nb">보여 줘요.</span></p>
+      </section>
+
+      <section id="justify">
+        <h2>&ldquo;자기를 옳게 보이려고&rdquo;는 <span class="nb">무슨 뜻일까요?</span></h2>
+        <p class="sub">본문이 짚은 문제는 행함이 아니라 <span class="nb">스스로 옳다 하는</span> <span class="nb">태도예요.</span></p>
+        <p>29절의 &ldquo;자기를 옳게 보이려고&rdquo;는 원문으로 &ldquo;자기를 의롭다 하려고&rdquo;(<span class="gk">δικαιῶσαι ἑαυτόν</span>)예요. &ldquo;의롭다 하다&rdquo;(<span class="gk">δικαιόω</span>)는 누가복음에 다섯 번 나와요. 다섯 번을 다 놓고 보면 방향이 <span class="nb">뚜렷해요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>누가복음의 &ldquo;의롭다 하다&rdquo; <span class="nb">다섯 번</span></caption>
+            <thead><tr><th scope="col">본문</th><th scope="col">누가 누구를</th><th scope="col">평가</th></tr></thead>
+            <tbody>
+              <tr><td>7:29</td><td>백성과 세리들이 <b>하나님</b>을 의롭다 함</td><td>긍정 <span class="alt">요한의 세례를 받음</span></td></tr>
+              <tr><td>7:35</td><td>지혜가 자녀들로 인해 의롭다 함을 받음</td><td>긍정</td></tr>
+              <tr><td><b>10:29</b></td><td>율법교사가 <b>자기</b>를</td><td>드러남</td></tr>
+              <tr><td><b>16:15</b></td><td>바리새인들이 사람 앞에서 <b>자기</b>를</td><td>책망 <span class="alt">&ldquo;하나님은 너희 마음을 아신다&rdquo;</span></td></tr>
+              <tr><td><b>18:14</b></td><td>세리가 의롭다 함을 <b>받음</b> <span class="gk">δεδικαιωμένος</span></td><td>긍정 <span class="alt">자기를 낮춘 자</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>누가복음에서 자기를 스스로 옳다 하는 사람은 늘 드러나거나 책망받아요. 의롭다 함을 <b>받는</b> 사람은 &ldquo;하나님이여 불쌍히 여기소서&rdquo;라고 한 세리예요. 18:9은 그 비유를 들은 사람들을 &ldquo;스스로 의롭다고 믿고 다른 이들을 멸시하는 자들&rdquo;이라고 <span class="nb">불러요.</span></p>
+        <p>루터교 학자 헐트그렌은 이 동사가 예수님의 비유에서 누가복음에만, 10:29와 18:14 두 번 나온다는 점에 주목해요. 누가와 바울의 직접 관계는 논쟁거리라고 단서를 달면서도, 바울의 영향인지 묻지 않을 수 없다고 써요. 그렇지 않다면 칭의는 바울 이전에 예수님의 가르침에 뿌리를 두었다는 <span class="nb">뜻이 된다고요.</span></p>
+        <p>그러니 29절의 &ldquo;내 이웃이 누구니이까&rdquo;는 순수한 궁금증이 아니에요. 사랑의 의무를 감당할 만한 크기로 줄이려는 질문이에요. 사회정체성 이론으로 이 비유를 읽은 에슬러는 이 질문을 &ldquo;우리 유대인이 누구를 이웃으로 대할 의무가 있고 누구는 아닌가&rdquo;를 묻는 &ldquo;배제형 경계 질문&rdquo;이라고 <span class="nb">불렀어요.</span></p>
+      </section>
+
+      <section id="road">
+        <h2>여리고 길에서는 무슨 일이 <span class="nb">있었을까요?</span></h2>
+        <p class="sub">예상된 도움은 지나갔고, 예상하지 못한 사람이 <span class="nb">멈췄어요.</span></p>
+        <blockquote class="bible" data-ref="누가복음 10:30" data-version="개역개정">
+          <p>예수께서 대답하여 이르시되 어떤 사람이 예루살렘에서 여리고로 내려가다가 강도를 만나매 강도들이 그 옷을 벗기고 때려 거의 죽은 것을 버리고 갔더라</p>
+          <cite>누가복음 10:30 · 개역개정</cite>
+        </blockquote>
+        <p>예루살렘 성전산은 해발 약 740m, 여리고는 해발 약 −258m예요. 직선으로 22km 남짓한 거리에서 1,000m 가까이 내려가는 길이라 &ldquo;내려가다&rdquo;는 말 그대로예요. &ldquo;거의 죽은&rdquo;(<span class="gk">ἡμιθανής</span>)은 신약에서 여기 한 번만 나와요. 지나가는 사람이 살았는지 죽었는지 가늠하기 어려운 <span class="nb">상태예요.</span></p>
+        <p>제사장과 레위인은 &ldquo;보고 피하여 지나갔다&rdquo;(<span class="gk">ἰδὼν ἀντιπαρῆλθεν</span>)고 해요. &ldquo;피하여 지나가다&rdquo;는 신약에서 이 두 절(31·32절)에만 나오는 <span class="nb">낱말이에요.</span></p>
+        <h3 class="sub-h">제사장은 정결 규정 때문에 <span class="nb">지나쳤을까요?</span></h3>
+        <p>설교에서 자주 듣는 설명이에요. 성전에서 섬겨야 하니 시체에 닿아 부정해질 수 없었다는 거예요. 1차 자료로 확인해 보면 이 설명은 <span class="nb">약해요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>&ldquo;정결 때문에 지나쳤다&rdquo; — <span class="nb">근거 판정</span></caption>
+            <thead><tr><th scope="col">근거로 드는 것</th><th scope="col">실제 내용</th><th scope="col">판정</th></tr></thead>
+            <tbody>
+              <tr><td>제사장은 친족 외의 시체로 부정해지면 안 된다(레 21:1–3)</td><td>규정은 실제로 있다. 대제사장은 부모로도 부정해지지 말라(21:11)</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>제사장은 성전으로 가는 길이었다</td><td>본문은 &ldquo;내려가다가&rdquo;(<span class="gk">κατέβαινεν</span>, 31절). 예루살렘에서 여리고 쪽, 성전 반대 방향이다</td><td><span class="verdict no">반증</span></td></tr>
+              <tr><td>여리고에 제사장이 많이 살았다</td><td>&ldquo;제사장 반열의 절반은 여리고에서 올라왔다&rdquo;(바빌론 탈무드 타아니트 27a). 근무를 마치고 돌아가는 길이었을 수 있다</td><td><span class="verdict ok">확인</span> <span class="alt">후대 자료</span></td></tr>
+              <tr><td>시체를 만지면 안 되니 어쩔 수 없었다</td><td>미쉬나 나지르 7:1 — 대제사장과 나실인도 <b>길에서</b> 버려진 시신을 만나면 부정을 감수하고 장사해야 한다</td><td><span class="verdict no">반증</span> <span class="alt">200년경 규정</span></td></tr>
+              <tr><td>레위인도 같은 이유였다</td><td>레위기 21장의 시체 규정은 제사장 규정이다</td><td><span class="verdict no">반증</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>무엇보다 누가는 두 사람이 왜 지나쳤는지 한 마디도 적지 않아요. 정결 규정 설명은 본문 밖에서 들여온 추측이에요. 놀랜드도 제사장이 이웃 사랑의 범위를 두고 고민했다고 생각하면 안 된다고 봐요. 이야기의 극적 구조는 &ldquo;기대한 도움이 실패한 뒤 예기치 않은 도움이 온다&rdquo;는 <span class="nb">데 있어요.</span></p>
+        <blockquote class="bible" data-ref="누가복음 10:33" data-version="개역개정">
+          <p>어떤 사마리아 사람은 여행하는 중 거기 이르러 그를 보고 불쌍히 여겨</p>
+          <cite>누가복음 10:33 · 개역개정</cite>
+        </blockquote>
+        <!--#PLATE:plate-samaritan.jpg-->
+      <figure class="plate ai">
+        <img src="../assets/img/plate-samaritan.jpg" alt="광야 돌길 위에 쓰러진 사람 곁에 회갈색 겉옷을 입은 나그네가 등을 보인 채 무릎을 꿇고 상처를 싸매는 그림. 옆에 짐을 실은 나귀가 서 있고 흙병이 놓여 있다. 길 저편으로 두 사람이 등을 보이며 멀어져 간다" width="1200" height="674" loading="lazy" decoding="async">
+        <figcaption>그림: 내용을 돕기 위한 AI 생성 삽화입니다.</figcaption>
+      </figure>
+      <!--/#PLATE-->
+        <h3 class="sub-h">사마리아인은 청중에게 <span class="nb">어떤 이름이었을까요?</span></h3>
+        <div class="scroller">
+          <table>
+            <caption>유대인과 사마리아인 사이를 <span class="nb">보여 주는 자료</span></caption>
+            <thead><tr><th scope="col">자료</th><th scope="col">내용</th><th scope="col">때</th></tr></thead>
+            <tbody>
+              <tr><td>집회서 50:25–26</td><td>&ldquo;내 영혼이 미워하는 두 민족 … 세겜에 사는 어리석은 백성&rdquo;</td><td>기원전 2세기</td></tr>
+              <tr><td>요세푸스 『유대 고대사』 18.29–30</td><td>유월절에 사마리아인들이 성전 회랑에 사람의 뼈를 뿌려 성전 출입이 막힘</td><td>6–9년</td></tr>
+              <tr><td>요세푸스 『유대 고대사』 20.118–136</td><td>명절에 사마리아를 지나던 갈릴리 순례자들이 살해됨. 『유대 전쟁사』 2.232는 한 사람이라고 적어 <span class="nb">서로 다르다</span></td><td>50년대 <span class="alt">예수님 이후</span></td></tr>
+              <tr><td>미쉬나 쉐비이트 8:10</td><td>&ldquo;사마리아인의 떡을 먹는 자는 돼지고기를 먹는 자와 같다&rdquo;는 랍비 엘리에제르 전승. 아키바가 &ldquo;조용하라&rdquo;며 막음</td><td>200년경 편집</td></tr>
+              <tr><td>요한복음 4:9 · 8:48</td><td>&ldquo;유대인은 사마리아인과 상종하지 아니함이러라&rdquo; · 예수님께 &ldquo;너는 사마리아 사람이라&rdquo;</td><td>1세기</td></tr>
+              <tr><td><b>누가복음 9:52–56</b></td><td>바로 앞 장에서 사마리아 마을이 예수님을 받아들이지 않음. 제자들이 &ldquo;불을 내려 멸하라 하기를&rdquo; 원함</td><td>본문 바로 앞</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>누가복음 독자의 기억 속에서 바로 전에 나온 사마리아인은 예수님을 거절한 마을 사람들이에요. 비유의 충격은 거기서 <span class="nb">나와요.</span></p>
+        <div class="tip">
+          <strong>반대 의견도 <span class="nb">있어요</span></strong>
+          <p>라이언(2021)은 유대인과 사마리아인이 서로를 원수로 여겼다면 누가가 비유 안에서 독자의 주의를 그쪽으로 끌었을 것이라고 봐요. 제사장의 성전행이나 정결 고려도 본문에 없다고 지적해요. 정결 부분은 위 판정과 같아요. 원수 관계는 일부만 받아들일 만해요. 비유 본문은 적대를 말하지 않지만, 누가는 9:52–56과 17:18(&ldquo;이 이방인&rdquo;)에서 이미 그 거리를 보여 줬어요. 그래서 이 페이지는 &ldquo;원수&rdquo;라는 낱말 대신 누가가 쓴 표현을 <span class="nb">따라가요.</span></p>
+        </div>
+      </section>
+
+      <section id="neighbor">
+        <h2>누가 이웃이 <span class="nb">되었을까요?</span></h2>
+        <p class="sub">질문이 뒤집혀요. &ldquo;누가 내 이웃인가&rdquo;에서 &ldquo;누가 이웃이 <span class="nb">되었는가&rdquo;로요.</span></p>
+        <blockquote class="bible" data-ref="누가복음 10:36-37" data-version="개역개정">
+          <p>네 생각에는 이 세 사람 중에 누가 강도 만난 자의 이웃이 되겠느냐 이르되 자비를 베푼 자니이다 예수께서 이르시되 가서 너도 이와 같이 하라 하시니라</p>
+          <cite>누가복음 10:36–37 · 개역개정</cite>
+        </blockquote>
+        <div class="ladder">
+          <div class="rung r2"><span class="who">29절</span><span class="what">&ldquo;<b>내</b> 이웃이 누구입니까?&rdquo; 이웃은 내가 사랑할 <b>대상</b>이고, 질문은 그 <span class="nb">경계를 물어요.</span></span></div>
+          <div class="rung r3"><span class="who">36절</span><span class="what">&ldquo;누가 강도 만난 자의 이웃이 <b>되었느냐</b>?&rdquo;(<span class="gk">γεγονέναι</span>, 완료형) 이웃은 사랑하는 <b>사람</b>이고, 자비를 행한 자가 <span class="nb">이웃이 돼요.</span></span></div>
+        </div>
+        <p>독일 학자 치머만은 이 뒤집힘을 비유의 핵심으로 봐요. 이웃은 내 사랑의 대상이 아니라 &ldquo;나 자신이 이웃이 되어야 할 주체&rdquo;라는 거예요. 개역개정은 36절을 &ldquo;되겠느냐&rdquo;로 옮겼지만, 원문의 완료형은 사마리아인이 자비를 행해서 이미 이웃이 <span class="nb">되었다는 뜻이에요.</span></p>
+        <p>37절에서 율법교사는 &ldquo;사마리아인&rdquo;이라는 이름을 말하지 않아요. &ldquo;자비를 베푼 자&rdquo;라고 행위로 답해요. 헐트그렌은 이것을 &ldquo;피해 가는 에두른 표현&rdquo;이라 불러요. 다만 왜 이름을 피했는지는 본문이 말하지 <span class="nb">않아요.</span></p>
+        <h3 class="sub-h">&ldquo;불쌍히 여기다&rdquo;와 &ldquo;자비&rdquo;는 <span class="nb">누구의 낱말일까요?</span></h3>
+        <div class="tiles">
+          <div class="tile a"><span class="k">불쌍히 여기다 <span class="gk">σπλαγχνίζομαι</span></span><span class="v">11</span><span class="u">회</span><span class="n">비유 밖에서는 전부 예수님이에요. 비유 안에서는 탕감하는 왕, 사마리아인, <span class="nb">탕자의 아버지</span></span></div>
+          <div class="tile b"><span class="k">자비 <span class="gk">ἔλεος</span> · 누가복음</span><span class="v">6</span><span class="u">회</span><span class="n">1장의 다섯은 모두 하나님의 자비예요. 사람이 주어인 곳은 <span class="nb">10:37 하나뿐</span></span></div>
+        </div>
+        <p>누가복음에서 &ldquo;불쌍히 여기다&rdquo;는 세 번 나와요. 나인 성 과부를 보신 예수님(7:13), 사마리아인(10:33), 돌아오는 아들을 본 아버지(15:20)예요. 15장에서 아버지가 불쌍히 여긴 결과 아들은 &ldquo;죽었다가 살아났다&rdquo;(15:24)고 해요. 10:28의 &ldquo;살리라&rdquo;와 같은 동사(<span class="gk">ζάω</span>)예요. 그 &ldquo;삶&rdquo;은 아들이 해 놓은 일이 아니라 아버지의 자비에서 <span class="nb">왔어요.</span></p>
+        <p>&ldquo;자비&rdquo;도 같은 방향이에요. 사가랴는 하나님이 &ldquo;우리 조상에게 긍휼을 베푸셨다&rdquo;고 노래해요(1:72). 원문은 <span class="gk">ποιῆσαι ἔλεος μετὰ τῶν πατέρων ἡμῶν</span>이에요. 37절 &ldquo;자비를 베푼 자&rdquo;는 <span class="gk">ὁ ποιήσας τὸ ἔλεος μετ’ αὐτοῦ</span>예요. 동사와 목적어와 전치사까지 같은 구문이에요. 사마리아인은 1장에서 하나님이 하신 일을 길 위에서 <span class="nb">한 사람이에요.</span></p>
+      </section>
+
+      <section id="luke">
+        <h2>누가는 이 질문에 <span class="nb">어디서 답할까요?</span></h2>
+        <p class="sub">18장과 사도행전에서요. 같은 저자가 이 질문을 <span class="nb">두 권에 걸쳐</span> <span class="nb">따라가요.</span></p>
+        <p>10장의 율법교사는 대답 없이 장면에서 사라져요. 누가는 같은 질문을 18장에서 다시 꺼내요. 관리는 어려서부터 계명을 다 지켰다고 말하고, 예수님은 &ldquo;아직도 한 가지 부족하니&rdquo; 가진 것을 다 팔고 나를 따르라고 하세요. 그는 근심하며 남고, 듣던 사람들이 <span class="nb">물어요.</span></p>
+        <blockquote class="bible" data-ref="누가복음 18:26-27" data-version="개역개정">
+          <p>듣는 자들이 이르되 그런즉 누가 구원을 얻을 수 있나이까 이르시되 무릇 사람이 할 수 없는 것을 하나님은 하실 수 있느니라</p>
+          <cite>누가복음 18:26–27 · 개역개정</cite>
+        </blockquote>
+        <p>요구를 진지하게 받을수록 결론은 여기로 와요. 사람이 해 놓아서 얻는 것이 아니라 하나님이 하시는 일이에요. 누가는 &ldquo;무엇을 하여야&rdquo;라는 질문을 여러 번 기록하고, 묻는 사람과 때에 따라 다른 답을 <span class="nb">적어 둬요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>누가-행전의 &ldquo;무엇을 <span class="nb">하여야&rdquo; 질문들</span></caption>
+            <thead><tr><th scope="col">본문</th><th scope="col">묻는 사람</th><th scope="col">답</th></tr></thead>
+            <tbody>
+              <tr><td>누가 3:10–14</td><td>무리·세리·군인</td><td>나누고, 정한 것 이상 받지 말라 (요한)</td></tr>
+              <tr><td><b>누가 10:25</b></td><td>율법교사</td><td>율법의 사랑 계명 → 비유</td></tr>
+              <tr><td><b>누가 18:18</b></td><td>관리</td><td>계명 → 다 팔고 나를 따르라 → &ldquo;하나님은 하실 수 있다&rdquo;</td></tr>
+              <tr><td>사도행전 2:37</td><td>오순절 청중</td><td>회개하고 예수 그리스도의 이름으로 세례를 받으라, 죄 사함</td></tr>
+              <tr><td><b>사도행전 16:30</b></td><td>빌립보 간수</td><td>&ldquo;주 예수를 믿으라 그리하면 너와 네 집이 구원을 받으리라&rdquo;(16:31)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>십자가와 부활 이전, 율법 전문가에게는 율법의 답이 주어져요. 이후에는 &ldquo;믿으라&rdquo;가 주어져요. 누가는 사도행전 13장에서 이 흐름을 한 문장으로 정리해요. 모세의 율법으로 의롭다 하심을 얻지 못하던 모든 일에서, 믿는 사람은 누구나 그분 안에서 의롭다 하심을 얻는다는 거예요(사도행전 13:38–39). 10:29의 &ldquo;의롭다 하다&rdquo;와 같은 동사예요. 이 배치는 두 권을 이어 읽을 때 보이는 흐름이고, 누가가 그렇게 설명한 문장이 따로 있는 것은 <span class="nb">아니에요.</span></p>
+        <h3 class="sub-h">비유 바로 뒤에 <span class="nb">마리아가 있어요</span></h3>
+        <p>누가는 비유 다음 장면에 마르다와 마리아 이야기를 둬요(10:38–42). 마리아는 &ldquo;주의 발아래 앉아 그의 말씀을 듣고&rdquo; 있었고, 예수님은 마리아가 &ldquo;좋은 편&rdquo;을 택했다고 하세요. &ldquo;행하라&rdquo;로 끝나는 단락 바로 뒤에 &ldquo;듣는&rdquo; 사람을 둔 거예요. 놀랜드는 25–42절 전체를 하나님 사랑을 예수님의 말씀에 대한 순종과 잇는 흐름으로 <span class="nb">읽어요.</span></p>
+        <!--#PLATE:plate-mary.jpg-->
+      <figure class="plate ai">
+        <img src="../assets/img/plate-mary.jpg" alt="돌집 안에서 머릿수건을 쓴 여자가 등을 보이며 바닥에 앉아, 낮은 돌 위에 고개를 숙이고 앉은 선생의 말을 듣는 그림. 오른쪽 부엌에서는 다른 여자가 항아리와 빵 앞에서 일하고 있다" width="1200" height="674" loading="lazy" decoding="async">
+        <figcaption>그림: 내용을 돕기 위한 AI 생성 삽화입니다.</figcaption>
+      </figure>
+      <!--/#PLATE-->
+        <p>&ldquo;좋은 편&rdquo;의 &ldquo;편&rdquo;(<span class="gk">μερίς</span>)은 &ldquo;몫&rdquo;이라는 말이에요. 미쉬나는 &ldquo;온 이스라엘은 오는 세상에 몫이 있다&rdquo;고 하고(산헤드린 10:1), 시편 16:5의 70인역은 &ldquo;주는 내 기업의 몫&rdquo;이라고 해요. 율법교사가 행위로 얻으려 한 상속을, 마리아는 앉아 듣는 곳에서 몫으로 받은 셈이에요. 낱말 밭이 겹친다는 관찰이고, 누가가 이것을 의도했다는 증거는 아직 없어서 <span class="nb">가설로 둬요.</span></p>
+      </section>
+
+      <section id="order">
+        <h2>구원과 자비, 무엇이 <span class="nb">먼저일까요?</span></h2>
+        <p class="sub">누가복음 전체에서는 언제나 <span class="nb">은혜가 먼저예요.</span></p>
+        <p>10:25–37만 떼어 읽으면 &ldquo;자비를 행해야 산다&rdquo;로 보이기 쉬워요. 누가복음의 다른 장면을 나란히 놓으면 순서가 <span class="nb">드러나요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>누가가 그리는 <span class="nb">은혜 → 자비</span></caption>
+            <thead><tr><th scope="col">본문</th><th scope="col">먼저</th><th scope="col">그다음</th></tr></thead>
+            <tbody>
+              <tr><td>누가 7:36–50</td><td>많은 죄가 이미 사함받음 <span class="alt">완료형</span></td><td>많이 사랑함. 구원의 근거는 &ldquo;네 믿음&rdquo;(7:50)</td></tr>
+              <tr><td>누가 15:20–32</td><td>아버지가 불쌍히 여겨 달려감</td><td>아들이 &ldquo;살아남&rdquo;</td></tr>
+              <tr><td>누가 19:1–10</td><td>예수님이 먼저 부르심 &ldquo;오늘 내가 네 집에 유하여야 하겠다&rdquo;</td><td>삭개오의 나눔과 갚음 → &ldquo;오늘 구원이 이 집에 이르렀다&rdquo;</td></tr>
+              <tr><td>사도행전 16:30–34</td><td>&ldquo;주 예수를 믿으라&rdquo;</td><td>간수가 바울과 실라의 맞은 상처를 씻어 줌</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>마지막 장면은 눈여겨볼 만해요. 간수는 믿은 그 밤에 두 사람의 &ldquo;맞은 자리&rdquo;(<span class="gk">πληγαί</span>)를 씻어 줘요. 강도들이 여리고 길의 사람에게 입힌 &ldquo;상처&rdquo;(10:30)와 같은 낱말이에요. 누가-행전에서 이 낱말은 네 번뿐이에요. 구원받은 간수가 사마리아인처럼 상처를 싸매는 사람이 <span class="nb">된 거예요.</span></p>
+        <p>그러니 이 본문은 &ldquo;선을 행하면 구원받는다&rdquo;를 가르치지 않아요. 자비의 경계를 긋는 사람이 자기가 받은 자비를 모른다는 것을 드러내요. 반대 방향의 오해도 본문 앞에서 서지 못해요. &ldquo;믿음으로 구원받으니 자비는 상관없다&rdquo;는 생각은 37절 &ldquo;가서 너도 이와 같이 하라&rdquo;와 맞지 않아요. 이 명령은 반어가 아니에요. 놀랜드는 누가가 행함의 강조를 비판하지 않고 28절과 37절에서 오히려 강화한다고 <span class="nb">봐요.</span></p>
+      </section>
+
+      <section id="history">
+        <h2>교회는 이 비유를 <span class="nb">어떻게 읽어 왔을까요?</span></h2>
+        <p class="sub">처음 천 년 동안은 사마리아인을 그리스도로 읽었어요. 종교개혁 이후로는 <span class="nb">그 읽기를</span> <span class="nb">조심해 왔어요.</span></p>
+        <p>2세기 말 이레나이우스는 지나가듯 이렇게 써요. 주님께서 강도 만난 자기 사람을 불쌍히 여기시고 상처를 싸매신 뒤 두 데나리온을 주셨는데, 그것은 우리가 성령으로 성부와 성자의 형상과 명문을 받게 하려 함이라고요(『이단 반박』 3.17.3). 지나가듯 말한다는 것 자체가 이 읽기가 이미 당연했다는 뜻으로 <span class="nb">읽혀요.</span></p>
+        <blockquote class="src">
+          <p>내려가던 사람은 아담이다. 예루살렘은 낙원이고 여리고는 세상이다. 강도들은 적대하는 세력이다. 제사장은 율법, 레위인은 선지자들, 사마리아인은 그리스도다. … 여관은 교회다.</p>
+          <cite>오리게네스 『누가복음 설교』 34 (장로 가운데 한 사람의 해석으로 소개)</cite>
+        </blockquote>
+        <p>알렉산드리아의 클레멘스는 &ldquo;구주 자신 말고 누구이겠는가&rdquo;라고 묻고(『어떤 부자가 구원받는가』 29), 아우구스티누스는 &ldquo;사마리아인은 지키는 자라는 뜻이니 이 이름은 주님 자신을 가리킨다&rdquo;고 풀어요. 클레멘스의 그 글은 같은 영생 질문을 한 부자(마가 10:17)를 다룬 작품이에요. 교부들도 두 본문을 한 쌍으로 <span class="nb">읽었어요.</span></p>
+        <p>칼뱅은 이 알레고리를 거부했어요. 흥미로운 것은 그 이유예요. 자유의지를 옹호하던 사람들이 &ldquo;거의 죽은&rdquo; 사람을 타락한 아담으로 읽고, 반쯤은 살아 있으니 선을 행할 힘이 아주 꺼지지는 않았다고 끌어냈기 때문이에요. 알레고리가 은혜론을 거스르는 데 쓰인 거예요. 칼뱅은 36절을 두고 &ldquo;가장 낯선 사람도 우리 이웃이다. 하나님이 서로 돕도록 모든 사람을 묶으셨기 때문이다&rdquo;라고 <span class="nb">썼어요.</span></p>
+        <div class="scroller">
+          <table>
+            <caption>해석 가설 <span class="nb">판정</span></caption>
+            <thead><tr><th scope="col">가설</th><th scope="col">근거와 대표</th><th scope="col">판정</th></tr></thead>
+            <tbody>
+              <tr><td>선을 행해야 영생을 얻는다고 가르친다</td><td>28절·37절 &ldquo;행하라&rdquo;. 같은 질문의 짝 18:26–27, 29절의 동기, 행 13:38–39와 충돌</td><td><span class="verdict no">반증</span></td></tr>
+              <tr><td>불가능한 요구로 죄를 깨닫게 한다</td><td>18:18–27, 갈 3:10–12. 모리스·드루쉬. 다만 10장 장면 안에서는 반어가 아님(놀랜드·데이비스)</td><td><span class="verdict ok">유력</span> <span class="alt">10장 장면 밖에서</span></td></tr>
+              <tr><td>사마리아인은 그리스도, 여관은 교회 등으로 하나하나 대응한다</td><td>이레나이우스·오리게네스·아우구스티누스. 세부 대응은 본문 밖. 학계에서 인정받지 못함(WBC)</td><td><span class="verdict no">반증</span> <span class="alt">세부 대응</span></td></tr>
+              <tr><td>사마리아인의 자비는 하나님과 예수님의 자비를 닮았다</td><td>&ldquo;불쌍히 여기다&rdquo;의 주어 분포, 1:72와 10:37의 같은 구문. 비유가 예수님 자신의 행동을 반영한다는 견해(WBC가 더 끌린다고 평가)</td><td><span class="verdict ok">유력</span></td></tr>
+              <tr><td>경계 없는 이웃 사랑의 모범을 보인다</td><td>37절 명령, 6:27–36 원수 사랑. 율리허 이후 다수</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>내 편과 남의 편의 경계를 지운다</td><td>29절에서 36절로의 질문 전환. 에슬러(2000)·마이클(2019)·치머만(2008)</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>북이스라엘과 남유다의 재통합 소망을 담았다</td><td>사마리아 = 옛 북왕국, 행 1:8·8장으로 이어짐. 데이비스(2025). 비유 자체에 명시 없음</td><td><span class="verdict hold">가설</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2>정리하면</h2>
+        <div class="scroller">
+          <table>
+            <caption>무엇이 확인되고 무엇이 <span class="nb">남았나</span></caption>
+            <thead><tr><th scope="col">항목</th><th scope="col">근거</th><th scope="col">판정</th></tr></thead>
+            <tbody>
+              <tr><td>율법교사의 영생과 교회가 말하는 최종 구원은 같은 것을 가리킨다</td><td>단 12:2, 눅 18:24–30에서 네 표현이 오감</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>질문은 행위를 수단으로 놓는다</td><td><span class="gk">τί ποιήσας</span> 신약 2회(10:25·18:18)</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>&ldquo;행하라 그러면 살리라&rdquo;는 레위기 18:5의 메아리다</td><td>ποιέω + ζάω. 직접 인용은 아님</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>1세기 무렵 유대 전통 일부는 레 18:5를 영생으로 읽었다</td><td>타르굼 옹켈로스·위-요나단. 시프라는 다르게 읽음. 타르굼의 연대 문제</td><td><span class="verdict ok">확인</span> <span class="alt">범위 주의</span></td></tr>
+              <tr><td>누가에서 자기를 의롭다 하는 사람은 늘 실패한다</td><td><span class="gk">δικαιόω</span> 5회 전수</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>제사장은 정결 규정 때문에 지나쳤다</td><td>&ldquo;내려가다가&rdquo;, 미쉬나 나지르 7:1, 본문은 동기를 말하지 않음</td><td><span class="verdict no">반증</span></td></tr>
+              <tr><td>10:37은 누가복음에서 사람이 &ldquo;자비&rdquo;의 주어인 유일한 곳이다</td><td><span class="gk">ἔλεος</span> 6회 중 5회가 1장의 하나님</td><td><span class="verdict ok">확인</span></td></tr>
+              <tr><td>누가는 영생 질문의 답을 18:27과 사도행전에서 준다</td><td>18:26–27, 행 13:38–39 · 16:30–31</td><td><span class="verdict ok">유력</span></td></tr>
+              <tr><td>마리아의 &ldquo;좋은 편&rdquo;은 상속의 몫과 이어진다</td><td><span class="gk">μερίς</span>와 &ldquo;오는 세상의 몫&rdquo;의 낱말 밭</td><td><span class="verdict hold">가설</span></td></tr>
+              <tr><td>율법교사가 &ldquo;사마리아인&rdquo;이라는 이름을 피했다</td><td>37절 &ldquo;자비를 베푼 자&rdquo;. 동기는 본문에 없음</td><td><span class="verdict hold">미결</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>어려운 말 풀이</h2>
+        <dl class="glossary">
+          <div class="term"><dt>부정과거 분사</dt>
+            <dd>헬라어에서 주동사보다 먼저 끝난 행위를 나타내는 동사 모양이에요. &ldquo;해 놓고서&rdquo;(ποιήσας)가 <span class="nb">그 예예요.</span></dd></div>
+          <div class="term"><dt>현재 명령형</dt>
+            <dd>계속하는 행동을 명령하는 모양이에요. &ldquo;행하라&rdquo;(ποίει)는 한 번이 아니라 <span class="nb">늘 행하라는 뜻이에요.</span></dd></div>
+          <div class="term"><dt>완료형</dt>
+            <dd>이미 일어난 일이 지금까지 결과로 남아 있음을 나타내요. &ldquo;이웃이 되었다&rdquo;(γεγονέναι)가 <span class="nb">완료형이에요.</span></dd></div>
+          <div class="term"><dt>70인역 <span class="hanja">Septuagint</span></dt>
+            <dd>기원전 3~1세기에 히브리어 성경을 그리스어로 옮긴 번역이에요. 신약 저자들이 <span class="nb">자주 인용해요.</span></dd></div>
+          <div class="term"><dt>타르굼 <span class="hanja">Targum</span></dt>
+            <dd>히브리어 성경을 아람어로 풀어 옮긴 것이에요. 번역에 해석을 덧붙이는 일이 많아 당시 유대인이 본문을 <span class="nb">어떻게 읽었는지 보여 줘요.</span></dd></div>
+          <div class="term"><dt>시프라 <span class="hanja">Sifra</span></dt>
+            <dd>레위기를 한 구절씩 풀이한 랍비 주석이에요. 3세기 무렵 <span class="nb">편집됐어요.</span></dd></div>
+          <div class="term"><dt>미쉬나 <span class="hanja">Mishnah</span></dt>
+            <dd>유대교의 구전 율법 해석을 200년경에 정리한 책이에요. 1세기 관습을 그대로 보여 준다고 단정할 수는 <span class="nb">없어요.</span></dd></div>
+          <div class="term"><dt>칭의 <span class="hanja">稱義</span></dt>
+            <dd>하나님이 사람을 의롭다고 선언하시는 일이에요. &ldquo;의롭다 하다&rdquo;(δικαιόω)라는 <span class="nb">동사에서 왔어요.</span></dd></div>
+          <div class="term"><dt>알레고리 <span class="hanja">allegory</span></dt>
+            <dd>이야기의 등장인물과 사물 하나하나를 다른 실재에 대응시켜 읽는 방법이에요. 교부들은 사마리아인을 그리스도로, 여관을 <span class="nb">교회로 읽었어요.</span></dd></div>
+          <div class="term"><dt>율법의 제2용법</dt>
+            <dd>율법이 사람의 죄를 드러내 은혜를 찾게 한다는 개신교의 가르침이에요. 율법을 <span class="nb">거울에 빗대요.</span></dd></div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>근거 자료</h2>
+        <div class="prose">
+          <p>헬라어 통계는 SBL 헬라어 신약(SBLGNT)의 형태소 자료를 직접 집계한 값입니다. &ldquo;불쌍히 여기다&rdquo;는 SBLGNT 기준 11회이며, 마가복음 1:41을 다르게 읽는 NA28 기준으로는 12회입니다. 비잔틴 다수본문(RP2018)과 대조한 결과 10:25–37에는 뜻을 바꾸는 이문이 없었습니다. 25·28·37절의 핵심 어구는 두 본문이 <span class="nb">같습니다.</span></p>
+          <p>레위기·다니엘·미쉬나·탈무드·타르굼·시프라는 Sefaria의 원문과 영역을 대조했습니다. 70인역은 Swete 판으로 확인했습니다. 요세푸스와 폴리비오스는 영역본으로만 확인했습니다. 오리게네스·암브로시우스·아우구스티누스는 영역과 2차 인용으로 확인했으며 라틴어 전문을 대조하지는 <span class="nb">못했습니다.</span></p>
+          <p>최근 논문 여덟 편의 인용문은 2026년 10월 6일 원문과 한 문장씩 대조했습니다. 루케마(2004), 개더콜(2004), 에슬러(2000)는 원문을 열지 못해 다른 논문의 인용으로만 확인했습니다. 성전산과 텔 에스-술탄 사이 거리는 위경도로 직접 <span class="nb">계산했습니다.</span></p>
+          <ul>
+            <li>SBLGNT / MorphGNT 형태소 자료 &mdash; ζωὴ αἰώνιος(43회) · κληρονομέω · ποιέω · δικαιόω(누가 5회) · πλησίον · σπλαγχνίζομαι · ἔλεος(누가 6회) · μερίς · πληγή <span class="nb">집계</span></li>
+            <li>Robinson–Pierpont 비잔틴 다수본문 2018, 누가복음 10:25–37 <span class="nb">대조</span></li>
+            <li>레위기 18:5 · 19:18 · 19:34 · 21:1–11, 다니엘 12:2 &mdash; Sefaria 히브리어 원문, Swete <span class="nb">70인역</span></li>
+            <li>타르굼 옹켈로스 · 위-요나단 레위기 18:5, 시프라 아하레이 모트 13:12–13 · 케도쉼 4:12 &mdash; <span class="nb">Sefaria</span></li>
+            <li>미쉬나 산헤드린 10:1 · 아보트 2:7 · 5:19 · 나지르 7:1 · 쉐비이트 8:10, 바빌론 탈무드 샤바트 31a · 타아니트 27a · 마코트 23b–24a &mdash; <span class="nb">Sefaria</span></li>
+            <li>마카베오하 7:9, 솔로몬의 시편 3:12, 집회서 50:25–26 &mdash; <span class="nb">sacred-texts.com</span></li>
+            <li>요세푸스 『유대 고대사』 18.2.2 · 20.6.1, 『유대 전쟁사』 2.12.3 &mdash; Whiston <span class="nb">영역</span></li>
+            <li>이레나이우스 『이단 반박』 3.17.3, 클레멘스 『어떤 부자가 구원받는가』 29 &mdash; New Advent <span class="nb">영역</span></li>
+            <li>오리게네스 『누가복음 설교』 34 (Lienhard 영역), 아우구스티누스 『복음서 문제』 2.19 &mdash; <span class="nb">2차 인용</span></li>
+            <li>J. Calvin, <i>Harmony of the Evangelists</i>, 누가복음 10:30–37 &mdash; CCEL <span class="nb">Pringle 영역</span></li>
+            <li>J. Nolland, 『WBC 성경주석 35 누가복음(중)』 (솔로몬) 283–315쪽 &mdash; 질문과 행함의 강조, 29절의 동기, 제사장 해석, 기독론적 해석 <span class="nb">평가</span></li>
+            <li>J. A. Davies, &ldquo;The Good Samaritan and the Hope for Kingdom Restoration (Luke 10:25-37)&rdquo;, <i>Tyndale Bulletin</i> 76 (2025) 153&ndash;176 &mdash; <span class="nb">원문 대조</span></li>
+            <li>J. S. DeRouchie, &ldquo;The Use of Leviticus 18:5 in Galatians 3:12&rdquo;, <i>Themelios</i> 45.2 (2020); E. Jodar, &ldquo;Leviticus 18:5 and the Law&rsquo;s Call to Faith&rdquo;, <i>Themelios</i> 45.1 (2020) &mdash; <span class="nb">원문 대조</span></li>
+            <li>A. J. Hultgren, &ldquo;Enlarging the Neighborhood&rdquo;, <i>Word &amp; World</i> 37.1 (2017) 71&ndash;78 &mdash; <span class="nb">원문 대조</span></li>
+            <li>R. Zimmermann, &ldquo;The etho-poietic of the parable of the good Samaritan&rdquo;, <i>Verbum et Ecclesia</i> 29.1 (2008) 269&ndash;292 &mdash; <span class="nb">원문 대조</span></li>
+            <li>M. Michael, &ldquo;Border-crossing and the Samaritan Traveler&rdquo;, <i>Stellenbosch Theological Journal</i> 5.3 (2019) 443&ndash;471 &mdash; 에슬러(2000) 재인용 <span class="nb">포함, 원문 대조</span></li>
+            <li>M. Ryan, &ldquo;Revisiting the Parable of the Good Samaritan&rdquo;, <i>Studies in Christian-Jewish Relations</i> 16.1 (2021) &mdash; 루케마(2004) 재인용 <span class="nb">포함, 원문 대조</span></li>
+            <li>K. Wright, &ldquo;The Good Samaritan (Luke 10:25-37)&rdquo;, Grace Evangelical Society (2022) &mdash; <span class="nb">원문 대조</span></li>
+          </ul>
+        </div>
+      </section>
+    </article>
+<!--#FOOTER-->
+    <footer class="site-foot">
+      <div class="inner">
+        <p><strong>성경연구노트</strong></p>
+        <p>성경 본문의 역사·지리·문헌 배경을 1차 자료로 확인해 정리한 연구 <span class="nb">자료 모음입니다.</span></p>
+        <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 <span class="nb">&ldquo;이견&rdquo;으로 표시합니다.</span></p>
+        <p class="src">© 2026 성경연구노트 · 노트지기</p>
+        <p class="foot-links"><a href="../index.html">자료 목록</a> <a href="../about.html">소개</a> <a href="../feed.xml">RSS</a></p>
+        <p class="visits" id="visits" hidden>방문 <span></span></p>
+        <script data-goatcounter="https://biblenotes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+        <script>fetch('https://biblenotes.goatcounter.com/counter/TOTAL.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.count)return;var v=document.getElementById('visits');v.querySelector('span').textContent=d.count;v.hidden=false}).catch(function(){});</script>
+      </div>
+    </footer>
+    <!--/#FOOTER-->
+</body>
+</html>
