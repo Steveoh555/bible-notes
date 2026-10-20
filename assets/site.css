@@ -26,6 +26,8 @@
   /* 히브리어는 모노 글꼴에 글자가 없어 대체 글꼴로 떨어지면서 모음 기호가 뭉친다.
      원문 표기는 세리프 계열로 따로 잡고, 크기도 라틴·헬라어보다 키운다. */
   --hebrew:"Times New Roman",Tinos,"Liberation Serif","David Libre",serif;
+  /* 그리스어 원문 표기(.gk) — 2026-10-20 세리프로 통일. 모노 글꼴로 쓰지 않는다. */
+  --greek:"Times New Roman",Tinos,"Liberation Serif","Noto Serif",serif;
   /* 글자 크기 — 6단계로 고정. 새 크기를 만들지 말고 아래 여섯 중 하나를 쓴다.
      역할: display=페이지 제목(h1)  h1=절 제목(h2)  h2=강조 블록·색인 제목
            h3=카드·차트 제목  body=본문·표  caption=메타·출처·칩 */
@@ -35,9 +37,12 @@
   --fs-h3:20px;      --fw-h3:600;
   --fs-body:16px;    --fw-body:400;
   --fs-caption:13px; --fw-caption:500;
+  /* 일곱째 단계(2026-10-20): 읽는 글 전용. 새 글의 문단·목록·카드 본문에만 쓴다.
+     표·검색창·메뉴는 계속 body(16px). 기존 페이지는 쓰지 않는다. */
+  --fs-read:17px;    --fw-read:400;
   /* 행간 — 역할별로 하나씩. 단위 없는 값만 */
   --lh-display:1.14; --lh-h1:1.26; --lh-h2:1.3; --lh-h3:1.32;
-  --lh-body:1.75;    --lh-caption:1.5;
+  --lh-body:1.75;    --lh-caption:1.5;   --lh-read:1.78;
   --measure:1060px;
   --r-lg:14px; --r-md:9px; --r-sm:5px;   /* 반경은 층위별로 다르게 */
   --ease:cubic-bezier(.2,.7,.3,1);
@@ -172,6 +177,10 @@ td.alt,th.alt{display:table-cell;margin-top:0}
 /* 히브리어 원문 표기 — 페이지마다 다시 정의하지 말고 이 클래스를 쓴다. */
 .he{font-family:var(--hebrew);font-size:1.5em;line-height:1.7;font-weight:400;
   font-feature-settings:"ccmp" 1}
+/* 그리스어 원문 표기 — 페이지마다 다시 정의하지 말고 이 클래스를 쓴다. (2026-10-20 세리프 통일) */
+.gk{font-family:var(--greek);font-size:1.06em;letter-spacing:0}
+.gk .note{font-family:var(--body)}
+.tile .k .gk{font-size:1.12em;letter-spacing:0;color:var(--ink-2)}
 .note{display:block;color:var(--muted);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);margin-top:5px;white-space:normal}
 .ref{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--accent);white-space:nowrap}
 .ref.none{color:var(--muted)}
@@ -395,3 +404,12 @@ blockquote.src cite{color:var(--muted)}
 .tiles > .tile > .u{grid-column:2}
 /* 예외: 값이 숫자가 아니라 낱말이고 .u 가 따로 읽혀야 하는 칸은 class="tile stack" 으로 예전처럼 위아래로 둔다 */
 .tiles > .tile.stack{display:flex;flex-direction:column}
+
+/* 한 기둥 레이아웃(2026-10-20, 새 글 전용): <article class="wrap onecol"> 로 켠다.
+   본문·인용 상자·일반 표·카드는 --col(760px), 지도·그래프·넓은 표만 .wide 를 붙여 넓힌다.
+   기존 페이지에는 이 클래스를 달지 않는다. */
+article.wrap.onecol{--col:760px}
+article.wrap.onecol > header > *, article.wrap.onecol > section > *{width:100%;max-width:var(--col);box-sizing:border-box}
+article.wrap.onecol > section > .wide{max-width:none}
+article.wrap.onecol .prose p, article.wrap.onecol .prose ul, article.wrap.onecol .prose ol, article.wrap.onecol .lede, article.wrap.onecol .tip p{max-width:none}
+article.wrap.onecol .prose p, article.wrap.onecol .prose li, article.wrap.onecol .lede, article.wrap.onecol .tip p{font-size:var(--fs-read);line-height:var(--lh-read)}

@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="../assets/site.css?v=9ddb8075">
+<link rel="stylesheet" href="../assets/site.css?v=cb69e101">
 <script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>
   /* 이 페이지 전용: 움직이는 경로 지도, 인구 막대그래프, 숫자 칸 */
@@ -114,11 +114,8 @@
   .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px;border:1.6px solid var(--ink)}
   .chart text{fill:var(--ink);font-family:var(--body)}
   .chart .m{font-family:var(--mono);fill:var(--muted)}
-  /* 한 기둥(A안, 2026-10-20 시험 적용): 본문·인용 상자·일반 표·카드 = --col, 지도 묶음·그래프·넓은 표만 .wide */
-  article.wrap > header > *, article.wrap > section > *{width:100%;max-width:var(--col);box-sizing:border-box}
-  article.wrap > section > .wide{max-width:none}
-  article.wrap .prose p, article.wrap .prose ul, article.wrap .prose ol, article.wrap .lede, article.wrap .tip p{max-width:none}
-  article.wrap .prose p, article.wrap .prose li, article.wrap .lede, article.wrap .tip p, .vcard dd{font-size:17px;line-height:1.78}
+  /* 한 기둥(A안): 규칙은 site.css 의 .onecol 로 옮김. 이 페이지에만 있는 카드 본문 크기만 남김 */
+  .vcard dd{font-size:var(--fs-read);line-height:var(--lh-read)}
   .info p{max-width:62ch}
   .vcards{display:flex;flex-direction:column;gap:12px}
   .vcard{background-color:var(--surface);border:1px solid var(--line);border-inline-start:4px solid var(--k);border-radius:var(--r-md);padding:18px 22px;display:flex;flex-direction:column;gap:12px}
@@ -168,7 +165,7 @@
     </header>
     <!--/#HEADER-->
 
-    <article id="main" class="wrap">
+    <article id="main" class="wrap onecol">
       <header>
         <!--#HERO-->
     
