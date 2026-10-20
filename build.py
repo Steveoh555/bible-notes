@@ -167,10 +167,56 @@ def headtags(cfg, info, depth):
         "isPartOf": {"@type": "WebSite", "name": cfg["site_name"]},
     }
     if url: ld["mainEntityOfPage"] = url
+    if base: ld["image"] = base + img
     if cfg.get("author"): ld["author"] = {"@type": "Person", "name": cfg["author"]}
+    if base: ld["publisher"] = {"@type": "Organization", "name": cfg["site_name"], "url": base + "/"}
     if info["tags"]: ld["keywords"] = ", ".join(info["tags"])
     parts.append('<script type="application/ld+json">%s</script>'
                  % json.dumps(ld, ensure_ascii=False))
+    if base:
+        crumbs = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": cfg["site_name"], "item": base + "/"},
+                {"@type": "ListItem", "position": 2, "name": info["title"], "item": url},
+            ],
+        }
+        parts.append('<script type="application/ld+json">%s</script>'
+                     % json.dumps(crumbs, ensure_ascii=False))
+    return "\n    ".join(parts)
+
+def site_headtags(cfg, page, title, desc, home=False):
+    """홈·소개 페이지용 canonical / Open Graph / (홈) WebSite JSON-LD."""
+    base = cfg.get("site_url", "").rstrip("/")
+    if not base:
+        return ""
+    url = base + "/" + ("" if home else page)
+    parts = [
+        '<link rel="canonical" href="%s">' % esc(url),
+        '<meta property="og:type" content="website">',
+        '<meta property="og:site_name" content="%s">' % esc(cfg["site_name"]),
+        '<meta property="og:locale" content="%s">' % esc(cfg.get("locale", "ko_KR")),
+        '<meta property="og:title" content="%s">' % esc(title),
+        '<meta property="og:description" content="%s">' % esc(desc),
+        '<meta property="og:url" content="%s">' % esc(url),
+        '<meta property="og:image" content="%s">' % esc(base + "/assets/og.png"),
+        '<meta name="twitter:card" content="summary_large_image">',
+        '<meta name="twitter:image" content="%s">' % esc(base + "/assets/og.png"),
+    ]
+    if home:
+        ld = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": cfg["site_name"],
+            "alternateName": cfg["tagline"],
+            "url": base + "/",
+            "description": cfg["description"],
+            "inLanguage": "ko",
+        }
+        if cfg.get("author"): ld["publisher"] = {"@type": "Organization", "name": cfg["site_name"], "url": base + "/"}
+        parts.append('<script type="application/ld+json">%s</script>'
+                     % json.dumps(ld, ensure_ascii=False))
     return "\n    ".join(parts)
 
 MARK = {
@@ -439,6 +485,7 @@ def build_index(cfg, studies):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{name} - {tag}</title>
 <meta name="description" content="{desc}">
+<!--#HEAD--><!--/#HEAD-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -490,6 +537,7 @@ def build_index(cfg, studies):
            desc=esc(cfg["description"]), n=n, cards=cards,
            favicon=FAVICON_BLOCK.format(up=""),
            rsslink=('<link rel="alternate" type="application/rss+xml" title="%s" href="feed.xml">\n' % esc(cfg["site_name"])) if cfg.get("site_url") else "")
+    body, _ = inject(body, "HEAD", site_headtags(cfg, "", "%s - %s" % (cfg["site_name"], cfg["tagline"]), cfg["description"], home=True))
     body, _ = inject(body, "HEADER", nav(cfg, 0, "index"))
     body, _ = inject(body, "FOOTER", foot(cfg, 0))
     body = stamp_assets(body, asset_versions())
@@ -783,6 +831,11 @@ def main():
     ap = os.path.join(ROOT, "about.html")
     if os.path.exists(ap):
         s = read(ap)
+        if "<!--#HEAD-->" not in s:
+            s = re.sub(r'(<meta name="description"[^>]*>)', lambda m: m.group(1) + "\n<!--#HEAD--><!--/#HEAD-->", s, count=1)
+        _t = re.search(r"<title>(.*?)</title>", s, re.S)
+        _d = re.search(r'<meta name="description" content="([^"]*)"', s)
+        s, _ = inject(s, "HEAD", site_headtags(cfg, "about.html", html.unescape(_t.group(1)).strip() if _t else "소개", html.unescape(_d.group(1)) if _d else cfg["description"]))
         s, _ = inject(s, "HEADER", nav(cfg, 0, "about"))
         s = ensure_head_links(s, 0)
         s = ensure_main_id(s)
