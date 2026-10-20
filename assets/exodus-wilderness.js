@@ -222,7 +222,7 @@ addEventListener('resize',()=>{ if(cur>=0) drawPhase(cur,false); });
 (function(){ const rows=[['문자적 (장정 60만 + 가족)',2500000],['클라크 1955',140000],['웬함 1967',72000],['험프리스 1998',20000],['페트리 1906',5550]];
   const f=n=>Math.round(n).toLocaleString('ko-KR');
   $('logi').innerHTML=`<thead><tr><th>추정</th><th>인원</th><th>행렬 길이<br><small>10열, 줄 간격 1~2m</small></th><th>하루 물<br><small>1인 5L, 가축 제외</small></th><th>하루 만나<br><small>1인 1오멜 ≈ 2.2L (출 16:16)</small></th><th>진영 면적<br><small>1인 30㎡</small></th></tr></thead><tbody>`+
-  rows.map(([t,n])=>`<tr><td>${t}</td><td class="n">${f(n)}명</td><td class="n">${f(n/10/1000)}~${f(n/10*2/1000)}km</td><td class="n">${f(n*5/1000)}톤</td><td class="n">${f(n*2.2/1000)}㎥</td><td class="n">${(n*30/1e6).toFixed(1)}㎢</td></tr>`).join('')+
+  rows.map(([t,n])=>`<tr><td>${t}</td><td class="n">${f(n)}명</td><td class="n">${(n/10/1000<10?(n/10/1000).toFixed(1):f(n/10/1000))}~${(n/10*2/1000<10?(n/10*2/1000).toFixed(1):f(n/10*2/1000))}km</td><td class="n">${f(n*5/1000)}톤</td><td class="n">${f(n*2.2/1000)}㎥</td><td class="n">${(n*30/1e6).toFixed(1)}㎢</td></tr>`).join('')+
   `</tbody><caption style="caption-side:bottom;text-align:left;padding:8px 10px;color:var(--muted);font-size:.8rem">250만 명이 10열로 걸으면 행렬이 250km를 넘어요. 시속 4km로 걸어도 맨 뒤가 출발하는 데 60시간이 넘게 걸려요. 반대로 폭 1km 통로라면 250만 명이 바다를 건너는 데는 한 시간이 채 안 걸려요(초당 1,000명 통과 가정). 건너는 일보다 바다 앞까지 오는 행렬이 더 어려운 문제예요.</caption>`; document.querySelectorAll('.dist, #logi').forEach(tb=>{ const rows=tb.rows; if(rows.length<2) return; [...rows[0].cells].forEach((th,i)=>{ const c=rows[1].cells[i]; if(c&&c.classList.contains('n')) th.style.textAlign='right'; }); }); })();
 
 let start=0; try{ const v=+localStorage.getItem('exo-phase'); if(v>=0&&v<PH.length) start=v; }catch(e){}

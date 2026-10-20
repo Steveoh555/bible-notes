@@ -25,7 +25,7 @@
 <script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>
   /* 이 페이지 전용: 움직이는 경로 지도, 인구 막대그래프, 숫자 칸 */
-  :root{ --s1:#008F80; --s2:#B2591F; --s3:#8A3566; --grid:#CBD2C4;
+  :root{ --col:760px; --s1:#008F80; --s2:#B2591F; --s3:#8A3566; --grid:#CBD2C4;
     --land:#DCD3BC; --land-edge:#A99D80; --sea:#B7CAD2; --lake:#97B2BE; --river:#5F8899;
     --a:var(--s1); --b:var(--s2); --c:var(--s3); --flight:var(--ink); --panel:var(--surface); --rule:var(--line); --hi:#B2402A; }
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --s1:#22A88F; --s2:#C97E33; --s3:#D27AAD; --grid:#39433F;
@@ -95,11 +95,26 @@
   .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px;border:1.6px solid var(--ink)}
   .chart text{fill:var(--ink);font-family:var(--body)}
   .chart .m{font-family:var(--mono);fill:var(--muted)}
+  /* 한 기둥(A안, 2026-10-20 시험 적용): 본문·인용 상자·일반 표·카드 = --col, 지도 묶음·그래프·넓은 표만 .wide */
+  article.wrap > header > *, article.wrap > section > *{width:100%;max-width:var(--col);box-sizing:border-box}
+  article.wrap > section > .wide{max-width:none}
+  article.wrap .prose p, article.wrap .prose ul, article.wrap .prose ol, article.wrap .lede, article.wrap .tip p{max-width:none}
+  article.wrap .prose p, article.wrap .prose li, article.wrap .lede, article.wrap .tip p, .vcard dd{font-size:17px;line-height:1.78}
+  .info p{max-width:62ch}
+  .vcards{display:flex;flex-direction:column;gap:12px}
+  .vcard{background-color:var(--surface);border:1px solid var(--line);border-inline-start:4px solid var(--k);border-radius:var(--r-md);padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+  .vcard h3{margin:0;font-family:var(--display);font-size:var(--fs-h3);line-height:var(--lh-h3)}
+  .vcard dl{margin:0;display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:8px 16px}
+  .vcard dt{color:var(--muted);font-size:var(--fs-caption);line-height:var(--lh-caption);padding-top:4px}
+  .vcard dd{margin:0;color:var(--ink-2);text-wrap:pretty}
+  @media (max-width:560px){ .vcard dl{grid-template-columns:1fr;gap:2px} .vcard dd{margin-bottom:8px} }
+  @media (min-width:700px){ article.wrap .glossary{grid-template-columns:repeat(3,minmax(0,1fr))} }
   .prose .he{white-space:nowrap}
   table.cmp{table-layout:fixed} table.cmp th:first-child,table.cmp td:first-child{width:7em}
   #logi td.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
   #logi th small{font-weight:400;color:var(--muted)}
   @media (max-width:600px){ .mapbox{min-width:560px} }
+  .scroller thead th.num{text-align:right}
   .num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
   @media (prefers-reduced-motion: reduce){.ph,.btn,.hyp{transition:none}}
 </style>
@@ -157,7 +172,7 @@
       <section id="map">
         <h2>광야 40년을 <span class="nb">지도에 그리면</span> <span class="nb">어떻게 될까요?</span></h2>
         <div class="prose"><p>아래 지도는 여덟 단계로 움직여요. 단계 단추를 누르거나 「전체 재생」을 누르면, 그 시기의 경로가 그려지고 지도 아래 해설에 거리와 하루 행군 판정이 나와요. 세 가설은 단추로 켜고 끌 수 있어요. 점이 꽉 찬 곳은 위치가 확실하거나 유력한 곳이고, 속이 빈 점은 추정, 점선 테두리는 위치 미상이나 학계가 받아들이지 않는 <span class="nb">대중설이에요.</span></p></div>
-        <div class="controls" role="group" aria-label="가설 선택">
+        <div class="controls wide" role="group" aria-label="가설 선택">
           <label class="hyp"><input type="checkbox" id="hA" checked><span class="sw" style="background:var(--a)"></span>A 남부 시내(전통)</label>
           <label class="hyp"><input type="checkbox" id="hB" checked><span class="sw" style="background:var(--b)"></span>B 북부 시내·네게브</label>
           <label class="hyp"><input type="checkbox" id="hC" checked><span class="sw" style="background:var(--c)"></span>C 서북 아라비아</label>
@@ -165,7 +180,7 @@
           <button class="btn" id="play" type="button">▶ 전체 재생</button>
           <button class="btn ghost" id="next" type="button">다음 ▶</button>
         </div>
-        <div class="mapwrap"><div class="mapbox">
+        <div class="mapwrap wide"><div class="mapbox">
           <svg id="mapsvg" viewBox="0 0 1000 720" role="img" aria-label="이집트 동부 델타에서 시나이 반도, 아라바, 서북 아라비아, 모압까지의 지도와 출애굽 경로 세 가설">
             <rect x="-2000" y="-2000" width="6000" height="6000" fill="var(--sea)"/>
             <g id="grat"></g>
@@ -183,10 +198,10 @@
             <g id="scale" class="scale"></g>
           </svg>
         </div></div>
-        <p class="mapnote">점선 테두리 호수는 손으로 그린 근사 위치예요. 바르다윌 석호와 팀사 호는 지금도 있고, 발라 호수는 지금은 마른 옛 호수예요. 해안선은 Natural Earth 1:10m 자료예요. 점에 손을 올리면 현대 지명과 확신도가 보여요. 휴대폰에서는 지도를 옆으로 밀어 <span class="nb">보세요.</span></p>
-        <div class="phases" id="phases" role="group" aria-label="시기 선택"></div>
-        <div class="yearbar" id="yearbar" aria-hidden="true"></div>
-        <div class="info" id="info" aria-live="polite"></div>
+        <p class="mapnote wide">점선 테두리 호수는 손으로 그린 근사 위치예요. 바르다윌 석호와 팀사 호는 지금도 있고, 발라 호수는 지금은 마른 옛 호수예요. 해안선은 Natural Earth 1:10m 자료예요. 점에 손을 올리면 현대 지명과 확신도가 보여요. 휴대폰에서는 지도를 옆으로 밀어 <span class="nb">보세요.</span></p>
+        <div class="phases wide" id="phases" role="group" aria-label="시기 선택"></div>
+        <div class="yearbar wide" id="yearbar" aria-hidden="true"></div>
+        <div class="info wide" id="info" aria-live="polite"></div>
       </section>
 
       <section>
@@ -198,14 +213,14 @@
           <p>이드로의 아들 호밥도 “나는 가지 아니하고 내 고향 내 친족에게로 가리라” 하고 말해요(민 10:30). 하지만 모세가 붙잡은 뒤 실제로 떠났는지는 본문이 말하지 않아요. 사사기 1:16은 오히려 모세의 장인 집안인 겐 사람의 자손이 유다 자손과 함께 <span class="nb">올라갔다고 해요.</span></p>
           <p>“미디안에서 40년”이라는 숫자는 출애굽기에 없어요. 사도행전 7:23과 7:30이 “나이가 사십이 되매”, “사십 년이 차매”라고 말하고, 랍비 문헌 시프레 신명기 357과 창세기 라바 100:10이 “애굽에서 40년, 미디안에서 40년, 이스라엘을 이끈 40년”이라는 같은 틀을 써요. 중세 주석가 람반은 이와 달리 모세가 열두 살쯤 도망해 약 60년을 떠돌았고, 그 끝 무렵에야 미디안에 왔다고 <span class="nb">계산해요(출 2:23 주석).</span></p>
         </div>
-        <div class="scroller"><table>
-          <thead><tr><th>견해</th><th>방목권</th><th>주요 근거</th><th>약점</th></tr></thead>
-          <tbody>
-            <tr><td>① 서북 히자즈</td><td>아카바만 동쪽, 알-바드(고대 마디얀)와 쿠라이야 일대</td><td>왕상 11:18의 도주 경로(미디안→바란→애굽), 요세푸스 『유대 고대사』 2.11 “홍해 곁 미디안 성읍”, 쿠라이야 채색토기 생산지예요. IVP 성경배경주석도 이곳을 “가능성이 가장 크다”고 봐요.</td><td>본거지 바로 곁에 호렙이 있으면 이드로의 귀향 기사가 어색해요. 알-바드의 “이드로 동굴”은 1세기 나바테아 무덤이에요.</td></tr>
-            <tr><td>② 남시나이(전통)</td><td>미디안 유목 집단이 아카바만을 돌아 남시나이 고산지까지 이동</td><td>호밥은 광야 진영 지리에 밝지만 고향은 따로 있어요(민 10:29–31). 스데반도 “미디안 땅”과 “시내 산 광야”를 나눠 말해요(행 7:29–30).</td><td>제벨 무사 전승은 4세기 이전 기록이 없어요. 남시나이에서는 미디안 토기가 거의 나오지 않아요.</td></tr>
-            <tr><td>③ 아라바·에돔</td><td>아라바 양안과 세일 산지, 겐 족속 활동권</td><td>모세의 장인이 겐 사람이에요(삿 1:16, 4:11). 하나님이 시내·세일·바란·데만에서 오신다는 시가 있어요(신 33:2, 삿 5:4, 합 3:3). 팀나에는 미디안 천막 성소와 구리 뱀이 남아 있어요.</td><td>남방 시들의 편집 연대가 늦을 수 있어요. 합 3:7의 미디안은 하나님 앞에서 “휘장이 흔들리는” 쪽이지 출발지가 아니에요.</td></tr>
-          </tbody>
-        </table></div>
+        <div class="vcards">
+          <div class="vcard" style="--k:var(--c)"><h3>① 서북 히자즈</h3>
+            <dl><dt>방목권</dt><dd>아카바만 동쪽, 알-바드(고대 마디얀)와 쿠라이야 일대</dd><dt>주요 근거</dt><dd>왕상 11:18의 도주 경로(미디안→바란→애굽), 요세푸스 『유대 고대사』 2.11 “홍해 곁 미디안 성읍”, 쿠라이야 채색토기 생산지예요. IVP 성경배경주석도 이곳을 “가능성이 가장 크다”고 봐요.</dd><dt>약점</dt><dd>본거지 바로 곁에 호렙이 있으면 이드로의 귀향 기사가 어색해요. 알-바드의 “이드로 동굴”은 1세기 나바테아 무덤이에요.</dd></dl></div>
+          <div class="vcard" style="--k:var(--a)"><h3>② 남시나이(전통)</h3>
+            <dl><dt>방목권</dt><dd>미디안 유목 집단이 아카바만을 돌아 남시나이 고산지까지 이동</dd><dt>주요 근거</dt><dd>호밥은 광야 진영 지리에 밝지만 고향은 따로 있어요(민 10:29–31). 스데반도 “미디안 땅”과 “시내 산 광야”를 나눠 말해요(행 7:29–30).</dd><dt>약점</dt><dd>제벨 무사 전승은 4세기 이전 기록이 없어요. 남시나이에서는 미디안 토기가 거의 나오지 않아요.</dd></dl></div>
+          <div class="vcard" style="--k:var(--b)"><h3>③ 아라바·에돔</h3>
+            <dl><dt>방목권</dt><dd>아라바 양안과 세일 산지, 겐 족속 활동권</dd><dt>주요 근거</dt><dd>모세의 장인이 겐 사람이에요(삿 1:16, 4:11). 하나님이 시내·세일·바란·데만에서 오신다는 시가 있어요(신 33:2, 삿 5:4, 합 3:3). 팀나에는 미디안 천막 성소와 구리 뱀이 남아 있어요.</dd><dt>약점</dt><dd>남방 시들의 편집 연대가 늦을 수 있어요. 합 3:7의 미디안은 하나님 앞에서 “휘장이 흔들리는” 쪽이지 출발지가 아니에요.</dd></dl></div>
+        </div>
         <div class="prose"><p>세 견해는 서로를 밀어내지 않아요. 많은 연구자는 본거지(오아시스 정착지)를 ①에 두고, 실제로 양을 몬 범위는 ③에서 ②까지로 넓게 잡아요. 출 3:1의 “광야 뒤편”과 이드로의 귀향 기사가 이 “본거지와 방목지가 다르다”는 구도와 <span class="nb">맞아요.</span></p></div>
       </section>
 
@@ -214,16 +229,14 @@
         <div class="prose">
           <p>본문의 날수만으로 보면 남부설(A)이 가장 잘 맞아요. 다만 제벨 무사라는 위치 자체는 4세기 이후의 전승이에요. 세 가설 모두 라암셋(피-람세스, 오늘날 칸티르)에서 출발하고, 가데스 이후 요단 동편 구간은 거의 같아요. 갈리는 곳은 바다를 건넌 지점과 <span class="nb">시내산이에요.</span></p>
         </div>
-        <div class="scroller"><table class="cmp">
-          <thead><tr><th>항목</th><th>A 남부 시내</th><th>B 북부 시내·네게브</th><th>C 서북 아라비아</th></tr></thead>
-          <tbody>
-            <tr><td>시내산</td><td>제벨 무사(2,285 m)</td><td>하르 카르콤, 제벨 헬랄</td><td>할랏 알-바드르(화산)</td></tr>
-            <tr><td>바다</td><td>발라 호수(호프마이어)</td><td>시르보니스 호(바르다윌) 사주</td><td>아카바만 북단(험프리스)</td></tr>
-            <tr><td>주장</td><td>에게리아(381–384), 호프마이어 2005·2021, 키친 2003</td><td>아이스펠트 1932, 아나티 1986·2001</td><td>베케 1873, 무질 1926, 험프리스 2003</td></tr>
-            <tr><td>약점</td><td>4세기 이전 기록이 없어요.</td><td>출 13:17은 “블레셋 사람의 땅의 길”을 피했다고 하는데, 바르다윌 사주가 바로 그 해안길이에요. 하르 카르콤의 제의 흔적은 기원전 2350–2000년이라, 출애굽을 이른 연대(기원전 1446년)에 두어도 550년 넘게 어긋나요.</td><td>바다까지 직선으로만 333 km인데, 이것을 세 진영 안에 가야 해요. 할랏 알-바드르에서 가데스까지는 직선으로 466 km예요.</td></tr>
-            <tr><td>판정</td><td>가설 · 날수와 가장 잘 맞음</td><td>미결 · 산 후보끼리 합의 없음</td><td>가설 · 종교사로는 진지, 경로로는 날수와 크게 어긋남</td></tr>
-          </tbody>
-        </table></div>
+        <div class="vcards">
+          <div class="vcard" style="--k:var(--a)"><h3>A 남부 시내</h3>
+            <dl><dt>시내산</dt><dd>제벨 무사(2,285 m)</dd><dt>바다</dt><dd>발라 호수(호프마이어)</dd><dt>주장</dt><dd>에게리아(381–384), 호프마이어 2005·2021, 키친 2003</dd><dt>약점</dt><dd>4세기 이전 기록이 없어요.</dd><dt>판정</dt><dd>가설 · 날수와 가장 잘 맞음</dd></dl></div>
+          <div class="vcard" style="--k:var(--b)"><h3>B 북부 시내·네게브</h3>
+            <dl><dt>시내산</dt><dd>하르 카르콤, 제벨 헬랄</dd><dt>바다</dt><dd>시르보니스 호(바르다윌) 사주</dd><dt>주장</dt><dd>아이스펠트 1932, 아나티 1986·2001</dd><dt>약점</dt><dd>출 13:17은 “블레셋 사람의 땅의 길”을 피했다고 하는데, 바르다윌 사주가 바로 그 해안길이에요. 하르 카르콤의 제의 흔적은 기원전 2350–2000년이라, 출애굽을 이른 연대(기원전 1446년)에 두어도 550년 넘게 어긋나요.</dd><dt>판정</dt><dd>미결 · 산 후보끼리 합의 없음</dd></dl></div>
+          <div class="vcard" style="--k:var(--c)"><h3>C 서북 아라비아</h3>
+            <dl><dt>시내산</dt><dd>할랏 알-바드르(화산)</dd><dt>바다</dt><dd>아카바만 북단(험프리스)</dd><dt>주장</dt><dd>베케 1873, 무질 1926, 험프리스 2003</dd><dt>약점</dt><dd>바다까지 직선으로만 333 km인데, 이것을 세 진영 안에 가야 해요. 할랏 알-바드르에서 가데스까지는 직선으로 466 km예요.</dd><dt>판정</dt><dd>가설 · 종교사로는 진지, 경로로는 날수와 크게 어긋남</dd></dl></div>
+        </div>
         <div class="prose">
           <blockquote class="bible" data-ref="신명기 1:2" data-version="개역개정"><p>호렙 산에서 세일 산을 지나 가데스 바네아까지 <span class="nb">열 하룻길이었더라</span></p><cite>신명기 1:2 · 개역개정</cite></blockquote>
           <p>세 시험의 결과를 한 표에 모았어요. 거리는 위경도로 구한 직선거리에 1.3을 곱해 실제 길로 어림했어요. 진영 하나를 하루로 보는 것은 이 계산의 가정이에요. 본문은 진영 사이의 날수를 <span class="nb">적지 않아요.</span></p>
@@ -253,8 +266,8 @@
           <p>그래서 학자들은 “천”으로 옮긴 히브리어 엘레프(<span class="he" dir="rtl" lang="he">אֶלֶף</span>)를 “부대”나 “씨족”으로 다시 읽어 보았어요. 가장 많이 인용되는 계산은 험프리스(1998)의 약 2만 명이고, 웬함(1967)은 약 7만 2천 명이에요. 험프리스는 장자 22,273명을 그대로 두지 않아요. 레위인보다 많았던 273명(민 3:46)만 실제 숫자로 보고 계산을 세워요. 그래서 장자 비율 문제는 엘레프를 다시 읽을 때에만 함께 풀려요. 비교 기준과 견주면 2만 명은 남시나이 13개 부족(약 3만 8천 명)이나 철기 I 가나안 고지대 정착 인구(약 4만 5천 명)와 같은 자릿수이고, 7만 2천 명은 그보다 많아요. 반대로 은 총량 계산은 엘레프를 1,000으로 읽어야만 맞고, 아데어(2025)는 '부대' 해석을 통계로 <span class="nb">반박했어요.</span></p>
         </div>
         <div class="prose"><p>막대는 로그 눈금이에요. 눈금 한 칸이 열 배예요. 녹색은 학설별 추정, 붉은색은 문자적 독법, 회색은 비교 <span class="nb">기준이에요.</span></p></div>
-        <div class="scroller"><svg class="chart" id="popchart" viewBox="0 0 1000 470" style="min-width:640px;width:100%;height:auto" role="img" aria-label="학설별 인구 추정치와 비교 기준을 로그 눈금으로 그린 막대그래프"></svg></div>
-        <div class="scroller"><table id="logi"></table></div>
+        <div class="scroller wide"><svg class="chart" id="popchart" viewBox="0 0 1000 470" style="min-width:640px;width:100%;height:auto" role="img" aria-label="학설별 인구 추정치와 비교 기준을 로그 눈금으로 그린 막대그래프"></svg></div>
+        <div class="scroller wide"><table id="logi"></table></div>
         <div class="tip"><p><b>판단</b> 엘레프를 다시 읽는 쪽을 택하면 “수만 명 규모, 대략 2만~7만 명”이 본문 안팎의 제약을 가장 많이 함께 설명해요. 문자적 독법은 만나와 반석의 물 같은 초자연적 공급을 전제로 하고, 본문도 그렇게 말해요(출 16–17장, 민 11장). 결정적으로 입증된 숫자는 <span class="nb">없어요.</span></p></div>
       </section>
 
