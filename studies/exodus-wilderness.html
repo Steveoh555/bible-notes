@@ -26,12 +26,15 @@
 <style>
   /* 이 페이지 전용: 움직이는 경로 지도, 인구 막대그래프, 숫자 칸 */
   :root{ --col:760px; --s1:#008F80; --s2:#B2591F; --s3:#8A3566; --grid:#CBD2C4;
-    --land:#DCD3BC; --land-edge:#A99D80; --sea:#B7CAD2; --lake:#97B2BE; --river:#5F8899;
-    --a:var(--s1); --b:var(--s2); --c:var(--s3); --flight:var(--ink); --panel:var(--surface); --rule:var(--line); --hi:#B2402A; }
+    --land:#DCD3BC; --land-edge:#6F6650; --sea:#B7CAD2; --lake:#97B2BE; --river:#3F6C80;
+    --s1-ink:#00665A; --s2-ink:#8F4010; --s3-ink:#8A3566; --badge-ink:#fff;
+    --a:var(--s1-ink); --b:var(--s2-ink); --c:var(--s3-ink); --flight:var(--ink); --panel:var(--surface); --rule:var(--line); --hi:#B2402A; }
   @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --s1:#22A88F; --s2:#C97E33; --s3:#D27AAD; --grid:#39433F;
-    --land:#38342A; --land-edge:#5E5644; --sea:#18262D; --lake:#24414E; --river:#4F7E92; --hi:#F07A5C; } }
+    --land:#38342A; --land-edge:#8A7E62; --sea:#18262D; --lake:#24414E; --river:#5E94AA; --hi:#F07A5C;
+    --s1-ink:#35C2A6; --s2-ink:#E09040; --s3-ink:#E58CC0; --badge-ink:#141714; } }
   :root[data-theme="dark"]{ --s1:#22A88F; --s2:#C97E33; --s3:#D27AAD; --grid:#39433F;
-    --land:#38342A; --land-edge:#5E5644; --sea:#18262D; --lake:#24414E; --river:#4F7E92; --hi:#F07A5C; }
+    --land:#38342A; --land-edge:#8A7E62; --sea:#18262D; --lake:#24414E; --river:#5E94AA; --hi:#F07A5C;
+    --s1-ink:#35C2A6; --s2-ink:#E09040; --s3-ink:#E58CC0; --badge-ink:#141714; }
 
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
   .tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:6px}
@@ -49,7 +52,7 @@
   .river{fill:none;stroke:var(--river);stroke-width:1.2;vector-effect:non-scaling-stroke}
   .grat{stroke:var(--ink);stroke-opacity:.08;stroke-width:1;vector-effect:non-scaling-stroke;fill:none}
   .region{stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:5 4;fill-opacity:.16}
-  .rname{fill:var(--muted);font-family:var(--display);font-style:italic;letter-spacing:.06em}
+  .rname{fill:var(--ink-2);font-family:var(--display);font-style:italic;letter-spacing:.06em}
   .route{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
   .route.ghost{stroke-opacity:.18}
   .st{vector-effect:non-scaling-stroke;stroke-width:1.6}
@@ -64,6 +67,22 @@
   .hyp:hover{border-color:var(--ink-2)} .hyp:active{transform:translateY(1px)}
   .hyp input{accent-color:var(--ink);margin:0}
   .sw{width:18px;height:4px;border-radius:2px;display:inline-block}
+  .sw.a{background:var(--a)}
+  .sw.b{background:repeating-linear-gradient(90deg,var(--b) 0 9px,transparent 9px 14px)}
+  .sw.c{background:repeating-linear-gradient(90deg,var(--c) 0 2px,transparent 2px 8px)}
+  .badge circle{stroke:var(--panel);stroke-width:1.5;vector-effect:non-scaling-stroke}
+  .badge text{fill:var(--badge-ink);font-family:var(--body);font-weight:700;text-anchor:middle;dominant-baseline:central}
+  #stlist,#popdata{margin:10px auto 0}
+  #stlist details,#popdata details{border:1px solid var(--line);border-radius:var(--r-lg);padding:4px 14px;background:var(--surface)}
+  #stlist summary,#popdata summary{cursor:pointer;color:var(--ink-2);padding:8px 0;font-size:var(--fs-caption)}
+  #stlist summary:focus-visible,#popdata summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  #stlist .scroller,#popdata .scroller{border:none;margin-bottom:8px}
+  #stlist .scroller table{min-width:0}
+  #stlist .scroller tbody th,#popdata .scroller tbody th{text-align:start;font-weight:600;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line-soft);background:none;white-space:normal}
+  #stlist .scroller tbody td,#popdata .scroller tbody td{padding:12px 14px}
+  #stlist .scroller thead th,#popdata .scroller thead th{padding:10px 14px}
+  #stlist .scroller tbody tr:last-child th{border-bottom:none}
+  #popdata th.num,#popdata td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
   .btn{font:inherit;font-size:var(--fs-caption);border:1px solid var(--ink);background:var(--ink);color:var(--ground);border-radius:var(--r-sm);padding:6px 14px;cursor:pointer;transition:opacity .2s var(--ease)}
   .btn.ghost{background:transparent;color:var(--ink)}
   .btn:hover{opacity:.85} .btn:active{transform:translateY(1px)}
@@ -173,9 +192,9 @@
         <h2>광야 40년을 <span class="nb">지도에 그리면</span> <span class="nb">어떻게 될까요?</span></h2>
         <div class="prose"><p>아래 지도는 여덟 단계로 움직여요. 단계 단추를 누르거나 「전체 재생」을 누르면, 그 시기의 경로가 그려지고 지도 아래 해설에 거리와 하루 행군 판정이 나와요. 세 가설은 단추로 켜고 끌 수 있어요. 점이 꽉 찬 곳은 위치가 확실하거나 유력한 곳이고, 속이 빈 점은 추정, 점선 테두리는 위치 미상이나 학계가 받아들이지 않는 <span class="nb">대중설이에요.</span></p></div>
         <div class="controls wide" role="group" aria-label="가설 선택">
-          <label class="hyp"><input type="checkbox" id="hA" checked><span class="sw" style="background:var(--a)"></span>A 남부 시내(전통)</label>
-          <label class="hyp"><input type="checkbox" id="hB" checked><span class="sw" style="background:var(--b)"></span>B 북부 시내·네게브</label>
-          <label class="hyp"><input type="checkbox" id="hC" checked><span class="sw" style="background:var(--c)"></span>C 서북 아라비아</label>
+          <label class="hyp"><input type="checkbox" id="hA" checked><span class="sw a"></span>A 남부 시내(전통)</label>
+          <label class="hyp"><input type="checkbox" id="hB" checked><span class="sw b"></span>B 북부 시내·네게브</label>
+          <label class="hyp"><input type="checkbox" id="hC" checked><span class="sw c"></span>C 서북 아라비아</label>
           <button class="btn ghost" id="prev" type="button">◀ 이전</button>
           <button class="btn" id="play" type="button">▶ 전체 재생</button>
           <button class="btn ghost" id="next" type="button">다음 ▶</button>
@@ -192,16 +211,18 @@
             <g id="rnames"></g>
             <g id="ghosts"></g>
             <g id="routes"></g>
+            <g id="badges"></g>
             <g id="stations"></g>
             <g id="labels"></g>
             <g id="movers"></g>
             <g id="scale" class="scale"></g>
           </svg>
         </div></div>
-        <p class="mapnote wide">점선 테두리 호수는 손으로 그린 근사 위치예요. 바르다윌 석호와 팀사 호는 지금도 있고, 발라 호수는 지금은 마른 옛 호수예요. 해안선은 Natural Earth 1:10m 자료예요. 점에 손을 올리면 현대 지명과 확신도가 보여요. 휴대폰에서는 지도를 옆으로 밀어 <span class="nb">보세요.</span></p>
+        <p class="mapnote wide">점선 테두리 호수는 손으로 그린 근사 위치예요. 바르다윌 석호와 팀사 호는 지금도 있고, 발라 호수는 지금은 마른 옛 호수예요. 해안선은 Natural Earth 1:10m 자료예요. 정거장의 현대 지명과 확신도는 지도 아래 목록에서 볼 수 있어요. 휴대폰에서는 지도를 옆으로 밀어 <span class="nb">보세요.</span></p>
         <div class="phases wide" id="phases" role="group" aria-label="시기 선택"></div>
         <div class="yearbar wide" id="yearbar" aria-hidden="true"></div>
         <div class="info wide" id="info" aria-live="polite"></div>
+        <div id="stlist" class="wide"></div>
       </section>
 
       <section>
@@ -266,7 +287,8 @@
           <p>그래서 학자들은 “천”으로 옮긴 히브리어 엘레프(<span class="he" dir="rtl" lang="he">אֶלֶף</span>)를 “부대”나 “씨족”으로 다시 읽어 보았어요. 가장 많이 인용되는 계산은 험프리스(1998)의 약 2만 명이고, 웬함(1967)은 약 7만 2천 명이에요. 험프리스는 장자 22,273명을 그대로 두지 않아요. 레위인보다 많았던 273명(민 3:46)만 실제 숫자로 보고 계산을 세워요. 그래서 장자 비율 문제는 엘레프를 다시 읽을 때에만 함께 풀려요. 비교 기준과 견주면 2만 명은 남시나이 13개 부족(약 3만 8천 명)이나 철기 I 가나안 고지대 정착 인구(약 4만 5천 명)와 같은 자릿수이고, 7만 2천 명은 그보다 많아요. 반대로 은 총량 계산은 엘레프를 1,000으로 읽어야만 맞고, 아데어(2025)는 '부대' 해석을 통계로 <span class="nb">반박했어요.</span></p>
         </div>
         <div class="prose"><p>막대는 로그 눈금이에요. 눈금 한 칸이 열 배예요. 녹색은 학설별 추정, 붉은색은 문자적 독법, 회색은 비교 <span class="nb">기준이에요.</span></p></div>
-        <div class="scroller wide"><svg class="chart" id="popchart" viewBox="0 0 1000 470" style="min-width:640px;width:100%;height:auto" role="img" aria-label="학설별 인구 추정치와 비교 기준을 로그 눈금으로 그린 막대그래프"></svg></div>
+        <div class="scroller wide"><svg class="chart" id="popchart" viewBox="0 0 1000 470" style="min-width:640px;width:100%;height:auto" role="img" aria-label="학설별 인구 추정은 5,550명에서 14만 명까지, 문자적 독법은 200만~610만 명으로 갈린다는 막대그래프예요. 값은 아래 표에 있어요."></svg></div>
+        <div id="popdata" class="wide"></div>
         <div class="scroller wide"><table id="logi"></table></div>
         <div class="tip"><p><b>판단</b> 엘레프를 다시 읽는 쪽을 택하면 “수만 명 규모, 대략 2만~7만 명”이 본문 안팎의 제약을 가장 많이 함께 설명해요. 문자적 독법은 만나와 반석의 물 같은 초자연적 공급을 전제로 하고, 본문도 그렇게 말해요(출 16–17장, 민 11장). 결정적으로 입증된 숫자는 <span class="nb">없어요.</span></p></div>
       </section>

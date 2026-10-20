@@ -15,6 +15,7 @@ $('ancp').setAttribute('d', G.anc); $('riverp').setAttribute('d', G.rivers);
   window.PXPERKM = K/111.2; })();
 
 const COL = {A:'var(--a)',B:'var(--b)',C:'var(--c)'};
+const DASH = {A:null,B:'9 5',C:'2 6'};
 const NAMES = {A:'A 남부 시내',B:'B 북부 시내·네게브',C:'C 서북 아라비아'};
 const REGIONS = [
   {k:'b',col:'var(--a)',t:'② 남시나이 방목설',at:[33.75,28.3]},{k:'c',col:'var(--b)',t:'③ 아라바·에돔 방목설',at:[35.0,30.75]},{k:'a',col:'var(--c)',t:'① 히자즈 방목설',at:[36.1,27.85]}];
@@ -116,15 +117,15 @@ let cur=-1, vb=[0,0,1000,720], anim=null;
 const shapeFor = c => (c==='확실'||c==='유력') ? 'solid' : (c==='미상'||c==='비학술') ? 'dash' : 'hollow';
 function drawPhase(i, animate){
   const p=PH[i]; const on=['A','B','C'].filter(k=>$('h'+k).checked);
-  ['regions','rnames','ghosts','routes','stations','labels','movers'].forEach(g=>$(g).innerHTML='');
+  ['regions','rnames','ghosts','routes','badges','stations','labels','movers'].forEach(g=>$(g).innerHTML='');
   // 지역 이름
   if(p.regions){ REGIONS.forEach(r=>{el('path',{d:G.reg[r.k],class:'region',fill:r.col,stroke:r.col},$('regions'));}); }
   const want=phaseRoutes[p.key]; const drawn=[]; const ptset=new Map();
   // 앞선 시기는 옅게
   const order=['p1','p2','p4','p5','p6']; const idx=order.indexOf(want[0]);
-  if(p.key!=='p7' && p.key!=='p0'){ const prior = p.key==='p3' ? ['p1','p2'] : order.slice(0, Math.max(0,idx)); on.forEach(k=>prior.forEach(seg=>{el('path',{d:pathD(RT[k][seg]),class:'route ghost',stroke:COL[k],'stroke-width':3},$('ghosts'));})); }
+  if(p.key!=='p7' && p.key!=='p0'){ const prior = p.key==='p3' ? ['p1','p2'] : order.slice(0, Math.max(0,idx)); on.forEach(k=>prior.forEach(seg=>{el('path',{d:pathD(RT[k][seg]),class:'route ghost',stroke:COL[k],'stroke-width':3,'stroke-dasharray':DASH[k]},$('ghosts'));})); }
   if(p.flight){ const d=pathD(DATA.flight); const pe=el('path',{d,class:'route',stroke:'var(--flight)','stroke-width':2.2,'stroke-dasharray':'6 5'},$('routes')); drawn.push({pe,col:'var(--flight)',dashed:true}); DATA.flight.forEach(k=>ptset.set(k,'var(--flight)')); }
-  on.forEach((k,j)=>{ want.forEach(seg=>{ const seq=RT[k][seg]; const pe=el('path',{d:pathD(seq, j*2.2-2.2),class:'route',stroke:COL[k],'stroke-width':p.key==='p5'?2.5:3.2,'stroke-dasharray':p.key==='p5'?'2 6':null},$('routes')); if(p.key==='p5') pe.setAttribute('stroke-dasharray','8 6'); drawn.push({pe,col:COL[k]}); seq.forEach(s=>{ if(!ptset.has(s)) ptset.set(s,COL[k]); }); }); });
+  on.forEach((k,j)=>{ want.forEach(seg=>{ const seq=RT[k][seg]; const w5={A:3.2,B:2.6,C:2.0}; const pe=el('path',{d:pathD(seq, j*2.2-2.2),class:'route',stroke:COL[k],'stroke-width':p.key==='p5'?w5[k]:3.2,'stroke-dasharray':p.key==='p5'?'8 6':DASH[k]},$('routes')); drawn.push({pe,col:COL[k]}); badgeRoute(pe,k); seq.forEach(s=>{ if(!ptset.has(s)) ptset.set(s,COL[k]); }); }); });
   (p.pts||[]).forEach(s=>{ if(!ptset.has(s)) ptset.set(s,'var(--ink)'); });
   if(p.unknown){ const a=PL.kadesh,b=PL.eziongeber; const cx=(a.x+b.x)/2-30, cy=(a.y+b.y)/2; el('ellipse',{cx,cy,rx:70,ry:95,fill:'none',stroke:'var(--muted)','stroke-dasharray':'3 4','vector-effect':'non-scaling-stroke'},$('regions')); const t=el('text',{x:cx,y:cy,'text-anchor':'middle',class:'rname','data-fs':12},$('rnames')); t.textContent='위치 미상 17곳'; }
   // 정거장
@@ -153,7 +154,13 @@ function drawPhase(i, animate){
   document.querySelectorAll('.dist, #logi').forEach(tb=>{ const rows=tb.rows; if(rows.length<2) return; [...rows[0].cells].forEach((th,i)=>{ const c=rows[1].cells[i]; if(c&&c.classList.contains('n')) th.style.textAlign='right'; }); });
   document.querySelectorAll('.ph').forEach((b,j)=>b.setAttribute('aria-pressed', j===i?'true':'false'));
   document.querySelectorAll('.yearbar .seg').forEach((s,j)=>s.classList.toggle('on', i===7 || j===i));
+  { const rows=[...ptset.keys()].map(k=>PL[k]); const open=$('stlist').querySelector('details')?.open;
+    $('stlist').innerHTML=rows.length?`<details${open?' open':''}><summary>이 시기 정거장 ${rows.length}곳 · 현대 지명과 확신도</summary><div class="scroller"><table class="dist"><thead><tr><th scope="col">정거장</th><th scope="col">현대 지명</th><th scope="col">확신도</th></tr></thead><tbody>${rows.map(s=>`<tr><th scope="row">${s.n}</th><td>${s.id||''}</td><td>${s.c}</td></tr>`).join('')}</tbody></table></div></details>`:''; }
 }
+function badgeRoute(pe,k){ const L=pe.getTotalLength(); if(!L) return;
+  [.35,.5,.65].forEach(u=>{ const pt=pe.getPointAtLength(L*u); const g=el('g',{class:'badge'},$('badges'));
+    el('circle',{cx:pt.x,cy:pt.y,r:7,'data-r':7,fill:COL[k]},g);
+    const t=el('text',{x:pt.x,y:pt.y,'data-fs':10},g); t.textContent=k; }); }
 function pathD(seq, off=0){ return 'M'+seq.map(k=>`${(PL[k].x+off).toFixed(1)},${(PL[k].y+off).toFixed(1)}`).join('L'); }
 function moveAlong(m,pe,dur){ const L=pe.getTotalLength(); const t0=performance.now(); (function f(t){ const u=Math.min(1,(t-t0)/dur); const e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2; const pt=pe.getPointAtLength(L*e); m.setAttribute('cx',pt.x); m.setAttribute('cy',pt.y); if(u<1 && m.isConnected) requestAnimationFrame(f); else if(m.isConnected) m.remove(); })(t0); }
 function scaleK(){ return vb[2]/1000 * (1000/svg.getBoundingClientRect().width||1) * 1.0; }
@@ -183,8 +190,21 @@ function zoomTo(target, dur, done){ if(anim) cancelAnimationFrame(anim); const f
   (function f(t){ const u=Math.min(1,(t-t0)/dur), e=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2; vb=from.map((v,i)=>v+(target[i]-v)*e); svg.setAttribute('viewBox',vb.join(' ')); setLabelSizes(); if(u<1) anim=requestAnimationFrame(f); else { anim=null; done&&done(); } })(t0); }
 function go(i, animate=true){ cur=i; const p=PH[i]; zoomTo(bboxVB(p.bbox), animate?900:0, ()=>drawPhase(i, animate)); if(!animate) drawPhase(i,false); try{localStorage.setItem('exo-phase',i)}catch(e){} }
 
-/* 펄스 */
-(function pulse(t){ svg.querySelectorAll('[data-pulse]').forEach(c=>{ const k=vb[2]/(svg.getBoundingClientRect().width||1000); const u=(t/1400)%1; c.setAttribute('r',(4+u*14)*k); c.setAttribute('stroke-opacity',1-u); }); if(!reduce) requestAnimationFrame(pulse); })(0);
+/* 펄스: 3번 뛴 뒤 멈춰요 (WCAG 2.2.2) */
+let pulseT0=null;
+(function pulse(t){
+  const P=svg.querySelectorAll('[data-pulse]');
+  if(P.length){
+    if(pulseT0===null) pulseT0=t;
+    const el=t-pulseT0, k=vb[2]/(svg.getBoundingClientRect().width||1000);
+    const done=reduce||el>=4200;
+    P.forEach(c=>{
+      if(done){ c.setAttribute('r',9*k); c.setAttribute('stroke-opacity',.45); }
+      else { const u=(el/1400)%1; c.setAttribute('r',(4+u*14)*k); c.setAttribute('stroke-opacity',1-u); }
+    });
+  } else pulseT0=null;
+  requestAnimationFrame(pulse);
+})(0);
 
 let playing=null;
 function stopPlay(){ if(playing){ clearTimeout(playing); playing=null; $('play').textContent='▶ 전체 재생'; } }
@@ -201,6 +221,8 @@ addEventListener('resize',()=>{ if(cur>=0) drawPhase(cur,false); });
   {t:'문자적 + 잡족(메킬타 120만~360만)',v:6100000,lo:3200000,k:'lit'},
   {t:'시나이 근대 유목민 (페트리, 20세기 초)',v:7000,lo:4000,k:'ref'},{t:'남시나이 13개 부족 (호리우치)',v:38000,k:'ref'},
   {t:'철기 I 가나안 고지대 정착 인구',v:45000,k:'ref'},{t:'신왕국 이집트 전체 (부처 1976)',v:3000000,lo:2500000,k:'ref'},{t:'이집트 전성기 군대',v:20000,k:'ref'}];
+  const kind={est:'학설별 추정',lit:'문자적 독법',ref:'비교 기준'}, fmt=n=>n.toLocaleString('ko-KR');
+  $('popdata').innerHTML=`<details><summary>막대 값을 표로 보기</summary><div class="scroller"><table><caption>인구 추정 막대그래프의 값</caption><thead><tr><th scope="col">분류</th><th scope="col">항목</th><th scope="col" class="num">값(명)</th></tr></thead><tbody>${items.map(it=>`<tr><td>${kind[it.k]}</td><th scope="row">${it.t}</th><td class="num">${it.lo?fmt(it.lo)+'–':''}${fmt(it.v)}</td></tr>`).join('')}</tbody></table></div></details>`;
   const X0=360,X1=780, lg=v=>Math.log10(v), x=v=>X0+(lg(v)-3)/(7-3)*(X1-X0); let y=34; const H=40;
   [[1e3,'1천'],[1e4,'1만'],[1e5,'10만'],[1e6,'100만'],[1e7,'1,000만']].forEach(([v,lb])=>{ el('line',{x1:x(v),x2:x(v),y1:16,y2:450,stroke:'var(--rule)'},s); const t=el('text',{x:x(v),y:466,'text-anchor':'middle',class:'m','font-size':17},s); t.textContent=lb; });
   const head=(t,yy)=>{const e=el('text',{x:8,y:yy,'font-size':17,class:'m'},s); e.textContent=t;};
