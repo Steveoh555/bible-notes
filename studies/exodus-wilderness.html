@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<meta name="theme-color" content="#EFF0EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141714" media="(prefers-color-scheme: dark)">
+<title>광야 40년, 어디로 몇 명이 걸었을까 - 성경연구노트</title>
+<meta name="description" content="모세가 양을 친 미디안의 위치, 출애굽 경로와 시내산에 대한 세 가설, 광야 세대의 인구를 본문의 날수와 실제 거리로 시험한 기록. 시기별로 움직이는 지도를 함께 실었어요.">
+<meta name="study:scripture" content="민수기 33:1-49">
+<meta name="study:tags" content="지리, 출애굽, 인구">
+<meta name="study:kind" content="배경 읽기">
+<meta name="study:hero" content="">
+<meta name="study:hero-alt" content="">
+<meta name="study:date" content="2026-10-20">
+<meta name="study:updated" content="2026-10-20">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="../assets/site.css?v=9ddb8075">
+<script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<style>
+  /* 이 페이지 전용: 움직이는 경로 지도, 인구 막대그래프, 숫자 칸 */
+  :root{ --s1:#008F80; --s2:#B2591F; --s3:#8A3566; --grid:#CBD2C4;
+    --land:#DCD3BC; --land-edge:#A99D80; --sea:#B7CAD2; --lake:#97B2BE; --river:#5F8899;
+    --a:var(--s1); --b:var(--s2); --c:var(--s3); --flight:var(--ink); --panel:var(--surface); --rule:var(--line); --hi:#B2402A; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --s1:#22A88F; --s2:#C97E33; --s3:#D27AAD; --grid:#39433F;
+    --land:#38342A; --land-edge:#5E5644; --sea:#18262D; --lake:#24414E; --river:#4F7E92; --hi:#F07A5C; } }
+  :root[data-theme="dark"]{ --s1:#22A88F; --s2:#C97E33; --s3:#D27AAD; --grid:#39433F;
+    --land:#38342A; --land-edge:#5E5644; --sea:#18262D; --lake:#24414E; --river:#4F7E92; --hi:#F07A5C; }
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:6px}
+  .tile .k{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);letter-spacing:.04em;color:var(--muted)}
+  .tile .v{font-family:var(--display);font-weight:var(--fw-h1);font-size:var(--fs-h1);line-height:1;font-variant-numeric:tabular-nums}
+  .tile .u{font-size:var(--fs-body);font-weight:var(--fw-body);color:var(--ink-2)}
+  .tile .n{font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--muted);text-wrap:pretty}
+
+  .mapwrap{overflow-x:auto}
+  .mapbox{background:var(--sea);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;min-width:340px}
+  .mapbox svg{display:block;width:100%;height:auto;aspect-ratio:1000/720}
+  .land{fill:var(--land);stroke:var(--land-edge);stroke-width:.6;vector-effect:non-scaling-stroke}
+  .lake{fill:var(--lake)}
+  .anc{fill:var(--lake);stroke:var(--river);stroke-dasharray:3 2;stroke-width:.8;vector-effect:non-scaling-stroke}
+  .river{fill:none;stroke:var(--river);stroke-width:1.2;vector-effect:non-scaling-stroke}
+  .grat{stroke:var(--ink);stroke-opacity:.08;stroke-width:1;vector-effect:non-scaling-stroke;fill:none}
+  .region{stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:5 4;fill-opacity:.16}
+  .rname{fill:var(--muted);font-family:var(--display);font-style:italic;letter-spacing:.06em}
+  .route{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+  .route.ghost{stroke-opacity:.18}
+  .st{vector-effect:non-scaling-stroke;stroke-width:1.6}
+  .lbl{fill:var(--ink);font-family:var(--body);font-weight:500;paint-order:stroke;stroke:var(--land);stroke-width:3px;stroke-linejoin:round}
+  .mover{stroke:var(--surface);stroke-width:2;vector-effect:non-scaling-stroke}
+  .scale text{fill:var(--ink);font-family:var(--mono)}
+  .scale line{stroke:var(--ink);vector-effect:non-scaling-stroke}
+  .mapnote{font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--muted);margin:6px 0 10px}
+
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+  .hyp{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;cursor:pointer;font-size:var(--fs-caption);color:var(--ink);transition:border-color .2s var(--ease)}
+  .hyp:hover{border-color:var(--ink-2)} .hyp:active{transform:translateY(1px)}
+  .hyp input{accent-color:var(--ink);margin:0}
+  .sw{width:18px;height:4px;border-radius:2px;display:inline-block}
+  .btn{font:inherit;font-size:var(--fs-caption);border:1px solid var(--ink);background:var(--ink);color:var(--ground);border-radius:var(--r-sm);padding:6px 14px;cursor:pointer;transition:opacity .2s var(--ease)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn:hover{opacity:.85} .btn:active{transform:translateY(1px)}
+  .btn:focus-visible,.hyp:focus-within,.ph:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+  .ph{font:inherit;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:var(--r-sm);padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;gap:2px;min-width:0;transition:border-color .2s var(--ease)}
+  .ph:hover{border-color:var(--ink-2)} .ph:active{transform:translateY(1px)}
+  .ph b{font-family:var(--mono);font-size:var(--fs-caption);color:var(--muted);font-weight:500}
+  .ph span{font-size:var(--fs-caption);line-height:1.35}
+  .ph[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--ground)}
+  .ph[aria-pressed="true"] b{color:var(--ground);opacity:.75}
+  .yearbar{position:relative;overflow:hidden;height:40px;margin-top:10px;border-top:1px solid var(--line)}
+  .yearbar .seg{position:absolute;top:8px;height:8px;background:var(--line);border-radius:2px}
+  .yearbar .seg.on{background:var(--accent)}
+  .yearbar .tick{position:absolute;top:18px;font-family:var(--mono);font-size:var(--fs-caption);color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+  .info{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .info .when{font-family:var(--mono);font-size:var(--fs-caption);color:var(--accent-ink)}
+  .info h3{margin:0}
+  .info .ref,.info .dref{font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--muted);max-width:none;white-space:normal}
+  .info p{margin:0;max-width:58ch}
+  .dist{width:100%;border-collapse:collapse;font-size:var(--fs-caption);font-variant-numeric:tabular-nums}
+  .dist th,.dist td{padding:5px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .dist td.n{text-align:right;white-space:nowrap;font-family:var(--mono)}
+  .flag{font-family:var(--mono);font-size:var(--fs-caption);padding:1px 6px;border-radius:3px;white-space:nowrap}
+  .flag.ok{background:var(--accent-soft)}
+  .flag.hard{background:var(--rome-soft)}
+  .flag.no{background:var(--temple-soft)}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:var(--fs-caption);color:var(--muted)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px;border:1.6px solid var(--ink)}
+  .chart text{fill:var(--ink);font-family:var(--body)}
+  .chart .m{font-family:var(--mono);fill:var(--muted)}
+  .num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  @media (prefers-reduced-motion: reduce){.ph,.btn,.hyp{transition:none}}
+</style>
+<!--#HEAD-->
+    <link rel="canonical" href="https://xn--289a0mi4h6svvsf8ov.kr/studies/exodus-wilderness.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="성경연구노트">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:title" content="광야 40년, 어디로 몇 명이 걸었을까">
+    <meta property="og:description" content="모세가 양을 친 미디안의 위치, 출애굽 경로와 시내산에 대한 세 가설, 광야 세대의 인구를 본문의 날수와 실제 거리로 시험한 기록. 시기별로 움직이는 지도를 함께 실었어요.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://xn--289a0mi4h6svvsf8ov.kr/assets/og.png">
+    <meta property="og:url" content="https://xn--289a0mi4h6svvsf8ov.kr/studies/exodus-wilderness.html">
+    <meta name="twitter:image" content="https://xn--289a0mi4h6svvsf8ov.kr/assets/og.png">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "광야 40년, 어디로 몇 명이 걸었을까", "description": "모세가 양을 친 미디안의 위치, 출애굽 경로와 시내산에 대한 세 가설, 광야 세대의 인구를 본문의 날수와 실제 거리로 시험한 기록. 시기별로 움직이는 지도를 함께 실었어요.", "datePublished": "2026-10-20", "dateModified": "2026-10-20", "inLanguage": "ko", "isPartOf": {"@type": "WebSite", "name": "성경연구노트"}, "mainEntityOfPage": "https://xn--289a0mi4h6svvsf8ov.kr/studies/exodus-wilderness.html", "author": {"@type": "Person", "name": "노트지기"}, "keywords": "지리, 출애굽, 인구"}</script>
+    <!--/#HEAD-->
+</head>
+<body>
+    <!--#HEADER-->
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
+    <header class="site-head">
+      <div class="bar">
+        <a class="brand" href="../index.html">
+          <b>성경연구노트</b><span>1차 자료로 확인하는 성경 배경</span>
+        </a>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="../index.html">자료 목록</a>
+          <a href="../about.html">소개</a>
+        </nav>
+        <button id="themeBtn" class="theme-btn" type="button" aria-label="화면 테마 바꾸기">자동</button>
+      </div>
+    </header>
+    <!--/#HEADER-->
+
+    <article id="main" class="wrap">
+      <header>
+        <!--#HERO-->
+    
+    <!--/#HERO-->
+        <div class="eyebrow">출애굽기 2:15 – 민수기 33:49 지리와 인구</div>
+        <h1>광야 40년, <span class="nb">어디로 몇 명이</span> <span class="nb">걸었을까</span></h1>
+        <p class="lede">모세는 미디안 어디에서 양을 쳤을까요? 이스라엘은 어느 길로 시내산에 갔고, 몇 명이었을까요? 학계에서 가장 많이 논의되는 세 가설을 지도에 겹쳐 놓고, 본문이 준 날수에 실제 거리를 대 <span class="nb">보았어요.</span></p>
+        <div class="stamp"><b class="nb">시내산 후보 3곳</b> · 본문 날수 시험 <b class="nb">3가지</b> · 인구 학설 <b class="nb">12가지</b></div>
+      </header>
+
+      <section>
+        <div class="tiles">
+          <div class="tile"><span class="k">"미디안 40년"의 출처</span><span class="v">행 7:30</span><span class="n">출애굽기에는 없는 숫자예요. 출애굽기는 80세만 <span class="nb">말해요(출 7:7)</span></span></div>
+          <div class="tile"><span class="k">바다까지 진영</span><span class="v">3<span class="u">곳</span></span><span class="n">숙곳, 에담, <span class="nb">비하히롯(민 33:5–7)</span></span></div>
+          <div class="tile"><span class="k">호렙→가데스 바네아</span><span class="v">11<span class="u">일</span></span><span class="n">시내산 위치를 시험하는 가장 좋은 <span class="nb">한 절(신 1:2)</span></span></div>
+          <div class="tile"><span class="k">20세 이상 남자</span><span class="v">603,550<span class="u">명</span></span><span class="n">출 38:26과 민 1:46이 같은 <span class="nb">숫자를 적어요</span></span></div>
+        </div>
+      </section>
+
+      <section id="map">
+        <h2>광야 40년을 <span class="nb">지도에 그리면</span> <span class="nb">어떻게 될까요?</span></h2>
+        <div class="prose"><p>아래 지도는 여덟 단계로 움직여요. 단계 단추를 누르거나 「전체 재생」을 누르면, 그 시기의 경로가 그려지고 지도 아래 해설에 거리와 하루 행군 판정이 나와요. 세 가설은 단추로 켜고 끌 수 있어요. 점이 꽉 찬 곳은 위치가 확실하거나 유력한 곳이고, 속이 빈 점은 추정, 점선 테두리는 위치 미상이나 학계가 받아들이지 않는 <span class="nb">대중설이에요.</span></p></div>
+        <div class="controls" role="group" aria-label="가설 선택">
+          <label class="hyp"><input type="checkbox" id="hA" checked><span class="sw" style="background:var(--a)"></span>A 남부 시내(전통)</label>
+          <label class="hyp"><input type="checkbox" id="hB" checked><span class="sw" style="background:var(--b)"></span>B 북부 시내·네게브</label>
+          <label class="hyp"><input type="checkbox" id="hC" checked><span class="sw" style="background:var(--c)"></span>C 서북 아라비아</label>
+          <button class="btn ghost" id="prev" type="button">◀ 이전</button>
+          <button class="btn" id="play" type="button">▶ 전체 재생</button>
+          <button class="btn ghost" id="next" type="button">다음 ▶</button>
+        </div>
+        <div class="mapwrap"><div class="mapbox">
+          <svg id="mapsvg" viewBox="0 0 1000 720" role="img" aria-label="이집트 동부 델타에서 시나이 반도, 아라바, 서북 아라비아, 모압까지의 지도와 출애굽 경로 세 가설">
+            <rect x="-2000" y="-2000" width="6000" height="6000" fill="var(--sea)"/>
+            <g id="grat"></g>
+            <path class="land" id="landp"/>
+            <path class="lake" id="lakep"/>
+            <path class="anc" id="ancp"/>
+            <path class="river" id="riverp"/>
+            <g id="regions"></g>
+            <g id="rnames"></g>
+            <g id="ghosts"></g>
+            <g id="routes"></g>
+            <g id="stations"></g>
+            <g id="labels"></g>
+            <g id="movers"></g>
+            <g id="scale" class="scale"></g>
+          </svg>
+        </div></div>
+        <p class="mapnote">점선 테두리 호수는 손으로 그린 근사 위치예요. 바르다윌 석호와 팀사 호는 지금도 있고, 발라 호수는 지금은 마른 옛 호수예요. 해안선은 Natural Earth 1:10m 자료예요. 점에 손을 올리면 현대 지명과 <span class="nb">확신도가 보여요.</span></p>
+        <div class="phases" id="phases" role="group" aria-label="시기 선택"></div>
+        <div class="yearbar" id="yearbar" aria-hidden="true"></div>
+        <div class="info" id="info" aria-live="polite"></div>
+      </section>
+
+      <section>
+        <h2>모세는 어디서 <span class="nb">양을 쳤을까요?</span></h2>
+        <div class="prose">
+          <blockquote class="bible" data-ref="출애굽기 3:1" data-version="개역개정"><p>모세가 그의 장인 미디안 제사장 이드로의 양 떼를 치더니 그 떼를 광야 서쪽으로 인도하여 하나님의 산 <span class="nb">호렙에 이르매</span></p><cite>출애굽기 3:1 · 개역개정</cite></blockquote>
+          <p>본문이 확정해 주는 것은 셋이에요. 모세는 "미디안 땅"에 머물렀어요(출 2:15). 이드로의 양 떼를 "광야 서쪽"으로 몰다가 호렙에 이르렀어요. 그리고 이드로는 그 산을 떠나 "자기의 땅"으로 돌아갔어요(출 18:27). 마지막 사실은 이드로의 본거지와 호렙이 서로 다른 곳이라는 <span class="nb">뜻이에요.</span></p>
+          <p>"서쪽"은 해석이 들어간 번역이에요. 히브리어는 "광야 뒤편(아하르 함미드바르, אַחַר הַמִּדְבָּר)"이에요. 동쪽을 앞으로 두는 셈법에서 뒤가 서쪽이 되기 때문에 개역개정과 영어 ESV가 "서쪽"으로 옮겼어요. 70인역과 불가타는 방향을 말하지 않고 "광야 쪽으로", "광야 <span class="nb">깊숙이"로 옮겨요.</span></p>
+          <p>이드로의 아들 호밥도 "나는 가지 아니하고 내 고향 내 친족에게로 가리라" 하고 말해요(민 10:30). 하지만 모세가 붙잡은 뒤 실제로 떠났는지는 본문이 말하지 않아요. 사사기 1:16은 오히려 모세의 장인 집안인 겐 사람의 자손이 유다 자손과 함께 <span class="nb">올라갔다고 해요.</span></p>
+          <p>"미디안에서 40년"이라는 숫자는 출애굽기에 없어요. 사도행전 7:23과 7:30이 "나이가 사십이 되매", "사십 년이 차매"라고 말하고, 랍비 문헌 시프레 신명기 357과 창세기 라바 100:10이 "애굽에서 40년, 미디안에서 40년, 이스라엘을 이끈 40년"이라는 같은 틀을 써요. 중세 주석가 람반은 이와 달리 모세가 열두 살쯤 도망했고 미디안 체류는 말년이었다고 <span class="nb">계산해요.</span></p>
+        </div>
+        <div class="scroller"><table>
+          <thead><tr><th>견해</th><th>방목권</th><th>주요 근거</th><th>약점</th></tr></thead>
+          <tbody>
+            <tr><td>① 서북 히자즈</td><td>아카바만 동쪽, 알-바드(고대 마디얀)와 쿠라이야 일대</td><td><span class="alt">왕상 11:18의 도주 경로(미디안→바란→애굽), 요세푸스 『유대 고대사』 2.11 "홍해 곁 미디안 성읍", 쿠라이야 채색토기 생산지예요. IVP 성경배경주석도 이곳을 "가능성이 가장 크다"고 봐요.</span></td><td><span class="alt">본거지 바로 곁에 호렙이 있으면 이드로의 귀향 기사가 어색해요. 알-바드의 "이드로 동굴"은 1세기 나바테아 무덤이에요.</span></td></tr>
+            <tr><td>② 남시나이(전통)</td><td>미디안 유목 집단이 아카바만을 돌아 남시나이 고산지까지 이동</td><td><span class="alt">호밥은 광야 진영 지리에 밝지만 고향은 따로 있어요(민 10:29–31). 스데반도 "미디안 땅"과 "시내 산 광야"를 나눠 말해요(행 7:29–30).</span></td><td><span class="alt">제벨 무사 전승은 4세기 이전 기록이 없어요. 남시나이에서는 미디안 토기가 거의 나오지 않아요.</span></td></tr>
+            <tr><td>③ 아라바·에돔</td><td>아라바 양안과 세일 산지, 겐 족속 활동권</td><td><span class="alt">모세의 장인이 겐 사람이에요(삿 1:16, 4:11). 하나님이 시내·세일·바란·데만에서 오신다는 시가 있어요(신 33:2, 삿 5:4, 합 3:3). 팀나에는 미디안 천막 성소와 구리 뱀이 남아 있어요.</span></td><td><span class="alt">남방 시들의 편집 연대가 늦을 수 있어요. 합 3:7의 미디안은 하나님 앞에서 "휘장이 흔들리는" 쪽이지 출발지가 아니에요.</span></td></tr>
+          </tbody>
+        </table></div>
+        <div class="prose"><p>세 견해는 서로를 밀어내지 않아요. 많은 연구자는 본거지(오아시스 정착지)를 ①에 두고, 실제로 양을 몬 범위는 ③에서 ②까지로 넓게 잡아요. 출 3:1의 "광야 뒤편"과 이드로의 귀향 기사가 이 "본거지와 방목지가 다르다"는 구도와 <span class="nb">맞아요.</span></p></div>
+      </section>
+
+      <section>
+        <h2>시내산은 <span class="nb">어디였을까요?</span></h2>
+        <div class="prose">
+          <p>본문의 날수만으로 보면 남부설(A)이 가장 잘 맞아요. 다만 제벨 무사라는 위치 자체는 4세기 이후의 전승이에요. 세 가설 모두 라암셋(피-람세스, 오늘날 칸티르)에서 출발하고, 가데스 이후 요단 동편 구간은 거의 같아요. 갈리는 곳은 바다를 건넌 지점과 <span class="nb">시내산이에요.</span></p>
+        </div>
+        <div class="scroller"><table>
+          <thead><tr><th>항목</th><th>A 남부 시내</th><th>B 북부 시내·네게브</th><th>C 서북 아라비아</th></tr></thead>
+          <tbody>
+            <tr><td>시내산</td><td>제벨 무사(2,285 m)</td><td>하르 카르콤, 제벨 헬랄</td><td>할랏 알-바드르(화산)</td></tr>
+            <tr><td>바다</td><td>발라 호수(호프마이어)</td><td>시르보니스 호(바르다윌) 사주</td><td>아카바만 북단(험프리스)</td></tr>
+            <tr><td>주장</td><td>에게리아(381–384), 호프마이어 2005·2021, 키친 2003</td><td>아이스펠트 1932, 아나티 1986·2001</td><td>베케 1873, 무질 1926, 험프리스 2003</td></tr>
+            <tr><td>약점</td><td><span class="alt">4세기 이전 기록이 없어요.</span></td><td><span class="alt">출 13:17은 "블레셋 사람의 땅의 길"을 피했다고 하는데, 바르다윌 사주가 바로 그 해안길이에요. 하르 카르콤의 제의 흔적은 기원전 2350–2000년이라 천 년 가까이 어긋나요.</span></td><td><span class="alt">바다까지 333 km를 세 진영 안에 가야 해요. 할랏 알-바드르에서 가데스까지는 466 km예요.</span></td></tr>
+            <tr><td>판정</td><td>가설 · 날수와 가장 잘 맞음</td><td>미결 · 산 후보끼리 합의 없음</td><td>가설 · 종교사로는 진지, 경로로는 날수와 크게 어긋남</td></tr>
+          </tbody>
+        </table></div>
+        <div class="prose">
+          <blockquote class="bible" data-ref="신명기 1:2" data-version="개역개정"><p>호렙 산에서 세일 산을 지나 가데스 바네아까지 <span class="nb">열 하룻길이었더라</span></p><cite>신명기 1:2 · 개역개정</cite></blockquote>
+          <p>세 시험의 결과를 한 표에 모았어요. 거리는 위경도로 구한 직선거리에 1.3을 곱해 실제 길로 어림했어요. 진영 하나를 하루로 보는 것은 이 계산의 가정이에요. 본문은 진영 사이의 날수를 <span class="nb">적지 않아요.</span></p>
+        </div>
+        <div class="scroller"><table>
+          <thead><tr><th>시험</th><th>A</th><th>B</th><th>C</th></tr></thead>
+          <tbody>
+            <tr><td>바다까지 세 진영 (민 33:5–7) · 하루</td><td class="num">39 km</td><td class="num">70 km</td><td class="num">162 km</td></tr>
+            <tr><td>라암셋→시내산 45일 독법 · 하루</td><td class="num">13 km</td><td class="num">10 km</td><td class="num">22 km</td></tr>
+            <tr><td>라암셋→시내산 90일 독법 · 하루</td><td class="num">6 km</td><td class="num">5 km</td><td class="num">11 km</td></tr>
+            <tr><td>열하룻길 (신 1:2) · 하루</td><td class="num">28 km</td><td class="num">6 km</td><td class="num">55 km</td></tr>
+          </tbody>
+        </table></div>
+        <div class="prose">
+          <p>가축과 가족이 함께 움직이는 무리는 하루 10 km 안팎, 대상은 30 km 남짓을 가요(IVP 성경배경주석). C는 바다까지의 세 진영과 열하룻길 두 시험에서 모두 크게 어긋나요. B의 하르 카르콤은 가데스에서 50 km뿐이라 "열하룻길"이라는 표현이 <span class="nb">어색해져요.</span></p>
+          <blockquote class="bible" data-ref="출애굽기 19:1" data-version="개역개정"><p>이스라엘 자손이 애굽 땅을 떠난 지 삼 개월이 되던 날 그들이 시내 <span class="nb">광야에 이르니라</span></p><cite>출애굽기 19:1 · 개역개정</cite></blockquote>
+          <p>45일과 90일, 두 독법이 생기는 이유는 번역이에요. 히브리어는 "셋째 달에(<span class="he" dir="rtl" lang="he">בַּחֹדֶשׁ הַשְּׁלִישִׁי</span>)… 바로 그 날"이라 말하고, 라쉬는 이것을 셋째 달 초하루로 읽어요. 1월 15일에 떠났으니 약 45일이에요. 개역개정은 "떠난 지 삼 개월이 되던 날"로 옮겨서 약 90일로 읽혀요. 90일로 읽으면 세 가설 모두 이 구간은 <span class="nb">갈 수 있어요.</span></p>
+        </div>
+      </section>
+
+      <section>
+        <h2>광야에서 <span class="nb">몇 명이</span> <span class="nb">살았을까요?</span></h2>
+        <div class="prose">
+          <blockquote class="bible" data-ref="출애굽기 12:37-38" data-version="개역개정"><p>이스라엘 자손이 라암셋을 떠나서 숙곳에 이르니 유아 외에 보행하는 장정이 육십만 가량이요 수많은 잡족과 양과 소와 심히 많은 가축이 그들과 <span class="nb">함께 하였으며</span></p><cite>출애굽기 12:37–38 · 개역개정</cite></blockquote>
+          <p>문자 그대로 읽으면 200만~300만 명이에요. 장정 60만에 여자와 아이를 더하면 200만~250만 명이고, "수많은 잡족"이 여기에 붙어요. 20세 이상 남자는 603,550명(출 38:26, 민 1:46), 둘째 조사에서는 601,730명이에요(민 26:51). 출 38:25–26의 은 총량 301,775세겔은 603,550명이 반 세겔씩 낸 액수와 <span class="nb">정확히 맞아요.</span></p>
+          <p>같은 오경 안에 반대 방향의 신호도 있어요. 장자가 22,273명뿐이라 장자 한 명당 20세 이상 남자가 스물일곱 명이에요(민 3:43). 하나님은 땅이 황폐해질까 봐 가나안 사람을 "네가 번성하여 그 땅을 기업으로 얻을 때까지" 조금씩 쫓아내겠다고 하세요(출 23:29–30). 이스라엘을 "모든 민족 중에 가장 적은" 백성이라고도 <span class="nb">불러요(신 7:7).</span></p>
+          <p>그래서 학자들은 "천"으로 옮긴 히브리어 엘레프(<span class="he" dir="rtl" lang="he">אֶלֶף</span>)를 "부대"나 "씨족"으로 다시 읽어 보았어요. 가장 많이 인용되는 계산은 험프리스(1998)의 약 2만 명이고, 웬함(1967)은 약 7만 2천 명이에요. 이 범위라면 시나이 반도의 근대 유목 인구, 철기 I 가나안 고지대 정착 인구(약 4만 5천 명), 장자 비율이 함께 맞아요. 반대로 은 총량 계산은 엘레프를 1,000으로 읽어야만 맞고, 아데어(2025)는 '부대' 해석을 통계로 <span class="nb">반박했어요.</span></p>
+        </div>
+        <div class="scroller"><svg class="chart" id="popchart" viewBox="0 0 1000 470" style="min-width:640px;width:100%;height:auto" role="img" aria-label="학설별 인구 추정치와 비교 기준을 로그 눈금으로 그린 막대그래프"></svg></div>
+        <div class="scroller"><table id="logi"></table></div>
+        <div class="tip"><p><b>판단</b> 본문 안팎의 제약을 함께 맞추면 "수만 명 규모, 대략 2만~7만 명"이 가장 설명력이 커요. 문자적 독법은 만나와 반석의 물 같은 초자연적 공급을 전제로 하고, 본문도 그렇게 말해요(출 16–17장, 민 11장). 결정적으로 입증된 숫자는 <span class="nb">없어요.</span></p></div>
+      </section>
+
+      <section>
+        <h2>아직 <span class="nb">모르는 것들</span></h2>
+        <div class="prose"><ul>
+          <li><strong>민 33:18–34의 열일곱 진영</strong>(릿마부터 아브로나까지)은 지금 어디인지 확정된 곳이 없어요. 38년의 길은 가데스와 에시온게벨 사이의 큰 고리로만 <span class="nb">그릴 수 있어요.</span></li>
+          <li><strong>호르산</strong>은 페트라 곁 제벨 하룬이 전통이지만, "에돔 땅 변경"(민 20:23)에는 가데스 근처 제벨 마두라가 더 맞는다는 견해도 있어요. <span class="nb">미결이에요.</span></li>
+          <li><strong>가데스 바네아</strong>로 보는 아인 엘-쿠데이라트에서는 후기 청동기 유물이 나오지 않았어요. 가장 이른 요새가 기원전 10세기예요(코헨 1976–82 발굴). 출애굽 연대를 이른 쪽(기원전 1446년)과 늦은 쪽(1270–1250년) 어디에 두어도 이 공백은 <span class="nb">그대로예요.</span></li>
+          <li><strong>메킬타가 잡족을 120만~360만으로 센 대목</strong>은 다른 학자의 인용으로만 확인했어요. 원문은 아직 <span class="nb">못 봤어요.</span></li>
+        </ul></div>
+      </section>
+
+      <section>
+        <h2>어려운 말 풀이</h2>
+        <dl class="glossary">
+          <div class="term"><dt>엘레프 <span class="he" dir="rtl" lang="he">אֶלֶף</span></dt>
+            <dd>보통 "천(1,000)"이지만 지파 안의 씨족이나 부대를 뜻하는 용례도 있어요(삿 6:15, 삼상 10:19).</dd></div>
+          <div class="term"><dt>잡족 <span class="hanja">에레브 라브</span></dt>
+            <dd>이스라엘과 함께 나온 다른 민족 사람들이에요. 본문은 수를 밝히지 않아요.</dd></div>
+          <div class="term"><dt>라쉬</dt>
+            <dd>11세기 프랑스의 유대 주석가예요. 지금도 히브리 성경을 읽을 때 가장 먼저 펴는 주석이에요.</dd></div>
+          <div class="term"><dt>시프레·메킬타</dt>
+            <dd>3세기 무렵 엮인 랍비들의 오경 해설집이에요.</dd></div>
+          <div class="term"><dt>미디안 채색토기</dt>
+            <dd>쿠라이야에서 구운 기하무늬 토기예요. 네게브·남요르단·팀나까지 퍼져 미디안 사람의 활동 범위를 짐작하게 해요.</dd></div>
+          <div class="term"><dt>쇼수 땅 YHW</dt>
+            <dd>아멘호텝 3세(솔렙)와 람세스 2세(아마라 서부)의 이집트 지명 목록에 나오는 남방 유목민 지역 이름이에요.</dd></div>
+          <div class="term"><dt>대권거리</dt>
+            <dd>지구를 공으로 보고 두 점 사이를 곧게 잰 가장 짧은 거리예요.</dd></div>
+        </dl>
+      </section>
+
+      <section>
+        <h2>근거 자료</h2>
+        <div class="prose">
+          <p>거리는 지점별 위경도로 대권거리를 구한 뒤 1.3을 곱해 실제 길로 어림한 값입니다. 정거장 동정 좌표 가운데 상당수는 각 가설 안에서도 추정입니다. 이 페이지는 연구 뒤에 검토자 셋과 판정자 하나가 교차검증한 결과를 <span class="nb">반영했습니다.</span></p>
+          <ul>
+            <li>히브리어 마소라 본문과 라쉬·옹켈로스·탈굼 위-요나단 (Sefaria). 출 3:1, 12:37–38, 19:1, 38:26, 민 1:46, 3:43, 26:51, 33장, 신 1:2, 7:7</li>
+            <li>『IVP 성경배경주석 구약』 출애굽기 2:15, 3:1, 12:37, 19:1 해설, 신명기 1:1–2, 32:50 해설</li>
+            <li>WBC 『출애굽기』(더럼) 12:37–51, WBC 『민수기』(버드) 1:1–47 「양식/구조/배경」</li>
+            <li>J. K. Hoffmeier, "The Hebrew Exodus from and Jeremiah's Eisodus into Egypt", <i>Tyndale Bulletin</i> (2021); <i>Ancient Israel in Sinai</i> (2005)</li>
+            <li>J. M. Tebes, "The Archaeology of Cult of Ancient Israel's Southern Neighbors and the Midianite-Kenite Hypothesis", <i>Entangled Religions</i> 12.2 (2021)</li>
+            <li>J. Charloux 외, "Madian revealed?", <i>Semitica et Classica</i> 14 (2021)</li>
+            <li>C. J. Humphreys, "The Number of People in the Exodus from Egypt", <i>Vetus Testamentum</i> 48 (1998)</li>
+            <li>J. W. Wenham, "Large Numbers in the Old Testament", <i>Tyndale Bulletin</i> 18 (1967)</li>
+            <li>G. A. Rendsburg, <i>Vetus Testamentum</i> 51 (2001); E. W. Davies, <i>Vetus Testamentum</i> 45 (1995); D. M. Fouts, <i>JETS</i> 40 (1997)</li>
+            <li>A. Adair, "Counting on the Census Numbers", <i>HIPHIL Novum</i> 10 (2025)</li>
+            <li>W. M. F. Petrie, "The Census of the Israelites", <i>The Expositor</i>; R. E. D. Clark, <i>JTVI</i> 87 (1955)</li>
+            <li>요세푸스 『유대 고대사』 2.11, 3.196, <span class="nb">3.288</span></li>
+          </ul>
+        </div>
+      </section>
+    </article>
+
+    <!--#FOOTER-->
+    <footer class="site-foot">
+      <div class="inner">
+        <p><strong>성경연구노트</strong></p>
+        <p>성경 본문의 역사·지리·문헌 배경을 1차 자료로 확인해 정리한 연구 <span class="nb">자료 모음입니다.</span></p>
+        <p>인용한 고전·1차 자료(요세푸스, 미쉬나, 교부 문헌 등)의 출처는 각 자료 페이지 하단에 밝혀 두었습니다. 확정되지 않은 견해는 &ldquo;가설&rdquo; 또는 <span class="nb">&ldquo;이견&rdquo;으로 표시합니다.</span></p>
+        <p class="src">© 2026 성경연구노트 · 노트지기</p>
+        <p class="foot-links"><a href="../index.html">자료 목록</a> <a href="../about.html">소개</a> <a href="../feed.xml">RSS</a></p>
+        <p class="visits" id="visits" hidden>방문 <span></span></p>
+        <script data-goatcounter="https://biblenotes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+        <script>fetch('https://biblenotes.goatcounter.com/counter/TOTAL.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(!d||!d.count)return;var v=document.getElementById('visits');v.querySelector('span').textContent=d.count;v.hidden=false}).catch(function(){});</script>
+      </div>
+    </footer>
+    <!--/#FOOTER-->
+<script src="../assets/site.js?v=d8a46d11"></script>
+<script src="../assets/exodus-wilderness.js"></script>
+
+</body>
+</html>
