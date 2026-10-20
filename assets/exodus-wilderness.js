@@ -44,7 +44,7 @@ const PH = [
   test:'p1', bbox:[31.5,28.9,35.6,31.5]},
  {key:'p2', tab:'바다 → 시내산', yr:[80.02,80.13], when:'1년 2월 15일 신 광야 (출 16:1) · 셋째 달 시내 광야 (출 19:1)',
   title:'마라, 엘림, 신 광야, 르비딤을 지나 하나님의 산으로', ref:'출 15:22–19:2 · 민 33:8–15',
-  text:'바다를 건넌 뒤 사흘 길을 가서 마라에 이르고(출 15:22), 출발 한 달 만에 신 광야에 닿아요. 시내 광야 도착은 히브리어로 "셋째 달에… 바로 그 날"(<bdi dir="rtl" lang="he">בַּחֹדֶשׁ הַשְּׁלִישִׁי … בַּיּוֹם הַזֶּה</bdi>)이라 라쉬는 셋째 달 초하루로 읽어요. 그러면 출발부터 약 45일이에요. 개역개정은 "떠난 지 삼 개월이 되던 날"로 옮겨서 약 90일로 읽혀요. 아래 표에 두 독법을 함께 넣었어요. B·C 가설은 이 구간의 정거장 대부분을 특정하지 못해요. 그래서 지도에서는 위치 미상 지점을 속이 빈 점선 원으로 표시했어요.',
+  text:'바다를 건넌 뒤 사흘 길을 가서 마라에 이르고(출 15:22), 출발 한 달 만에 신 광야에 닿아요. 시내 광야 도착은 히브리어로 “셋째 달에… 바로 그 날”(<bdi dir="rtl" lang="he">בַּחֹדֶשׁ הַשְּׁלִישִׁי … בַּיּוֹם הַזֶּה</bdi>)이라 라쉬는 셋째 달 초하루로 읽어요. 그러면 출발부터 약 45일이에요. 개역개정은 “떠난 지 삼 개월이 되던 날”로 옮겨서 약 90일로 읽혀요. 아래 표에 두 독법을 함께 넣었어요. B·C 가설은 이 구간의 정거장 대부분을 특정하지 못해요. 그래서 지도에서는 위치 미상 지점을 속이 빈 점선 원으로 표시했어요.',
   test:'p12', bbox:[31.6,26.8,38.0,31.4]},
  {key:'p3', tab:'시내산 체류', yr:[80.13,81.1], when:'1년 3월 ~ 2년 2월 20일 (출 19:1; 민 10:11)',
   title:'열한 달 남짓 한 곳에 머물다', ref:'출 19장–민 10:10',
@@ -52,7 +52,7 @@ const PH = [
   pts:['sinai_A','sinai_B','sinai_C','lawz','helal'], still:true, bbox:[32.2,26.8,38.0,31.2]},
  {key:'p4', tab:'시내산 → 가데스', yr:[81.1,81.4], when:'2년 2월 20일 출발 (민 10:11) · 정탐 40일 (민 13:25)',
   title:'열하룻길, 그리고 정탐꾼 열둘', ref:'민 10:11–14:45 · 신 1:2, 1:19',
-  text:'"호렙 산에서 세일 산을 지나 가데스 바네아까지 열하룻길"(신 1:2). 이 한 절로 시내산 위치를 날수로 시험할 수 있어요. 가데스를 아인 엘-쿠데이라트로 놓고 각 후보 산까지의 거리를 11일로 나눠 보세요.',
+  text:'“호렙 산에서 세일 산을 지나 가데스 바네아까지 열하룻길”(신 1:2). 이 한 절로 시내산 위치를 날수로 시험할 수 있어요. 가데스를 아인 엘-쿠데이라트로 놓고 각 후보 산까지의 거리를 11일로 나눠 보세요.',
   test:'p4', bbox:[32.6,26.8,38.0,31.3]},
  {key:'p5', tab:'38년의 방랑', yr:[81.4,119.2], when:'가데스에서 세렛 시내까지 38년 (신 2:14)',
   title:'이름만 남은 열일곱 정거장', ref:'민 14:33–35 · 민 33:18–36 · 신 2:1–14',
@@ -60,7 +60,7 @@ const PH = [
   pts:['kadesh','eziongeber','timna','kuntillet'], unknown:true, bbox:[33.4,28.9,36.4,31.3]},
  {key:'p6', tab:'40년째: 가데스 → 모압', yr:[119.2,120], when:'40년 5월 1일 아론 죽음 (민 33:38) · 11월 1일 모세의 고별 설교 (신 1:3)',
   title:'호르산에서 느보산까지', ref:'민 20:1–22:1 · 민 33:37–49',
-  text:'미리암이 가데스에서 죽고(민 20:1), 에돔이 길을 막자 돌아가요(민 20:21). 아론은 호르산에서 죽어요. 전통은 페트라 곁 제벨 하룬이지만 "에돔 땅 변경"(민 20:23)에는 가데스 근처 제벨 마두라가 더 맞는다는 견해도 있어요. 이후 부논(페이난 구리 광산), 디본갓(디반)을 거쳐 모압 평지에 이르러요. 이 구간은 세 가설이 거의 같아요.',
+  text:'미리암이 가데스에서 죽고(민 20:1), 에돔이 길을 막자 돌아가요(민 20:21). 아론은 호르산에서 죽어요. 전통은 페트라 곁 제벨 하룬이지만 “에돔 땅 변경”(민 20:23)에는 가데스 근처 제벨 마두라가 더 맞는다는 견해도 있어요. 이후 부논(페이난 구리 광산), 디본갓(디반)을 거쳐 모압 평지에 이르러요. 이 구간은 세 가설이 거의 같아요.',
   pts:['hor_alt','petra','arnon','zered'], bbox:[33.6,29.9,36.4,32.2]},
  {key:'p7', tab:'전체 보기', yr:[40,120], when:'모세 40세 ~ 120세 (신 34:7)',
   title:'세 가설 전체 경로', ref:'민 33:1–49',
@@ -79,16 +79,16 @@ PH.forEach((p,i)=>{const b=document.createElement('button');b.className='ph';b.t
 /* 가설 카드 */
 const CARDS = {
  A:{sinai:'제벨 무사(2,285m), 일부는 캐서린산', sea:'발라 호수 / 팀사 호 / 비터 호', who:'4세기 이후 비잔틴 전승(에게리아 381–384), 호프마이어 2005·2021, 키친 2003',
-    plus:'신 1:2의 열하룻길에 대면 하루 약 28km로 대상 속도와 맞아요(세 후보 가운데 가장 가까움). 라암셋에서 발라 호수까지 직선은 46km이고, 숙곳으로 내려갔다가 "돌이키는"(출 14:2) 길을 따르면 직선 합 약 90km, 실제 길로 약 118km예요. 세 진영으로 나누면 하루 약 39km라 강행군이지만, 세 가설 가운데 바다까지 가장 가까워요. 발라 호수 일대 지질 조사가 뒷받침해요.',
+    plus:'신 1:2의 열하룻길에 대면 하루 약 28km로 대상 속도와 맞아요(세 후보 가운데 가장 가까움). 라암셋에서 발라 호수까지 직선은 46km이고, 숙곳으로 내려갔다가 “돌이키는”(출 14:2) 길을 따르면 직선 합 약 90km, 실제 길로 약 118km예요. 세 진영으로 나누면 하루 약 39km라 강행군이지만, 세 가설 가운데 바다까지 가장 가까워요. 발라 호수 일대 지질 조사가 뒷받침해요.',
     minus:'시내산이 이곳이라는 기록이 4세기 이전에는 없어요. 반도 남부에서 이스라엘 시대 유물이 나오지 않아요.',
     v:'성경 본문의 날수와 가장 잘 맞는 가설이에요. 다만 위치 자체는 전승이에요.'},
  B:{sinai:'하르 카르콤(아나티) / 제벨 헬랄 / (서중부) 신 비샤르', sea:'시르보니스 호(바르다윌) 사주, 바알스본 = 카시우스산', who:'아이스펠트 1932(바알스본), 아나티 1986·2001(하르 카르콤), 하르엘 1983(신 비샤르)',
     plus:'바알스본을 카시우스 신전에 맞추는 이집트·그리스 자료가 있어요. 가데스 가까이에 산을 두면 장기 체류가 자연스러워요.',
-    minus:'출 13:17은 "블레셋 사람의 땅의 길"을 피했다고 하는데 바르다윌 사주가 바로 그 해안길이에요. 하르 카르콤의 제의 흔적은 기원전 2350–2000년이라, 출애굽을 이른 연대(기원전 1446년)에 두어도 550년 넘게 어긋나요. 헬랄은 가데스에서 38km라 열하룻길이 무의미해져요.',
+    minus:'출 13:17은 “블레셋 사람의 땅의 길”을 피했다고 하는데 바르다윌 사주가 바로 그 해안길이에요. 하르 카르콤의 제의 흔적은 기원전 2350–2000년이라, 출애굽을 이른 연대(기원전 1446년)에 두어도 550년 넘게 어긋나요. 헬랄은 가데스에서 38km라 열하룻길이 무의미해져요.',
     v:'바다 건넌 곳의 논거는 진지하지만 산 후보끼리 합의가 없어요.'},
  C:{sinai:'할랏 알-바드르(화산, 험프리스) / 제벨 알-라우즈(대중설)', sea:'아카바만 북단(험프리스) / 누웨이바(대중설)', who:'베케 1873, 무질 1926, 험프리스 2003. 미디안-겐 가설: 블렌킨솝 2008, 뢰머 2015, 테베스 2021',
-    plus:'이드로가 미디안 제사장이고, "세일·바란·데만에서 오시는 하나님" 시(신 33:2, 삿 5:4, 합 3:3)와 미디안이 함께 나오는 합 3:7와 이집트의 "쇼수 땅 YHW" 지명이 남쪽을 가리켜요. 시내산의 불과 연기가 화산 현상과 닮았어요.',
-    minus:'라암셋에서 아카바만까지 직선으로만 333km인데, 이것을 세 정거장에 가야 해요. 할랏 알-바드르에서 가데스까지는 직선 466km라 열하룻길과 맞지 않아요. 제벨 알-라우즈의 "고고학 증거"는 학계가 검증하지 않았어요.',
+    plus:'이드로가 미디안 제사장이고, “세일·바란·데만에서 오시는 하나님” 시(신 33:2, 삿 5:4, 합 3:3)와 미디안이 함께 나오는 합 3:7와 이집트의 “쇼수 땅 YHW” 지명이 남쪽을 가리켜요. 시내산의 불과 연기가 화산 현상과 닮았어요.',
+    minus:'라암셋에서 아카바만까지 직선으로만 333km인데, 이것을 세 정거장에 가야 해요. 할랏 알-바드르에서 가데스까지는 직선 466km라 열하룻길과 맞지 않아요. 제벨 알-라우즈의 “고고학 증거”는 학계가 검증하지 않았어요.',
     v:'종교사(야훼 숭배의 남방 기원)로는 학계에서 진지하게 논의되지만, 이동 경로로는 본문 날수와 가장 크게 어긋나요.'},
 };
 if($('cards')) for(const k of ['A','B','C']){const c=CARDS[k];const d=document.createElement('article');d.className='card';d.style.setProperty('--k',COL[k]);
@@ -100,7 +100,7 @@ function testTable(t){
   const on=['A','B','C'].filter(k=>$('h'+k).checked); if(!on.length) return '';
   let rows='';
   if(t==='p1'){ rows=on.map(k=>{const km=plen(RT[k].p1);const r=road(km);return `<tr><td style="color:${COL[k]}">●</td><td>${NAMES[k]}</td><td class="n">${r}km</td><td class="n">${Math.round(r/3)}km</td><td>${flag(r/3)}</td></tr>`}).join('');
-    return `<table class="dist"><tr><th></th><th>가설</th><th>도로</th><th>하루</th><th></th></tr>${rows}</table><p class="dref">세 정거장(민 33:5–7)을 3일로 보고 나눈 값이에요. 판정 기준은 하루 20km 이하 가능, 40km 이하 강행군이에요. A는 숙곳으로 내려갔다가 북쪽으로 "돌이키는"(출 14:2) 길이라 직선보다 길어요.</p>`; }
+    return `<table class="dist"><tr><th></th><th>가설</th><th>도로</th><th>하루</th><th></th></tr>${rows}</table><p class="dref">세 정거장(민 33:5–7)을 3일로 보고 나눈 값이에요. 판정 기준은 하루 20km 이하 가능, 40km 이하 강행군이에요. A는 숙곳으로 내려갔다가 북쪽으로 “돌이키는”(출 14:2) 길이라 직선보다 길어요.</p>`; }
   if(t==='p12'){ rows=on.map(k=>{const km=plen(RT[k].p1)+plen(RT[k].p2);const r=road(km);return `<tr><td style="color:${COL[k]}">●</td><td>${NAMES[k]}</td><td class="n">${r}km</td><td class="n">${Math.round(r/45)}km ${flag(r/45,15,25)}</td><td class="n">${Math.round(r/90)}km</td></tr>`}).join('');
     return `<table class="dist"><tr><th></th><th>가설</th><th>라암셋→산</th><th>45일(히브리어·라쉬)</th><th>90일(개역개정)</th></tr>${rows}</table><p class="dref">45일 독법에서 하루 15km 이하 가능, 25km 이하 강행군으로 판정했어요. 90일 독법이면 세 가설 모두 이 구간은 갈 수 있는 거리예요. C를 가르는 것은 이 구간이 아니라 바다까지의 세 진영(01단계)과 열하룻길(04단계)이에요.</p>`; }
   if(t==='p4'){ const S={A:'sinai_A',B:'sinai_B',C:'sinai_C'}; rows=on.map(k=>{const r=road(hav(S[k],'kadesh'));return `<tr><td style="color:${COL[k]}">●</td><td>${PL[S[k]].n}</td><td class="n">${r}km</td><td class="n">${Math.round(r/11)}km</td><td>${r/11<12?'<span class="flag hard">너무 가까움</span>':flag(r/11)}</td></tr>`}).join('');
@@ -118,7 +118,7 @@ function drawPhase(i, animate){
   const p=PH[i]; const on=['A','B','C'].filter(k=>$('h'+k).checked);
   ['regions','rnames','ghosts','routes','stations','labels','movers'].forEach(g=>$(g).innerHTML='');
   // 지역 이름
-  if(p.regions){ REGIONS.forEach(r=>{el('path',{d:G.reg[r.k],class:'region',fill:r.col,stroke:r.col},$('regions')); const [x,y]=proj(...r.at); const tx=el('text',{x,y,'text-anchor':'middle','data-fs':13,fill:r.col,'font-weight':600,class:'lbl'},$('rnames')); tx.textContent=r.t;}); }
+  if(p.regions){ REGIONS.forEach(r=>{el('path',{d:G.reg[r.k],class:'region',fill:r.col,stroke:r.col},$('regions'));}); }
   const want=phaseRoutes[p.key]; const drawn=[]; const ptset=new Map();
   // 앞선 시기는 옅게
   const order=['p1','p2','p4','p5','p6']; const idx=order.indexOf(want[0]);
@@ -135,6 +135,9 @@ function drawPhase(i, animate){
     if(p.still && /^sinai_|lawz|helal/.test(k)) { const pulse=el('circle',{cx:s.x,cy:s.y,r:4,'data-r':4,'data-pulse':1,fill:'none',stroke:col,'stroke-width':2,'vector-effect':'non-scaling-stroke'},g); }
     lab.push({k,s,col}); });
   const placed=placeLabels(lab);
+  if(p.regions){ const k2=vb[2]/(svg.getBoundingClientRect().width||1000), fs2=13*k2; REGIONS.forEach(r=>{ const [x0,y0]=proj(...r.at); const w=r.t.length*fs2*0.95,hh=fs2*1.1;
+    for(const dy of [0,-24,24,-48,48]){ const yy=y0+dy*k2, box=[x0-w/2,yy-hh*.85,x0+w/2,yy+hh*.25]; if(placed.some(b=>!(box[2]<b[0]||box[0]>b[2]||box[3]<b[1]||box[1]>b[3]))) continue;
+      placed.push(box); const tx=el('text',{x:x0,y:yy,'text-anchor':'middle','data-fs':13,fill:r.col,'font-weight':600,class:'lbl'},$('rnames')); tx.textContent=r.t; break; } }); }
   { const k=vb[2]/(svg.getBoundingClientRect().width||1000), fs=13*k;
     RNAMES.forEach(([t,x,y])=>{ const w=t.length*fs*1.0, h=fs*1.1, box=[x-w/2,y-h*.85,x+w/2,y+h*.25];
       if(placed.some(b=>!(box[2]<b[0]||box[0]>b[2]||box[3]<b[1]||box[1]>b[3]))) return;
@@ -147,6 +150,7 @@ function drawPhase(i, animate){
   const info=$('info');
   info.innerHTML=`<span class="when">${p.when}</span><h3>${p.title}</h3><span class="dref">${p.ref}</span><p>${p.text}</p>${p.extra?p.extra():''}${p.test?testTable(p.test):''}
    <div class="legend"><span><i style="background:var(--ink)"></i>확실·유력</span><span><i style="background:var(--panel)"></i>추정</span><span><i style="background:var(--panel);border-style:dashed"></i>미상·비학술</span></div>`;
+  document.querySelectorAll('.dist, #logi').forEach(tb=>{ const rows=tb.rows; if(rows.length<2) return; [...rows[0].cells].forEach((th,i)=>{ const c=rows[1].cells[i]; if(c&&c.classList.contains('n')) th.style.textAlign='right'; }); });
   document.querySelectorAll('.ph').forEach((b,j)=>b.setAttribute('aria-pressed', j===i?'true':'false'));
   document.querySelectorAll('.yearbar .seg').forEach((s,j)=>s.classList.toggle('on', i===7 || j===i));
 }
@@ -155,11 +159,11 @@ function moveAlong(m,pe,dur){ const L=pe.getTotalLength(); const t0=performance.
 function scaleK(){ return vb[2]/1000 * (1000/svg.getBoundingClientRect().width||1) * 1.0; }
 function placeLabels(lab){
   const k=vb[2]/ (svg.getBoundingClientRect().width||1000); const fs=12.5*k; const placed=[];
-  lab.sort((a,b)=>a.s.y-b.s.y); lab.forEach(({s})=>placed.push([s.x-5*k,s.y-5*k,s.x+5*k,s.y+5*k]));
+  lab.sort((a,b)=>a.s.y-b.s.y); lab.forEach(({s})=>placed.push([s.x-5*k,s.y-5*k,s.x+5*k,s.y+5*k])); placed.push([vb[0]+vb[2]-250*k,vb[1]+vb[3]-44*k,vb[0]+vb[2],vb[1]+vb[3]]); const inb=b=>b[0]>=vb[0]+3*k&&b[2]<=vb[0]+vb[2]-3*k&&b[1]>=vb[1]+2*k&&b[3]<=vb[1]+vb[3]-2*k;
   const tries=[[7,-6,'start'],[7,12,'start'],[-7,-6,'end'],[-7,12,'end'],[0,-11,'middle'],[0,19,'middle']];
   lab.forEach(({k:key,s})=>{ const w=s.n.length*fs*0.98, h=fs*1.1; let ok=null;
     for(const [dx,dy,an] of tries){ const x0 = an==='start'? s.x+dx*k : an==='end'? s.x+dx*k-w : s.x-w/2; const y0=s.y+dy*k-h*.85; const box=[x0,y0,x0+w,y0+h];
-      if(!placed.some(b=>!(box[2]<b[0]||box[0]>b[2]||box[3]<b[1]||box[1]>b[3]))){ ok=[dx,dy,an,box]; break; } }
+      if(inb(box)&&!placed.some(b=>!(box[2]<b[0]||box[0]>b[2]||box[3]<b[1]||box[1]>b[3]))){ ok=[dx,dy,an,box]; break; } }
     if(!ok) return; placed.push(ok[3]);
     const t=el('text',{x:s.x+ok[0]*k,y:s.y+ok[1]*k,'text-anchor':ok[2],class:'lbl','data-fs':12.5},$('labels')); t.textContent=s.n;
     const tt=el('title',{},t); tt.textContent=`${s.n} — ${s.id} (${s.c})`; });
@@ -197,20 +201,20 @@ addEventListener('resize',()=>{ if(cur>=0) drawPhase(cur,false); });
   {t:'문자적 + 잡족(메킬타 120만~360만)',v:6100000,lo:3200000,k:'lit'},
   {t:'시나이 근대 유목민 (페트리, 20세기 초)',v:7000,lo:4000,k:'ref'},{t:'남시나이 13개 부족 (호리우치)',v:38000,k:'ref'},
   {t:'철기 I 가나안 고지대 정착 인구',v:45000,k:'ref'},{t:'신왕국 이집트 전체 (부처 1976)',v:3000000,lo:2500000,k:'ref'},{t:'이집트 전성기 군대',v:20000,k:'ref'}];
-  const X0=300,X1=800, lg=v=>Math.log10(v), x=v=>X0+(lg(v)-3)/(7-3)*(X1-X0); let y=30; const H=30;
-  [[1e3,'1천'],[1e4,'1만'],[1e5,'10만'],[1e6,'100만'],[1e7,'1,000만']].forEach(([v,lb])=>{ el('line',{x1:x(v),x2:x(v),y1:16,y2:450,stroke:'var(--rule)'},s); const t=el('text',{x:x(v),y:466,'text-anchor':'middle',class:'m','font-size':12},s); t.textContent=lb; });
-  const head=(t,yy)=>{const e=el('text',{x:8,y:yy,'font-size':12,class:'m'},s); e.textContent=t;};
+  const X0=360,X1=780, lg=v=>Math.log10(v), x=v=>X0+(lg(v)-3)/(7-3)*(X1-X0); let y=34; const H=40;
+  [[1e3,'1천'],[1e4,'1만'],[1e5,'10만'],[1e6,'100만'],[1e7,'1,000만']].forEach(([v,lb])=>{ el('line',{x1:x(v),x2:x(v),y1:16,y2:450,stroke:'var(--rule)'},s); const t=el('text',{x:x(v),y:466,'text-anchor':'middle',class:'m','font-size':17},s); t.textContent=lb; });
+  const head=(t,yy)=>{const e=el('text',{x:8,y:yy,'font-size':17,class:'m'},s); e.textContent=t;};
   let last=null;
-  items.forEach(it=>{ if(it.k!==last){ if(last) y+=14; head(it.k==='est'?'학설별 추정 (전체 인구)':it.k==='lit'?'문자적 독법':'비교 기준', y); y+=18; last=it.k; }
+  items.forEach(it=>{ if(it.k!==last){ if(last) y+=18; head(it.k==='est'?'학설별 추정 (전체 인구)':it.k==='lit'?'문자적 독법':'비교 기준', y); y+=26; last=it.k; }
     const col= it.k==='est'?'var(--a)': it.k==='lit'?'var(--hi)':'var(--muted)';
-    const t=el('text',{x:X0-8,y:y+12,'text-anchor':'end','font-size':12.5},s); t.textContent=it.t;
-    const xs=it.lo? x(it.lo):X0; el('rect',{x:it.lo?xs:X0,y:y+2,width:Math.max(3,x(it.v)-(it.lo?xs:X0)),height:14,fill:col,'fill-opacity':it.lo?.85:.85,rx:2},s);
-    if(it.lo) el('rect',{x:X0,y:y+8,width:xs-X0,height:2,fill:col,'fill-opacity':.35},s);
-    const n=el('text',{x:x(it.v)+6,y:y+13,'font-size':11.5,class:'m'},s); n.textContent=(it.lo?it.lo.toLocaleString('ko-KR')+'–':'')+it.v.toLocaleString('ko-KR');
-    y+=H-6; });
-  s.setAttribute('viewBox',`0 0 1000 ${y+30}`);
+    const t=el('text',{x:X0-10,y:y+18,'text-anchor':'end','font-size':19},s); t.textContent=it.t;
+    const xs=it.lo? x(it.lo):X0; el('rect',{x:it.lo?xs:X0,y:y+3,width:Math.max(3,x(it.v)-(it.lo?xs:X0)),height:20,fill:col,'fill-opacity':it.lo?.85:.85,rx:2},s);
+    if(it.lo) el('rect',{x:X0,y:y+12,width:xs-X0,height:2,fill:col,'fill-opacity':.35},s);
+    const n=el('text',{x:x(it.v)+8,y:y+19,'font-size':16,class:'m'},s); n.textContent=(it.lo?it.lo.toLocaleString('ko-KR')+'–':'')+it.v.toLocaleString('ko-KR');
+    y+=H-4; });
+  s.setAttribute('viewBox',`0 0 1000 ${y+44}`);
   // 대응: 눈금 라벨 다시 아래로
-  s.querySelectorAll('text.m').forEach(t=>{ if(+t.getAttribute('y')===466) t.setAttribute('y', y+18); });
+  s.querySelectorAll('text.m').forEach(t=>{ if(+t.getAttribute('y')===466) t.setAttribute('y', y+26); });
   s.querySelectorAll('line').forEach(l=>l.setAttribute('y2',y+4));
 })();
 
@@ -219,7 +223,7 @@ addEventListener('resize',()=>{ if(cur>=0) drawPhase(cur,false); });
   const f=n=>Math.round(n).toLocaleString('ko-KR');
   $('logi').innerHTML=`<thead><tr><th>추정</th><th>인원</th><th>행렬 길이<br><small>10열, 줄 간격 1~2m</small></th><th>하루 물<br><small>1인 5L, 가축 제외</small></th><th>하루 만나<br><small>1인 1오멜 ≈ 2.2L (출 16:16)</small></th><th>진영 면적<br><small>1인 30㎡</small></th></tr></thead><tbody>`+
   rows.map(([t,n])=>`<tr><td>${t}</td><td class="n">${f(n)}명</td><td class="n">${f(n/10/1000)}~${f(n/10*2/1000)}km</td><td class="n">${f(n*5/1000)}톤</td><td class="n">${f(n*2.2/1000)}㎥</td><td class="n">${(n*30/1e6).toFixed(1)}㎢</td></tr>`).join('')+
-  `</tbody><caption style="caption-side:bottom;text-align:left;padding:8px 10px;color:var(--muted);font-size:.8rem">250만 명이 10열로 걸으면 행렬이 250km를 넘어요. 시속 4km로 걸어도 맨 뒤가 출발하는 데 60시간이 넘게 걸려요. 반대로 폭 1km 통로라면 250만 명이 바다를 건너는 데는 한 시간이 채 안 걸려요(초당 1,000명 통과 가정). 건너는 일보다 바다 앞까지 오는 행렬이 더 어려운 문제예요.</caption>`; })();
+  `</tbody><caption style="caption-side:bottom;text-align:left;padding:8px 10px;color:var(--muted);font-size:.8rem">250만 명이 10열로 걸으면 행렬이 250km를 넘어요. 시속 4km로 걸어도 맨 뒤가 출발하는 데 60시간이 넘게 걸려요. 반대로 폭 1km 통로라면 250만 명이 바다를 건너는 데는 한 시간이 채 안 걸려요(초당 1,000명 통과 가정). 건너는 일보다 바다 앞까지 오는 행렬이 더 어려운 문제예요.</caption>`; document.querySelectorAll('.dist, #logi').forEach(tb=>{ const rows=tb.rows; if(rows.length<2) return; [...rows[0].cells].forEach((th,i)=>{ const c=rows[1].cells[i]; if(c&&c.classList.contains('n')) th.style.textAlign='right'; }); }); })();
 
 let start=0; try{ const v=+localStorage.getItem('exo-phase'); if(v>=0&&v<PH.length) start=v; }catch(e){}
 requestAnimationFrame(()=>go(start,false));
