@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="../assets/site.css?v=cb69e101">
+<link rel="stylesheet" href="../assets/site.css?v=b187d83e">
 <script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>
   /* 이 페이지 전용: 움직이는 경로 지도, 인구 막대그래프, 숫자 칸 */
@@ -72,17 +72,16 @@
   .sw.c{background:repeating-linear-gradient(90deg,var(--c) 0 2px,transparent 2px 8px)}
   .badge circle{stroke:var(--panel);stroke-width:1.5;vector-effect:non-scaling-stroke}
   .badge text{fill:var(--badge-ink);font-family:var(--body);font-weight:700;text-anchor:middle;dominant-baseline:central}
-  #stlist,#popdata{margin:10px auto 0}
-  #stlist details,#popdata details{border:1px solid var(--line);border-radius:var(--r-lg);padding:4px 14px;background:var(--surface)}
-  #stlist summary,#popdata summary{cursor:pointer;color:var(--ink-2);padding:8px 0;font-size:var(--fs-caption)}
-  #stlist summary:focus-visible,#popdata summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  #stlist .scroller,#popdata .scroller{border:none;margin-bottom:8px}
+  #stlist{margin:10px auto 0}
+  #stlist details{border:1px solid var(--line);border-radius:var(--r-lg);padding:4px 14px;background:var(--surface)}
+  #stlist summary{cursor:pointer;color:var(--ink-2);padding:8px 0;font-size:var(--fs-caption)}
+  #stlist summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  #stlist .scroller{border:none;margin-bottom:8px}
   #stlist .scroller table{min-width:0}
-  #stlist .scroller tbody th,#popdata .scroller tbody th{text-align:start;font-weight:600;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line-soft);background:none;white-space:normal}
-  #stlist .scroller tbody td,#popdata .scroller tbody td{padding:12px 14px}
-  #stlist .scroller thead th,#popdata .scroller thead th{padding:10px 14px}
+  #stlist .scroller tbody th{text-align:start;font-weight:600;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line-soft);background:none;white-space:normal}
+  #stlist .scroller tbody td{padding:12px 14px}
+  #stlist .scroller thead th{padding:10px 14px}
   #stlist .scroller tbody tr:last-child th{border-bottom:none}
-  #popdata th.num,#popdata td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
   .btn{font:inherit;font-size:var(--fs-caption);border:1px solid var(--ink);background:var(--ink);color:var(--ground);border-radius:var(--r-sm);padding:6px 14px;cursor:pointer;transition:opacity .2s var(--ease)}
   .btn.ghost{background:transparent;color:var(--ink)}
   .btn:hover{opacity:.85} .btn:active{transform:translateY(1px)}
@@ -112,8 +111,6 @@
   .flag.no{background:var(--rome-soft)}
   .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:var(--fs-caption);color:var(--muted)}
   .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px;border:1.6px solid var(--ink)}
-  .chart text{fill:var(--ink);font-family:var(--body)}
-  .chart .m{font-family:var(--mono);fill:var(--muted)}
   /* 한 기둥(A안): 규칙은 site.css 의 .onecol 로 옮김. 이 페이지에만 있는 카드 본문 크기만 남김 */
   .vcard dd{font-size:var(--fs-read);line-height:var(--lh-read)}
   .info p{max-width:62ch}
@@ -283,9 +280,28 @@
           <p>같은 오경 안에 반대 방향의 신호도 있어요. 장자가 22,273명뿐이라 장자 한 명당 20세 이상 남자가 스물일곱 명이에요(민 3:43). 하나님은 땅이 황폐해질까 봐 가나안 사람을 “네가 번성하여 그 땅을 기업으로 얻을 때까지” 조금씩 쫓아내겠다고 하세요(출 23:29–30). 이스라엘을 두고 “모든 민족 중에 가장 적으니라”라고도 <span class="nb">말해요(신 7:7).</span></p>
           <p>그래서 학자들은 “천”으로 옮긴 히브리어 엘레프(<span class="he" dir="rtl" lang="he">אֶלֶף</span>)를 “부대”나 “씨족”으로 다시 읽어 보았어요. 가장 많이 인용되는 계산은 험프리스(1998)의 약 2만 명이고, 웬함(1967)은 약 7만 2천 명이에요. 험프리스는 장자 22,273명을 그대로 두지 않아요. 레위인보다 많았던 273명(민 3:46)만 실제 숫자로 보고 계산을 세워요. 그래서 장자 비율 문제는 엘레프를 다시 읽을 때에만 함께 풀려요. 비교 기준과 견주면 2만 명은 남시나이 13개 부족(약 3만 8천 명)이나 철기 I 가나안 고지대 정착 인구(약 4만 5천 명)와 같은 자릿수이고, 7만 2천 명은 그보다 많아요. 반대로 은 총량 계산은 엘레프를 1,000으로 읽어야만 맞고, 아데어(2025)는 '부대' 해석을 통계로 <span class="nb">반박했어요.</span></p>
         </div>
-        <div class="prose"><p>막대는 로그 눈금이에요. 눈금 한 칸이 열 배예요. 녹색은 학설별 추정, 붉은색은 문자적 독법, 회색은 비교 <span class="nb">기준이에요.</span></p></div>
-        <div class="scroller wide"><svg class="chart" id="popchart" viewBox="0 0 1000 470" style="min-width:640px;width:100%;height:auto" role="img" aria-label="학설별 인구 추정은 5,550명에서 14만 명까지, 문자적 독법은 200만~610만 명으로 갈린다는 막대그래프예요. 값은 아래 표에 있어요."></svg></div>
-        <div id="popdata" class="wide"></div>
+        <figure class="chartcard wide">
+          <div class="chart-head">
+            <h3>인구 추정은 학설마다 이렇게 달라요</h3>
+            <p>가로축은 로그 눈금이라 한 칸이 열 배예요. 굵은 부분이 추정 범위이고, 막대에 손을 올리면 <span class="nb">값이 보여요.</span></p>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-scroll" tabindex="0" role="region" aria-label="그래프 (좌우로 밀어 볼 수 있어요)">
+              <svg id="popchart" viewBox="0 0 760 640" role="img" aria-labelledby="popT popD">
+                <title id="popT">광야 인구 추정치와 비교 기준을 로그 눈금으로 그린 막대그래프</title>
+                <desc id="popD">학설별 인구 추정은 5,550명에서 14만 명까지, 문자적 독법은 200만에서 610만 명까지예요. 비교 기준은 4천 명에서 300만 명까지예요. 정확한 값은 아래 표에 있어요.</desc>
+              </svg>
+            </div>
+            <div class="tt"></div>
+          </div>
+          <div class="chart-legend">
+            <span><i style="background-color:var(--s1)"></i>학설별 추정(전체 인구)</span>
+            <span><i style="background-color:var(--s2)"></i>문자적 독법</span>
+            <span><i style="background-color:var(--s0)"></i>비교 기준</span>
+          </div>
+          <figcaption>학설별 추정은 5,550명에서 14만 명 사이이고, 문자적 독법은 200만 명이 <span class="nb">넘어요.</span></figcaption>
+        </figure>
+        <details class="chart-data" id="popdata"></details>
         <div class="scroller wide"><table id="logi"></table></div>
         <div class="tip"><p><b>판단</b> 엘레프를 다시 읽는 쪽을 택하면 “수만 명 규모, 대략 2만~7만 명”이 본문 안팎의 제약을 가장 많이 함께 설명해요. 문자적 독법은 만나와 반석의 물 같은 초자연적 공급을 전제로 하고, 본문도 그렇게 말해요(출 16–17장, 민 11장). 결정적으로 입증된 숫자는 <span class="nb">없어요.</span></p></div>
       </section>
@@ -360,7 +376,7 @@
       </div>
     </footer>
     <!--/#FOOTER-->
-<script src="../assets/site.js?v=d8a46d11"></script>
+<script src="../assets/site.js?v=f1b8c2f3"></script>
 <script src="../assets/exodus-wilderness.js"></script>
 
 </body>

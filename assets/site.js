@@ -98,3 +98,24 @@
     }
   });
 })();
+
+/* 차트 말풍선 — 막대·점에 올리거나 초점을 주면 뜬다(Esc 로 닫힘). 모든 차트가 이것을 쓴다.
+   BN.chartTip(요소, 말풍선 HTML, 요소 위쪽 중심 x, y)  — x·y 는 SVG 뷰박스 좌표, 요소는 이미 SVG 안에 붙어 있어야 한다. */
+window.BN=window.BN||{};
+BN.chartTip=function(node,html,x,y){
+  var wrap=node.closest('.chart-wrap'), svg=node.ownerSVGElement;
+  var tt=wrap&&wrap.querySelector('.tt');
+  if(!tt||!svg) return;
+  function show(){
+    tt.innerHTML=html; tt.style.opacity='1';
+    var box=svg.getBoundingClientRect(), w=wrap.getBoundingClientRect();
+    var s=box.width/((svg.viewBox&&svg.viewBox.baseVal.width)||760);
+    var left=x*s+box.left-w.left-tt.offsetWidth/2;
+    tt.style.left=Math.min(Math.max(left,4),Math.max(4,w.width-tt.offsetWidth-4))+'px';
+    tt.style.top=Math.max(2,y*s+box.top-w.top-tt.offsetHeight-8)+'px';
+  }
+  function hide(){ tt.style.opacity='0'; }
+  node.addEventListener('mouseenter',show); node.addEventListener('focus',show);
+  node.addEventListener('mouseleave',hide); node.addEventListener('blur',hide);
+  node.addEventListener('keydown',function(e){ if(e.key==='Escape') hide(); });
+};

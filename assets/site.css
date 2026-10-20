@@ -19,6 +19,8 @@
   /* 그림자는 잉크 색조를 띠게 */
   --shadow:0 1px 1px rgba(31,36,32,.04), 0 8px 24px -12px rgba(31,36,32,.18);
   --shadow-lift:0 2px 4px rgba(31,36,32,.06), 0 14px 32px -14px rgba(31,36,32,.26);
+  /* 차트 팔레트(검증 통과): s1 구원·긍정, s2 위협·부정, s0 중립. 모든 차트가 이 셋만 쓴다 */
+  --s0:#5F665F; --s1:#008F80; --s2:#B2591F; --grid:#CBD2C4;
 
   --display:"Gowun Batang","Nanum Myeongjo","Noto Serif KR",Georgia,serif;
   --body:"Pretendard Variable",Pretendard,"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
@@ -57,6 +59,7 @@
     --temple:#DCAE4E; --temple-soft:#332A16;
     --shadow:0 1px 1px rgba(0,0,0,.3), 0 10px 26px -12px rgba(0,0,0,.55);
     --shadow-lift:0 2px 5px rgba(0,0,0,.36), 0 16px 34px -14px rgba(0,0,0,.6);
+    --s0:#88908A; --s1:#22A88F; --s2:#C97E33; --grid:#39433F;
   }
 }
 :root[data-theme="dark"]{
@@ -68,6 +71,7 @@
   --temple:#DCAE4E; --temple-soft:#332A16;
   --shadow:0 1px 1px rgba(0,0,0,.3), 0 10px 26px -12px rgba(0,0,0,.55);
   --shadow-lift:0 2px 5px rgba(0,0,0,.36), 0 16px 34px -14px rgba(0,0,0,.6);
+  --s0:#88908A; --s1:#22A88F; --s2:#C97E33; --grid:#39433F;
 }
 
 *{box-sizing:border-box}
@@ -404,6 +408,40 @@ blockquote.src cite{color:var(--muted)}
 .tiles > .tile > .u{grid-column:2}
 /* 예외: 값이 숫자가 아니라 낱말이고 .u 가 따로 읽혀야 하는 칸은 class="tile stack" 으로 예전처럼 위아래로 둔다 */
 .tiles > .tile.stack{display:flex;flex-direction:column}
+
+/* ── 차트 공통 규격 (2026-10-20) ─────────────────────────────────────────
+   카드(.chartcard) 안에 머리(.chart-head) · 그림(.chart-wrap > .chart-scroll > svg + .tt) · 범례(.chart-legend)
+   · 캡션(figcaption)을 두고, 카드 바로 뒤에 표(details.chart-data)를 둔다. 페이지마다 다시 정의하지 않는다.
+   SVG 안 글자는 뷰박스 폭 760 기준 14 단위(= 화면 14px). 막대 모서리 4, 선 2, 점 지름 8 이상. */
+.chartcard{border:1px solid var(--line);border-radius:var(--r-lg);background-color:var(--surface);
+  padding:clamp(16px,3vw,24px);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;margin:0}
+.chart-head{display:flex;flex-direction:column;gap:4px}
+.chart-head h3{margin:0}
+.chart-head p{margin:0;color:var(--muted);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption)}
+.chart-wrap{position:relative}
+.chart-scroll{overflow-x:auto}
+.chart-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chart-scroll svg{display:block;min-width:660px;width:100%;height:auto}
+.chartcard .ax{fill:var(--muted);font-size:14px;font-weight:var(--fw-caption);font-family:var(--mono)}
+.chartcard .cat{fill:var(--ink-2);font-size:14px;font-weight:var(--fw-caption)}
+.chartcard .val{fill:var(--ink);font-size:14px;font-weight:var(--fw-caption);font-family:var(--mono);font-variant-numeric:tabular-nums}
+.chartcard .gl{stroke:var(--grid);stroke-width:1}
+.chartcard .bar{cursor:pointer}
+.chartcard .bar:hover{opacity:.82}
+.chartcard .bar:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chart-legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--ink-2)}
+.chart-legend span{display:inline-flex;align-items:center;gap:8px}
+.chart-legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.chartcard .tt{position:absolute;pointer-events:none;background-color:var(--ink);color:var(--ground);
+  padding:8px 11px;border-radius:var(--r-sm);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:1.5;white-space:nowrap;
+  opacity:0;transition:opacity .12s;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.chartcard .tt b{font-family:var(--mono)}
+details.chart-data > summary{cursor:pointer;color:var(--ink-2);padding:6px 0}
+details.chart-data > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+details.chart-data > .scroller{margin-top:10px}
+details.chart-data .scroller tbody th{text-align:start;font-weight:600;vertical-align:top;padding:15px 19px;border-bottom:1px solid var(--line-soft);background:none;white-space:normal}
+details.chart-data .scroller tbody tr:last-child th{border-bottom:none}
+details.chart-data th.num,details.chart-data td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 
 /* 한 기둥 레이아웃(2026-10-20, 새 글 전용): <article class="wrap onecol"> 로 켠다.
    본문·인용 상자·일반 표·카드는 --col(760px), 지도·그래프·넓은 표만 .wide 를 붙여 넓힌다.

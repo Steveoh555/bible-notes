@@ -214,30 +214,36 @@ $('next').onclick=()=>{ stopPlay(); go((cur+1)%PH.length); };
 ['A','B','C'].forEach(k=>$('h'+k).addEventListener('change',()=>drawPhase(cur,false)));
 addEventListener('resize',()=>{ if(cur>=0) drawPhase(cur,false); });
 
-/* 인구 차트 (로그 눈금) */
-(function(){ const s=$('popchart'); const items=[
+/* 인구 차트 (로그 눈금) — 공통 차트 규격(.chartcard, BN.chartTip) */
+(function(){ const s=$('popchart'); if(!s) return;
+  const items=[
   {t:'페트리 1906 (장막 해석)',v:5550,k:'est'},{t:'험프리스 1998 (부대 해석)',v:20000,k:'est'},{t:'웬함 1967 (지휘관 해석)',v:72000,k:'est'},
   {t:'지게르트 2009 (정복기)',v:120000,k:'est'},{t:'클라크 1955',v:140000,k:'est'},{t:'문자적: 장정 60만 + 가족',v:2500000,lo:2000000,k:'lit'},
   {t:'문자적 + 잡족(메킬타 120만~360만)',v:6100000,lo:3200000,k:'lit'},
   {t:'시나이 근대 유목민 (페트리, 20세기 초)',v:7000,lo:4000,k:'ref'},{t:'남시나이 13개 부족 (호리우치)',v:38000,k:'ref'},
   {t:'철기 I 가나안 고지대 정착 인구',v:45000,k:'ref'},{t:'신왕국 이집트 전체 (부처 1976)',v:3000000,lo:2500000,k:'ref'},{t:'이집트 전성기 군대',v:20000,k:'ref'}];
-  const kind={est:'학설별 추정',lit:'문자적 독법',ref:'비교 기준'}, fmt=n=>n.toLocaleString('ko-KR');
-  $('popdata').innerHTML=`<details><summary>막대 값을 표로 보기</summary><div class="scroller"><table><caption>인구 추정 막대그래프의 값</caption><thead><tr><th scope="col">분류</th><th scope="col">항목</th><th scope="col" class="num">값(명)</th></tr></thead><tbody>${items.map(it=>`<tr><td>${kind[it.k]}</td><th scope="row">${it.t}</th><td class="num">${it.lo?fmt(it.lo)+'–':''}${fmt(it.v)}</td></tr>`).join('')}</tbody></table></div></details>`;
-  const X0=360,X1=780, lg=v=>Math.log10(v), x=v=>X0+(lg(v)-3)/(7-3)*(X1-X0); let y=34; const H=40;
-  [[1e3,'1천'],[1e4,'1만'],[1e5,'10만'],[1e6,'100만'],[1e7,'1,000만']].forEach(([v,lb])=>{ el('line',{x1:x(v),x2:x(v),y1:16,y2:450,stroke:'var(--rule)'},s); const t=el('text',{x:x(v),y:466,'text-anchor':'middle',class:'m','font-size':17},s); t.textContent=lb; });
-  const head=(t,yy)=>{const e=el('text',{x:8,y:yy,'font-size':17,class:'m'},s); e.textContent=t;};
-  let last=null;
-  items.forEach(it=>{ if(it.k!==last){ if(last) y+=18; head(it.k==='est'?'학설별 추정 (전체 인구)':it.k==='lit'?'문자적 독법':'비교 기준', y); y+=26; last=it.k; }
-    const col= it.k==='est'?'var(--a)': it.k==='lit'?'var(--hi)':'var(--muted)';
-    const t=el('text',{x:X0-10,y:y+18,'text-anchor':'end','font-size':19},s); t.textContent=it.t;
-    const xs=it.lo? x(it.lo):X0; el('rect',{x:it.lo?xs:X0,y:y+3,width:Math.max(3,x(it.v)-(it.lo?xs:X0)),height:20,fill:col,'fill-opacity':it.lo?.85:.85,rx:2},s);
-    if(it.lo) el('rect',{x:X0,y:y+12,width:xs-X0,height:2,fill:col,'fill-opacity':.35},s);
-    const n=el('text',{x:x(it.v)+8,y:y+19,'font-size':16,class:'m'},s); n.textContent=(it.lo?it.lo.toLocaleString('ko-KR')+'–':'')+it.v.toLocaleString('ko-KR');
-    y+=H-4; });
-  s.setAttribute('viewBox',`0 0 1000 ${y+44}`);
-  // 대응: 눈금 라벨 다시 아래로
-  s.querySelectorAll('text.m').forEach(t=>{ if(+t.getAttribute('y')===466) t.setAttribute('y', y+26); });
-  s.querySelectorAll('line').forEach(l=>l.setAttribute('y2',y+4));
+  const kind={est:['학설별 추정','s1'],lit:['문자적 독법','s2'],ref:['비교 기준','s0']};
+  const fmt=n=>n.toLocaleString('ko-KR');
+  const ko=n=>{ if(n<10000) return fmt(n); const m=Math.floor(n/10000), r=n%10000; return fmt(m)+'만'+(r?' '+(r/1000)+'천':''); };
+  const short=it=>(it.lo?ko(it.lo)+'–':'')+ko(it.v), full=it=>(it.lo?fmt(it.lo)+'–':'')+fmt(it.v);
+  const wrap=(t,n)=>{ const out=[]; let cur=''; t.split(' ').forEach(w=>{ if(cur && (cur+' '+w).length>n){ out.push(cur); cur=w; } else cur=cur?cur+' '+w:w; }); if(cur) out.push(cur); return out; };
+  $('popdata').innerHTML=`<summary>막대 값 표로 보기</summary><div class="scroller"><table>
+ <caption>인구 추정 막대그래프의 값</caption>
+ <thead><tr><th scope="col">분류</th><th scope="col">항목</th><th scope="col" class="num">값(명)</th></tr></thead>
+ <tbody>${items.map(it=>`<tr><td>${kind[it.k][0]}</td><th scope="row">${it.t}</th><td class="num">${full(it)}</td></tr>`).join('')}</tbody></table></div>`;
+  const X0=250, X1=600, x=v=>X0+(Math.log10(v)-3)/4*(X1-X0), top=16, H=42, bottom=top+items.length*H;
+  [[1e3,'1천'],[1e4,'1만'],[1e5,'10만'],[1e6,'100만'],[1e7,'1,000만']].forEach(([v,lb])=>{
+    el('line',{class:'gl',x1:x(v),x2:x(v),y1:8,y2:bottom},s);
+    const t=el('text',{class:'ax',x:x(v),y:bottom+18,'text-anchor':'middle'},s); t.textContent=lb; });
+  const at=el('text',{class:'ax',x:(X0+X1)/2,y:bottom+40,'text-anchor':'middle'},s); at.textContent='인구(명) · 로그 눈금';
+  items.forEach((it,i)=>{ const [kn,cv]=kind[it.k], y0=top+i*H, col=`var(--${cv})`, xs=it.lo?x(it.lo):X0, xe=x(it.v);
+    const L=wrap(it.t,13);
+    L.forEach((ln,j)=>{ const t=el('text',{class:'cat',x:X0-10,y:y0+(L.length===1?22:14+j*16),'text-anchor':'end'},s); t.textContent=ln; });
+    if(it.lo) el('rect',{x:X0,y:y0+16,width:xs-X0,height:2,fill:col,'fill-opacity':.35},s);
+    const bar=el('rect',{class:'bar',x:xs,y:y0+7,width:Math.max(3,xe-xs),height:20,rx:4,fill:col,tabindex:0,role:'img','aria-label':`${it.t}. ${kn} ${full(it)}명`},s);
+    const n=el('text',{class:'val',x:xe+9,y:y0+22},s); n.textContent=short(it);
+    BN.chartTip(bar,`<b>${it.t}</b><br>${kn} · ${full(it)}명`,(xs+xe)/2,y0+6); });
+  s.setAttribute('viewBox',`0 0 760 ${bottom+52}`);
 })();
 
 /* 행렬·물·만나 표 */

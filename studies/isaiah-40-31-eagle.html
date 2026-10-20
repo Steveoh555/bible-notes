@@ -21,13 +21,10 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="../assets/site.css?v=cb69e101">
+<link rel="stylesheet" href="../assets/site.css?v=b187d83e">
 <script>try{var t=localStorage.getItem('bnote-theme');if(t&&t!=='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <style>
   /* 이 페이지 전용: 용례 막대그래프와 숫자 칸 */
-  :root{ --s1:#008F80; --s2:#B2591F; --s0:#5F665F; --grid:#CBD2C4; }
-  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; --grid:#39433F; } }
-  :root[data-theme="dark"]{ --s1:#22A88F; --s2:#C97E33; --s0:#88908A; --grid:#39433F; }
 
   .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
   .tile{background-color:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
@@ -39,27 +36,6 @@
   .tile .n{font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--muted);text-wrap:pretty}
   .tile.a .v{color:var(--s1)} .tile.b .v{color:var(--s2)}
 
-  .chartcard{border:1px solid var(--line);border-radius:var(--r-lg);background-color:var(--surface);
-    padding:clamp(16px,3vw,24px);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;margin:0}
-  .chart-head{display:flex;flex-direction:column;gap:4px}
-  .chart-head h3{margin:0}
-  .chart-head p{margin:0;color:var(--muted);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption)}
-  .chart-wrap{position:relative}
-  .chart-scroll{overflow-x:auto}
-  .chart-scroll svg{display:block;min-width:660px;width:100%;height:auto}
-  .ax{fill:var(--muted);font-size:14px;font-weight:var(--fw-caption);font-family:var(--mono)} /* SVG 단위 — 뷰박스 배율 보정 */
-  .cat{fill:var(--ink-2);font-size:14px;font-weight:var(--fw-caption)}
-  .val{fill:var(--ink);font-size:14px;font-weight:var(--fw-caption);font-family:var(--mono);font-variant-numeric:tabular-nums}
-  .gl{stroke:var(--grid);stroke-width:1}
-  .bar{cursor:pointer}
-  .bar:hover{opacity:.82}
-  .chart-legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);color:var(--ink-2)}
-  .chart-legend span{display:inline-flex;align-items:center;gap:8px}
-  .chart-legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
-  .tt{position:absolute;pointer-events:none;background-color:var(--ink);color:var(--ground);
-    padding:8px 11px;border-radius:var(--r-sm);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);line-height:1.5;white-space:nowrap;
-    opacity:0;transition:opacity .12s;z-index:5;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-  .tt b{font-family:var(--mono)}
 
   .verdict{font-family:var(--mono);font-size:var(--fs-caption);font-weight:var(--fw-caption);line-height:var(--lh-caption);white-space:nowrap}
   .verdict.ok{color:var(--accent-ink)}
@@ -172,7 +148,7 @@
             <p>막대에 손을 올리면 어느 구절인지 보여요. 가로축은 <span class="nb">나온 횟수예요.</span></p>
           </div>
           <div class="chart-wrap">
-            <div class="chart-scroll">
+            <div class="chart-scroll" tabindex="0" role="region" aria-label="그래프 (좌우로 밀어 볼 수 있어요)">
               <svg viewBox="0 0 760 362" role="img" aria-labelledby="cTitle cDesc">
                 <title id="cTitle">구약 독수리(네셰르) 용례 26회의 문맥별 분포</title>
                 <desc id="cDesc">덮치는 적군·추격 7회, 그룹의 얼굴과 그 밖 6회, 시체를 먹는 새 2회, 높은 둥지에서 끌어내려짐 3회, 하나님의 구원과 젊음의 갱신 3회, 제국의 상징 2회, 먹지 못할 부정한 새 2회, 이 본문 이사야 40:31 1회. 이 본문을 빼면 위로가 되는 곳은 셋뿐이에요. 자세한 구절은 아래 표에 있어요.</desc>
@@ -199,7 +175,7 @@
           <figcaption>스물여섯 번 가운데 열여섯이 무서운 대목이에요. 그중 둘은 &ldquo;먹지 말라&rdquo;는 목록이고요. 이사야 40:31 자신을 빼면 위로가 되는 <span class="nb">곳은 셋뿐이에요.</span></figcaption>
         </figure>
 
-        <details>
+        <details class="chart-data">
           <summary>구절 표로 보기</summary>
           <div class="scroller" style="margin-top:10px">
             <table>
@@ -460,7 +436,7 @@
       </div>
     </footer>
     <!--/#FOOTER-->
-<script src="../assets/site.js?v=d8a46d11"></script>
+<script src="../assets/site.js?v=f1b8c2f3"></script>
 <script>
 (function(){
   var D=[
@@ -484,19 +460,8 @@
     r.setAttribute('fill','var(--'+d[2]+')');
     r.setAttribute('tabindex','0'); r.setAttribute('role','img');
     r.setAttribute('aria-label',d[0]+' '+d[1]+'회. '+d[3]);
-    function show(){
-      tt.innerHTML='<b>'+d[0]+' · '+d[1]+'회</b><br>'+d[3];
-      tt.style.opacity='1';
-      var svg=r.ownerSVGElement, box=svg.getBoundingClientRect(),
-          wrap=tt.parentElement.getBoundingClientRect(), s=box.width/760;
-      var left=(X0+w/2)*s+box.left-wrap.left-tt.offsetWidth/2;
-      tt.style.left=Math.min(Math.max(left,4),Math.max(4,wrap.width-tt.offsetWidth-4))+'px';
-      tt.style.top=Math.max(2,(y)*s+box.top-wrap.top-tt.offsetHeight-8)+'px';
-    }
-    function hide(){ tt.style.opacity='0'; }
-    r.addEventListener('mouseenter',show); r.addEventListener('focus',show);
-    r.addEventListener('mouseleave',hide); r.addEventListener('blur',hide);
     g.appendChild(r);
+    BN.chartTip(r,'<b>'+d[0]+' · '+d[1]+'회</b><br>'+d[3],X0+w/2,y);
 
     var lab=document.createElementNS(NS,'text');
     lab.setAttribute('class','cat'); lab.setAttribute('x',190);
