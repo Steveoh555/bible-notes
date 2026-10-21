@@ -499,7 +499,7 @@ def build_index(cfg, studies):
 
     <main id="main" class="wrap">
       <header>
-        <figure class="hero-band">
+        <figure class="hero-band home-hero">
           <span class="frame"><img src="assets/img/hero-home.jpg" alt="올리브 나무가 선 유대 산지의 계단밭과 멀리 성벽으로 둘러싸인 마을을 그린 그림" width="1400" height="594" loading="eager" decoding="async"></span>
           <figcaption>내용을 돕기 위한 AI 생성 삽화입니다.</figcaption>
         </figure>
